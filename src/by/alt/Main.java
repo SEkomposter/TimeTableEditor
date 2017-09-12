@@ -8,7 +8,7 @@ public class Main {
         PropReader propReader = new PropReader();
         try {
          //  propReader.Read("D:\\ExternalReports\\");
-            propReader.ReadProp();
+            propReader.ReadRepProp();
         }
         catch (IOException exc){
             exc.printStackTrace();

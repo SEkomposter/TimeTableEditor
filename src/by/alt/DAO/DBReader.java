@@ -1,6 +1,28 @@
 package by.alt.DAO;
+import by.alt.PropReader;
 
-public class DBReader {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBReader{
     String parameter1="db.connect.host",parameter2="db.connect.port",parameter3="db.connect.user",parameter4="db.connect.pass",parameter5="db.connect.driver";
-
+    static Connection connection;
+    public Connection ConnectToDB()throws SQLException{
+        PropReader propReader = new PropReader();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        }catch (ClassNotFoundException exc){
+            exc.printStackTrace();
+        }
+        connection= DriverManager.getConnection("jdbc:mysql://" +propReader.ReadCommonProps(parameter1)+":"+propReader.ReadCommonProps(parameter2)+"/tc-db-main",propReader.ReadCommonProps(parameter3),propReader.ReadCommonProps(parameter4));
+        return connection;
+    }
+    public void closeConnectionToDB() throws SQLException{
+        connection.close();
+    }
+    public void QueryToDB(String query)throws SQLException{
+        Statement stm = this.ConnectToDB().createStatement();
+    }
 }

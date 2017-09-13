@@ -1,12 +1,11 @@
 package by.alt;
 
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.util.*;
 
 public class PropReader {
     String fileName = "report03.properties";
+    String commProps = "common.properties";
     File filePath = new File("D:\\TimeTableEditor\\");
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
 
@@ -45,17 +44,17 @@ public class PropReader {
                 property.put(pr, map.get(pr));
             }
             property.store(fos,"");
-            System.out.print(properties);
+            System.out.println(properties);
 
         } catch (IOException e) {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
     }
-    String ReadCommonProps(String fileName,String propName){
+    public String ReadCommonProps(String propName){
         Properties property = new Properties();
         FileInputStream fis;
         try {
-            fis = new FileInputStream("src/resources/"+fileName);
+            fis = new FileInputStream("src/resources/"+ commProps);
             property.load(fis);
         } catch (IOException e) {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");

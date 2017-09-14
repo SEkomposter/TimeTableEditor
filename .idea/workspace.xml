@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="179baa62-75c8-4e73-8053-ba57ac431e86" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Configurator.form" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Configurator.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Main.java" afterPath="$PROJECT_DIR$/src/by/alt/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/MainForm.form" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,12 +36,12 @@
       <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+            <state relative-caret-position="37">
+              <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#257#258#0" expanded="true" />
-                <element signature="e#287#288#0" expanded="true" />
+                <element signature="e#283#284#0" expanded="true" />
+                <element signature="e#313#314#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -676,7 +672,7 @@
       <option name="presentableId" value="Default" />
       <updated>1505069640041</updated>
       <workItem from="1505069641804" duration="8613000" />
-      <workItem from="1505115637930" duration="41348000" />
+      <workItem from="1505115637930" duration="41675000" />
     </task>
     <task id="LOCAL-00001" summary="next update 12.09.17">
       <created>1505210573201</created>
@@ -699,11 +695,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505313732165</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="next update 14.09.17">
+      <created>1505401767799</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1505401767800</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49961000" />
+    <option name="totallyTimeSpent" value="50288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -779,7 +782,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="next update 12.09.17" />
-    <option name="LAST_COMMIT_MESSAGE" value="next update 12.09.17" />
+    <MESSAGE value="next update 14.09.17" />
+    <option name="LAST_COMMIT_MESSAGE" value="next update 14.09.17" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -950,12 +954,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        <state relative-caret-position="37">
+          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#257#258#0" expanded="true" />
-            <element signature="e#287#288#0" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#313#314#0" expanded="true" />
           </folding>
         </state>
       </provider>

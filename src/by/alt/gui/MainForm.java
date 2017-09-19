@@ -6,6 +6,8 @@ import by.alt.Object.TableEntry;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.List;
@@ -18,6 +20,7 @@ public class MainForm extends JFrame{
     private Font font;
     private MyMenuBar menuBar;
     private TimeTable tt;
+    private TimeTableEditor timeTableEditor;
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -26,7 +29,6 @@ public class MainForm extends JFrame{
                 new MainForm();
             }
         });
-
     }
     public MainForm(){
         setBounds(0,0,1000,600);
@@ -60,7 +62,15 @@ public class MainForm extends JFrame{
             add(tTabSubPan1);
             add(tTabSubPan2);
             tTabSubPan2.setLayout(new BorderLayout());
-            addButton("Добавить",tTabSubPan1);
+            timeTableEditor = new TimeTableEditor();
+            JButton addButton = new JButton("Добавить");
+            addButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    timeTableEditor.setVisible(true);
+                }
+            });
+            tTabSubPan1.add(addButton);
             addButton("Редактировать",tTabSubPan1);
             addButton("Удалить",tTabSubPan1);
             ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
@@ -75,13 +85,13 @@ public class MainForm extends JFrame{
             tTabSubPan2.add(tt,BorderLayout.NORTH);
             tTabSubPan2.add(new JScrollPane(tt));
             setVisible(true);
-            //setLayout(lm);
+            new TimeTableEditor();
         }
     }
     private static void addButton (String caption, Container container){
         JButton button = new JButton(caption);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-       button.setAlignmentY(Component.TOP_ALIGNMENT);
+        button.setAlignmentY(Component.TOP_ALIGNMENT);
         container.add(button);
     }
     class DepartmentsTab extends JPanel{
@@ -90,7 +100,7 @@ public class MainForm extends JFrame{
             setBounds(x, y, w, h);
             add(new JButton("Department"));
             setVisible(true);
-            //setLayout(lm);
+
         }
     }
     class MyMenuBar extends JMenuBar{
@@ -112,6 +122,14 @@ public class MainForm extends JFrame{
         TimeTable(){
             super();
             setVisible(true);
+        }
+    }
+    class TimeTableEditor extends JDialog{
+        TimeTableEditor(){
+            getContentPane().add (new JButton("OK"));
+
+            addButton("Cancel", this);
+            setVisible(false);
         }
     }
 }

@@ -1,5 +1,7 @@
 package by.alt;
 
+import sun.misc.ASCIICaseInsensitiveComparator;
+
 import java.io.*;
 import java.util.*;
 
@@ -9,7 +11,7 @@ public class PropReader {
     File filePath = new File("D:\\TimeTableEditor\\");
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
 
-    Map ReadRepProp() throws IOException{
+    Map ReadRepProp(Enum en) throws IOException{
             FileInputStream fis;
             Properties property = new Properties();
 
@@ -20,7 +22,8 @@ public class PropReader {
                 String pr;
                 while (it.hasNext()) {
                     pr=it.next().toString();
-                    properties.put(pr, property.getProperty(pr));
+                    if (pr.startsWith(en.toString()))
+                        properties.put(pr, property.getProperty(pr));
                 }
                 System.out.print(properties);
 
@@ -60,5 +63,23 @@ public class PropReader {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
         return property.get(propName).toString();
+    }
+    public ArrayList<String> parseProperties(Map map, Enum en){
+        ArrayList<String> list = new ArrayList<String>();
+        Map<String,String> ouputMap = new LinkedHashMap<String, String>();
+
+        Iterator it = map.keySet().iterator();
+        String key="";
+            switch (en.name()){
+                case "TIMETABLE":
+                    while (it.hasNext())
+                        key = (String) it.next();
+                        if (key.startsWith(en.name()))
+                            ouputMap.put(key,(String)map.get(key));
+            }
+
+
+
+        return list;
     }
 }

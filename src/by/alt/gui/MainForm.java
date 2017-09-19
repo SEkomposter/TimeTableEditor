@@ -1,39 +1,117 @@
 package by.alt.gui;
 
 
+import by.alt.Object.MyTableModel;
+import by.alt.Object.TableEntry;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.util.*;
+import java.util.List;
 
 public class MainForm extends JFrame{
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
-    private JPanel timeTables;
-    private JPanel stuff;
+    private TimeTableTab timeTables;
+    private DepartmentsTab depTab;
+    private Font font;
+    private MyMenuBar menuBar;
+    private TimeTable tt;
 
     public static void main(String[] args) {
-        new MainForm();
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame.setDefaultLookAndFeelDecorated(true);
+                new MainForm();
+            }
+        });
+
     }
     public MainForm(){
-        setBounds(0,0,1250,1000);
+        setBounds(0,0,1000,600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        tabbedPane1 = new JTabbedPane();
-        tabbedPane1.setVisible(true);
-        timeTables = new JPanel();
-        timeTables.setBounds(0,0,200,100);
-        timeTables.setVisible(true);
-        stuff = new JPanel();
-        stuff.setName("stuff");
-        stuff.setBounds(15,15,200,100);
-        stuff.setVisible(true);
-        tabbedPane1.add(timeTables);
-        panel1 = new JPanel();
-        panel1.setVisible(true);
-        panel1.add(tabbedPane1);
-        add(panel1);
+        menuBar = new MyMenuBar();
+        tabbedPane1 = new myTabbedPane(this.getX(),this.getY(),this.getWidth(),getHeight());
+        getContentPane().add(tabbedPane1);
+        this.setJMenuBar(menuBar);
+        repaint();
+
+    }
+    class myTabbedPane extends JTabbedPane{
+        myTabbedPane(int x, int y,int w, int h){
+            setBounds(x, y, w, h);
+            setVisible(true);
+            timeTables = new TimeTableTab(x, y, w, h);
+            this.addTab("Расписания",timeTables);
+            depTab = new DepartmentsTab(x, y, w, h);
+            this.addTab("Подразделения",depTab);
+
+        }
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    class TimeTableTab extends JPanel{
+        TimeTableTab(int x, int y,int w, int h){
+            setBounds(x, y, w, h);
+            setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+            JPanel tTabSubPan1 = new JPanel();
+            JPanel tTabSubPan2 = new JPanel();
+            add(tTabSubPan1);
+            add(tTabSubPan2);
+            tTabSubPan2.setLayout(new BorderLayout());
+            addButton("Добавить",tTabSubPan1);
+            addButton("Редактировать",tTabSubPan1);
+            addButton("Удалить",tTabSubPan1);
+            ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
+            for (int i = 0; i < 30; i++) {
+                tableEntryList.add(new TableEntry("Имя " + i, "Режим " + i, "Время начала " + i, "Время окончания " + i));
+            }
+            MyTableModel tableModel = new MyTableModel(tableEntryList);
+            JTable tt = new JTable(tableModel);
+            //tt.setBounds(tTabSubPan2.getX()+20,tTabSubPan2.getY(),tTabSubPan2.getWidth()-40,tTabSubPan2.getHeight()-20);
+            tt.setRowSelectionAllowed(true);
+            tt.setRowHeight(25);
+            tTabSubPan2.add(tt,BorderLayout.NORTH);
+            tTabSubPan2.add(new JScrollPane(tt));
+            setVisible(true);
+            //setLayout(lm);
+        }
+    }
+    private static void addButton (String caption, Container container){
+        JButton button = new JButton(caption);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+       button.setAlignmentY(Component.TOP_ALIGNMENT);
+        container.add(button);
+    }
+    class DepartmentsTab extends JPanel{
+        DepartmentsTab(){}
+        DepartmentsTab(int x, int y,int w, int h){
+            setBounds(x, y, w, h);
+            add(new JButton("Department"));
+            setVisible(true);
+            //setLayout(lm);
+        }
+    }
+    class MyMenuBar extends JMenuBar{
+        MyMenuBar(){
+            JMenu fileMenu = new JMenu("File");
+            fileMenu.setFont(font);
+            fileMenu.setVisible(true);
+            JMenuItem newMenu = new JMenuItem("New");
+            newMenu.setFont(font);
+            fileMenu.add(newMenu);
+            JMenuItem openItem = new JMenuItem("Open");
+            openItem.setFont(font);
+            fileMenu.add(openItem);
+            newMenu.setVisible(true);
+            add(fileMenu);
+        }
+    }
+    class TimeTable extends JTable{
+        TimeTable(){
+            super();
+            setVisible(true);
+        }
     }
 }

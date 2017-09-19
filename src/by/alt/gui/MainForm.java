@@ -54,18 +54,26 @@ public class MainForm extends JFrame{
     class TimeTableTab extends JPanel{
         TimeTableTab(int x, int y,int w, int h){
             setBounds(x, y, w, h);
-            //setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
-            addButton("Добавить",this);
-            addButton("Редактировать",this);
-            addButton("Удалить",this);
+            setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+            JPanel tTabSubPan1 = new JPanel();
+            JPanel tTabSubPan2 = new JPanel();
+            add(tTabSubPan1);
+            add(tTabSubPan2);
+            tTabSubPan2.setLayout(new BorderLayout());
+            addButton("Добавить",tTabSubPan1);
+            addButton("Редактировать",tTabSubPan1);
+            addButton("Удалить",tTabSubPan1);
             ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
             for (int i = 0; i < 30; i++) {
                 tableEntryList.add(new TableEntry("Имя " + i, "Режим " + i, "Время начала " + i, "Время окончания " + i));
             }
             MyTableModel tableModel = new MyTableModel(tableEntryList);
             JTable tt = new JTable(tableModel);
-            add(tt);
-            add(new JScrollPane(tt));
+            //tt.setBounds(tTabSubPan2.getX()+20,tTabSubPan2.getY(),tTabSubPan2.getWidth()-40,tTabSubPan2.getHeight()-20);
+            tt.setRowSelectionAllowed(true);
+            tt.setRowHeight(25);
+            tTabSubPan2.add(tt,BorderLayout.NORTH);
+            tTabSubPan2.add(new JScrollPane(tt));
             setVisible(true);
             //setLayout(lm);
         }

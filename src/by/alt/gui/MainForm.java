@@ -21,6 +21,7 @@ public class MainForm extends JFrame{
     private MyMenuBar menuBar;
     private TimeTable tt;
     private TimeTableEditor timeTableEditor;
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -126,9 +127,99 @@ public class MainForm extends JFrame{
     }
     class TimeTableEditor extends JDialog{
         TimeTableEditor(){
-            getContentPane().add (new JButton("OK"));
+            setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+            setBounds((int)(MainForm.this.getWidth()/2)-250,(int)(MainForm.this.getHeight()/2)-100,500,300);
+            JPanel row1 = new JPanel();
+            row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
+            JPanel row2 = new JPanel();
+            row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
+            JPanel row3 = new JPanel();
+            row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
+            JPanel row4 = new JPanel();
+            row4.setLayout(new BoxLayout(row4, BoxLayout.X_AXIS));
+            getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
+            getContentPane().add(row1);
+            getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
+            getContentPane().add(row2);
+            getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
+            getContentPane().add(row3);
+            getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
+            getContentPane().add(row4);
+            getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
 
-            addButton("Cancel", this);
+            row1.add(Box.createRigidArea(new Dimension(30,1)));
+            JLabel nameLabel = new JLabel("Имя");
+            row1.add(nameLabel);
+            row1.add(Box.createRigidArea(new Dimension(100,1)));
+            JTextField nameField = new JTextField(20);
+            row1.add(nameField);
+            row1.add(Box.createRigidArea(new Dimension(30,1)));
+
+            row2.add(Box.createRigidArea(new Dimension(30,1)));
+            JLabel sheduleLabel = new JLabel("Режим");
+            row2.add(sheduleLabel);
+            row2.add(Box.createRigidArea(new Dimension(83,1)));
+            JComboBox sheduleCombo = new JComboBox();
+            row2.add(sheduleCombo);
+            row2.add(Box.createRigidArea(new Dimension(30,1)));
+
+            row3.add(Box.createRigidArea(new Dimension(30,1)));
+            JLabel sheduleLabel = new JLabel("Режим");
+            row3.add(sheduleLabel);
+            row3.add(Box.createRigidArea(new Dimension(83,1)));
+            JComboBox sheduleCombo = new JComboBox();
+            row3.add(sheduleCombo);
+            row3.add(Box.createRigidArea(new Dimension(30,1)));
+          /*  setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+            setBounds((int)(MainForm.this.getWidth()/2)-250,(int)(MainForm.this.getHeight()/2)-100,500,300);
+            JPanel leftPanel = new JPanel();
+            leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+            getContentPane().add(Box.createRigidArea(new Dimension(50,250)));
+            getContentPane().add(leftPanel);
+            getContentPane().add(Box.createRigidArea(new Dimension(50,10)));
+
+            JLabel nameLabel = new JLabel("Имя");
+            nameLabel.setSize(100,20);
+            leftPanel.add(Box.createRigidArea(new Dimension(1,40)));
+            leftPanel.add(nameLabel);
+            leftPanel.add(Box.createRigidArea(new Dimension(1,30)));
+            JLabel sheduleLabel = new JLabel("Режим");
+            leftPanel.add(sheduleLabel);
+            leftPanel.add(Box.createRigidArea(new Dimension(1,30)));
+            JLabel fromLabel = new JLabel("Время начала");
+            leftPanel.add(fromLabel);
+            leftPanel.add(Box.createRigidArea(new Dimension(1,30)));
+            JLabel toLabel = new JLabel("Время окончания");
+            leftPanel.add(toLabel);
+            leftPanel.add(Box.createRigidArea(new Dimension(1,40)));
+
+            JPanel rightPanel = new JPanel();
+            rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+            getContentPane().add(rightPanel);
+            getContentPane().add(Box.createRigidArea(new Dimension(50,250)));
+            JTextField nameField = new JTextField(20);
+            nameField.setSize(50,20);
+            rightPanel.add(Box.createRigidArea(new Dimension(1,40)));
+            rightPanel.add(nameField);
+            rightPanel.add(Box.createRigidArea(new Dimension(1,30)));
+            JComboBox sheduleCombo = new JComboBox();
+            rightPanel.add(sheduleCombo);
+            rightPanel.add(Box.createRigidArea(new Dimension(1,30)));
+            JTextField fromField = new JTextField(30);
+            fromField.setSize(50,20);
+            rightPanel.add(Box.createRigidArea(new Dimension(1,30)));
+            JTextField toField = new JTextField(30);
+            toField.setSize(50,20);
+            rightPanel.add(Box.createRigidArea(new Dimension(1,40)));
+            */
+
+            JButton ok = new JButton("OK");
+            JButton cancel = new JButton("Cancel");
+            ok.setSize(100,30);
+            cancel.setSize(100,30);
+           // add(ok);
+           // add(cancel);
+            //pack();
             setVisible(false);
         }
     }

@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="179baa62-75c8-4e73-8053-ba57ac431e86" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TimeTableEditor.iml" afterPath="$PROJECT_DIR$/TimeTableEditor.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/DBReader.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/DBReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Main.java" afterPath="$PROJECT_DIR$/src/by/alt/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Object/TableEntry.java" afterPath="$PROJECT_DIR$/src/by/alt/Object/TableEntry.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/by/alt/PropReader.java" afterPath="$PROJECT_DIR$/src/by/alt/Object/PropReader.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,15 +27,11 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="PropReader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/alt/PropReader.java">
+        <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="55" column="13" lean-forward="false" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#339#354#0" expanded="false" />
-                <element signature="e#2290#2298#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="122">
+              <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -41,30 +40,48 @@
         <entry file="file://$PROJECT_DIR$/src/by/alt/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="15" column="7" lean-forward="false" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+              <caret line="13" column="7" lean-forward="false" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state relative-caret-position="1632">
+              <caret line="99" column="29" lean-forward="false" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2735#2747#0" expanded="true" />
+                <element signature="e#797#809#0" expanded="true" />
+                <element signature="e#8318#8319#0" expanded="true" />
+                <element signature="e#8367#8368#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimeTables.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/alt/gui/TimeTables.java">
+      <file leaf-file-name="TableEntry.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/by/alt/Object/TableEntry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="153">
+              <caret line="31" column="29" lean-forward="true" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#559#560#0" expanded="true" />
+                <element signature="e#646#647#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
+                <element signature="e#771#772#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyTableModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/alt/Object/MyTableModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-119">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -92,10 +109,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/MainWindow.java" />
-        <option value="$PROJECT_DIR$/src/by/alt/PropReader.java" />
         <option value="$PROJECT_DIR$/src/by/alt/gui/MainForm.form" />
         <option value="$PROJECT_DIR$/src/by/alt/Main.java" />
         <option value="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
+        <option value="$PROJECT_DIR$/src/by/alt/PropReader.java" />
+        <option value="$PROJECT_DIR$/src/by/alt/Object/PropReader.java" />
+        <option value="$PROJECT_DIR$/src/by/alt/Object/TableEntry.java" />
       </list>
     </option>
   </component>
@@ -630,7 +649,7 @@
       <workItem from="1505161349110" duration="924000" />
       <workItem from="1505413460483" duration="2299000" />
       <workItem from="1505856706285" duration="1832000" />
-      <workItem from="1505899480440" duration="16137000" />
+      <workItem from="1505899480440" duration="25162000" />
     </task>
     <task id="LOCAL-00001" summary="20.09.2017">
       <created>1505920359919</created>
@@ -639,11 +658,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505920359919</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="21.09.2017">
+      <created>1506005736703</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1506005736703</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29920000" />
+    <option name="totallyTimeSpent" value="38945000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -715,7 +741,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="20.09.2017" />
-    <option name="LAST_COMMIT_MESSAGE" value="20.09.2017" />
+    <MESSAGE value="21.09.2017" />
+    <option name="LAST_COMMIT_MESSAGE" value="21.09.2017" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -728,15 +755,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/by/alt/PropReader.java">
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
           <caret line="55" column="13" lean-forward="false" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#339#354#0" expanded="false" />
-            <element signature="e#2290#2298#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -754,7 +777,9 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2735#2747#0" expanded="true" />
+            <element signature="e#797#809#0" expanded="true" />
+            <element signature="e#8318#8319#0" expanded="true" />
+            <element signature="e#8367#8368#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -767,15 +792,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/PropReader.java">
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#339#354#0" expanded="false" />
-            <element signature="e#2290#2298#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -794,20 +815,18 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2735#2747#0" expanded="true" />
+            <element signature="e#797#809#0" expanded="true" />
+            <element signature="e#8318#8319#0" expanded="true" />
+            <element signature="e#8367#8368#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/PropReader.java">
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#339#354#0" expanded="false" />
-            <element signature="e#2290#2298#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -827,15 +846,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/PropReader.java">
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#339#354#0" expanded="false" />
-            <element signature="e#2290#2298#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -847,15 +862,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/PropReader.java">
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#339#354#0" expanded="false" />
-            <element signature="e#2290#2298#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -876,26 +887,6 @@
     <entry file="file://D:/ExternalReports/props-editor/props-editor-1/AddAction.class" />
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.form" />
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_112/src.zip!/java/awt/Container.java" />
-    <entry file="file://$PROJECT_DIR$/src/by/alt/PropReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="55" column="13" lean-forward="false" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#339#354#0" expanded="false" />
-            <element signature="e#2290#2298#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="7" lean-forward="false" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/TimeTables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -904,13 +895,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/MyTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+        <state relative-caret-position="1632">
+          <caret line="99" column="29" lean-forward="false" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2735#2747#0" expanded="true" />
+            <element signature="e#797#809#0" expanded="true" />
+            <element signature="e#8318#8319#0" expanded="true" />
+            <element signature="e#8367#8368#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="7" lean-forward="false" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/TableEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="31" column="29" lean-forward="true" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#559#560#0" expanded="true" />
+            <element signature="e#646#647#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+            <element signature="e#771#772#0" expanded="true" />
           </folding>
         </state>
       </provider>

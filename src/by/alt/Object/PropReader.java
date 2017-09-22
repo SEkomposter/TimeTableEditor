@@ -1,4 +1,4 @@
-package by.alt;
+package by.alt.Object;
 
 import sun.misc.ASCIICaseInsensitiveComparator;
 
@@ -11,7 +11,7 @@ public class PropReader {
     File filePath = new File("D:\\TimeTableEditor\\");
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
 
-    Map ReadRepProp(Enum en) throws IOException{
+    Map<String,String> readRepProp(Enum en) throws IOException{
             FileInputStream fis;
             Properties property = new Properties();
 
@@ -33,7 +33,7 @@ public class PropReader {
 
     return properties;
     }
-    void WriteRepProp(Map<String,String> map) throws IOException{
+    void writeRepProp(Map<String,String> map) throws IOException{
 
         FileOutputStream fos;
         Properties property = new Properties();
@@ -53,7 +53,7 @@ public class PropReader {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
     }
-    public String ReadCommonProps(String propName){
+    public String readCommonProps(String propName){
         Properties property = new Properties();
         FileInputStream fis;
         try {
@@ -64,22 +64,5 @@ public class PropReader {
         }
         return property.get(propName).toString();
     }
-    public ArrayList<String> parseProperties(Map map, Enum en){
-        ArrayList<String> list = new ArrayList<String>();
-        Map<String,String> ouputMap = new LinkedHashMap<String, String>();
 
-        Iterator it = map.keySet().iterator();
-        String key="";
-            switch (en.name()){
-                case "TIMETABLE":
-                    while (it.hasNext())
-                        key = (String) it.next();
-                        if (key.startsWith(en.name()))
-                            ouputMap.put(key,(String)map.get(key));
-            }
-
-
-
-        return list;
-    }
 }

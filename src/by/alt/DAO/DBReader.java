@@ -1,5 +1,5 @@
 package by.alt.DAO;
-import by.alt.PropReader;
+import by.alt.Object.PropReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

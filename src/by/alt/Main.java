@@ -1,8 +1,6 @@
 package by.alt;
-import by.alt.Object.PropType;
+import by.alt.Object.PropReader;
 import by.alt.gui.*;
-
-import java.io.IOException;
 
 public class Main {
 

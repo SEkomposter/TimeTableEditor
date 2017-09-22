@@ -24,6 +24,8 @@ public class MainForm extends JFrame{
     private TimeTable tt;
     private TimeTableEditor timeTableEditor;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
+    MyTableModel tableModel = new MyTableModel(tableEntryList);
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -70,26 +72,32 @@ public class MainForm extends JFrame{
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeTableEditor = new TimeTableEditor(MainForm.this);
+                    timeTableEditor = new TimeTableEditor(MainForm.this,"Добавление расписания");
                     timeTableEditor.setVisible(true);
                 }
             });
             tTabSubPan1.add(addButton);
-            addButton("Редактировать",tTabSubPan1);
+            JButton editButton = new JButton("Редактировать");
+            editButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    timeTableEditor = new TimeTableEditor(MainForm.this,"редактирование расписания");
+                    timeTableEditor.setVisible(true);
+                }
+            });
+            tTabSubPan1.add(editButton);
             addButton("Удалить",tTabSubPan1);
-            ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
+
             for (int i = 0; i < 30; i++) {
                 tableEntryList.add(new TableEntry("Имя " + i, "Режим " + i, "Время начала " + i, "Время окончания " + i));
             }
-            MyTableModel tableModel = new MyTableModel(tableEntryList);
+
             JTable tt = new JTable(tableModel);
-            //tt.setBounds(tTabSubPan2.getX()+20,tTabSubPan2.getY(),tTabSubPan2.getWidth()-40,tTabSubPan2.getHeight()-20);
             tt.setRowSelectionAllowed(true);
             tt.setRowHeight(25);
             tTabSubPan2.add(tt,BorderLayout.NORTH);
             tTabSubPan2.add(new JScrollPane(tt));
             setVisible(true);
-
         }
     }
     private static void addButton (String caption, Container container){
@@ -104,7 +112,6 @@ public class MainForm extends JFrame{
             setBounds(x, y, w, h);
             add(new JButton("Department"));
             setVisible(true);
-
         }
     }
     class MyMenuBar extends JMenuBar{
@@ -129,13 +136,13 @@ public class MainForm extends JFrame{
         }
     }
     class TimeTableEditor extends JDialog{
-        TimeTableEditor(Frame owner){
-            super(owner);
+        TimeTableEditor(Frame owner, String title){
+            super(owner,title,ModalityType.DOCUMENT_MODAL);
             setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-            setBounds((int)(MainForm.this.getWidth()/2)-250,(int)(MainForm.this.getHeight()/2)-100,500,300);
-            setPreferredSize(new Dimension(500,300));
-            setMinimumSize(new Dimension(500,300));
-            setMaximumSize(new Dimension(500,300));
+            setBounds((int)(MainForm.this.getWidth()/2)-250,(int)(MainForm.this.getHeight()/2)-100,500,330);
+            setPreferredSize(new Dimension(500,330));
+            setMinimumSize(new Dimension(500,330));
+            setMaximumSize(new Dimension(500,330));
             JPanel row1 = new JPanel();
             row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
             JPanel row2 = new JPanel();
@@ -144,7 +151,10 @@ public class MainForm extends JFrame{
             row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
             JPanel row4 = new JPanel();
             row4.setLayout(new BoxLayout(row4, BoxLayout.X_AXIS));
+            JPanel row5 = new JPanel();
+            row5.setLayout(new BoxLayout(row5, BoxLayout.X_AXIS));
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
             getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
             getContentPane().add(row1);
             getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
@@ -153,6 +163,8 @@ public class MainForm extends JFrame{
             getContentPane().add(row3);
             getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
             getContentPane().add(row4);
+            getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
+            getContentPane().add(row5);
             getContentPane().add(Box.createRigidArea(new Dimension(1,30)));
 
             row1.add(Box.createRigidArea(new Dimension(30,1)));
@@ -187,14 +199,18 @@ public class MainForm extends JFrame{
             row4.add(toTime);
             row4.add(Box.createRigidArea(new Dimension(250,1)));
 
-            JButton ok = new JButton("OK");
-            JButton cancel = new JButton("Cancel");
-            ok.setSize(100,30);
-            cancel.setSize(100,30);
-           // add(ok);
-           // add(cancel);
-            //pack();
-            setVisible(false);
+            JButton addB = new JButton("Добавить" );
+            JButton cancelB = new JButton("Отмена");
+            cancelB.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                }
+            });
+            row5.add(addB);
+            row5.add(Box.createRigidArea(new Dimension(70,1)));
+            row5.add(cancelB);
+
         }
 
     }

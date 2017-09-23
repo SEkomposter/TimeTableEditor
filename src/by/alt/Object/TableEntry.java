@@ -1,6 +1,9 @@
 package by.alt.Object;
 
 
+import by.alt.gui.MainForm;
+import by.alt.gui.TimeTableEditor;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,11 +22,14 @@ public class TableEntry {
         this.setTimeFrom(tf);
         this.setTimeTo(tt);
     }
-    public TableEntry getTableEntry(){
-        return new TableEntry(getName(""),getShedule(),getTimeFrom(),getTimeTo());
+    public TableEntry getTableEntryFromDialog(){
+        return new TableEntry(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog(),getTimeFrom(),getTimeTo());
     }
-    public TableEntry setTableEntry(String n,String s,String tf, String tt){
-        return new TableEntry(n,s,tf,tt);
+    public void setTableEntry(String n,String s,String tf, String tt){
+        setName(n);
+        setShedule(s);
+        setTimeTo(tt);
+        setTimeFrom(tf);
     }
     public ArrayList<TableEntry> getTableEntryList (){
         PropReader propReader = new PropReader();

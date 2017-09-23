@@ -22,8 +22,10 @@ public class TableEntry {
         this.setTimeFrom(tf);
         this.setTimeTo(tt);
     }
+
+    //Читаем данные из формы добавления или редактирования расписания
     public TableEntry getTableEntryFromDialog(){
-        return new TableEntry(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog(),getTimeFrom(),getTimeTo());
+        return new TableEntry(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog(),TimeTableEditor.getFromTimeFromDialog(),TimeTableEditor.getToTimeFromDialog());
     }
     public void setTableEntry(String n,String s,String tf, String tt){
         setName(n);

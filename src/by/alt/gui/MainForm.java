@@ -24,9 +24,9 @@ public class MainForm extends JFrame{
     private TimeTableEditor timeTableEditor;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
-    private ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    MyTableModel tableModel= new MyTableModel(tableEntryList);
-    JTable tt;
+    public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
+    static MyTableModel tableModel= new MyTableModel(tableEntryList);
+    static JTable tt;
 
 
     public static void main(String[] args) {
@@ -48,6 +48,11 @@ public class MainForm extends JFrame{
         repaint();
 
     }
+
+    public static void tableUpdate(){
+        tableModel.fireTableStructureChanged();
+        tt.updateUI();
+    }
     class myTabbedPane extends JTabbedPane{
         myTabbedPane(int x, int y,int w, int h){
             setBounds(x, y, w, h);
@@ -68,7 +73,6 @@ public class MainForm extends JFrame{
             add(tTabSubPan1);
             add(tTabSubPan2);
             tTabSubPan2.setLayout(new BorderLayout());
-
             JButton addButton = new JButton("Добавить");
             addButton.addActionListener(new ActionListener() {
                 @Override
@@ -89,10 +93,6 @@ public class MainForm extends JFrame{
             });
             tTabSubPan1.add(editButton);
             addButton("Удалить",tTabSubPan1);
-            //tableEntryList.addAll(new TableEntry().getTableEntryList());
-      /*      for (int i = 0; i < 30; i++) {
-                tableEntryList.add(new TableEntry("Имя " + i, "Режим " + i, "Время начала " + i, "Время окончания " + i));
-            }*/
 
             tt = new JTable(tableModel);
             tt.setRowSelectionAllowed(true);
@@ -101,6 +101,7 @@ public class MainForm extends JFrame{
             tTabSubPan2.add(new JScrollPane(tt));
             setVisible(true);
         }
+
     }
     private static void addButton (String caption, Container container){
         JButton button = new JButton(caption);

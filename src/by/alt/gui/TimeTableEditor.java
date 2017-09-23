@@ -1,16 +1,21 @@
 package by.alt.gui;
 
-
+import by.alt.gui.MainForm;
+import by.alt.Object.Shedules;
+import by.alt.Object.TableEntry;
 import lu.tudor.santec.jtimechooser.JTimeChooser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 public class TimeTableEditor extends JDialog {
     private static JTextField nameField;
     private static JComboBox sheduleCombo;
+    public static JTimeChooser fromTime;
+    public static JTimeChooser toTime;
     TimeTableEditor(Frame owner, String title){
         super(owner,title,ModalityType.DOCUMENT_MODAL);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -54,8 +59,9 @@ public class TimeTableEditor extends JDialog {
         JLabel sheduleLabel = new JLabel("Режим");
         row2.add(sheduleLabel);
         row2.add(Box.createRigidArea(new Dimension(83,1)));
-        JComboBox sheduleCombo = new JComboBox();
-
+        sheduleCombo = new JComboBox();
+        sheduleCombo.addItem(Shedules.DAY);
+        sheduleCombo.addItem(Shedules.NIGHT);
         row2.add(sheduleCombo);
         row2.add(Box.createRigidArea(new Dimension(100,1)));
 
@@ -63,7 +69,7 @@ public class TimeTableEditor extends JDialog {
         JLabel fromField = new JLabel("Время начала");
         row3.add(fromField);
         row3.add(Box.createRigidArea(new Dimension(40,1)));
-        JTimeChooser fromTime = new JTimeChooser();
+        fromTime = new JTimeChooser();
         row3.add(fromTime);
         row3.add(Box.createRigidArea(new Dimension(250,1)));
 
@@ -71,7 +77,7 @@ public class TimeTableEditor extends JDialog {
         JLabel toField = new JLabel("Время окончания");
         row4.add(toField);
         row4.add(Box.createRigidArea(new Dimension(22,1)));
-        JTimeChooser toTime = new JTimeChooser();
+        toTime = new JTimeChooser();
         row4.add(toTime);
         row4.add(Box.createRigidArea(new Dimension(250,1)));
 
@@ -79,7 +85,9 @@ public class TimeTableEditor extends JDialog {
         addB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                TableEntry addedTableEntry = new TableEntry();
+                MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                MainForm.tableUpdate();
                 dispose();
             }
         });
@@ -95,9 +103,24 @@ public class TimeTableEditor extends JDialog {
         row5.add(cancelB);
     }
     public static String getNameFromDialog(){
-        return nameField.getText();
+        String str = nameField.getText();
+        str = str.replace (".","");
+        str = str.replace (" ","");
+        return str;
     }
     public static String getSheduleFromDialog(){
-        return (String)sheduleCombo.getSelectedItem();
+        return sheduleCombo.getSelectedItem().toString();
+    }
+    public static String getToTimeFromDialog(){
+        DecimalFormat myFormatter = new DecimalFormat("00");
+        String hours = myFormatter.format(toTime.getHours());
+        String minutes = myFormatter.format(toTime.getMinutes());
+        return hours + "." + minutes;
+    }
+    public static String getFromTimeFromDialog(){
+        DecimalFormat myFormatter = new DecimalFormat("00");
+        String hours = myFormatter.format(fromTime.getHours());
+        String minutes = myFormatter.format(fromTime.getMinutes());
+        return hours + "." + minutes;
     }
 }

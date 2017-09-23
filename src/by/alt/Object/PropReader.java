@@ -25,7 +25,7 @@ public class PropReader {
                     if (pr.startsWith(en.toString()))
                         properties.put(pr, property.getProperty(pr));
                 }
-                System.out.print(properties);
+               // System.out.print(properties);
 
             } catch (IOException e) {
                 System.err.println("ОШИБКА: Файл свойств отсуствует!");

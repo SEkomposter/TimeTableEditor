@@ -7,11 +7,12 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TableEntry {
     private String name, shedule,timeFrom,timeTo;
     Map<String,String> map = new LinkedHashMap<>();
-    TableEntry(){}
+    public TableEntry(){}
     public TableEntry(String n,String s,String tf, String tt){
         this.setName(n);
         this.setShedule(s);
@@ -19,33 +20,40 @@ public class TableEntry {
         this.setTimeTo(tt);
     }
     public TableEntry getTableEntry(){
-        return new TableEntry(getName(),getShedule(),getTimeFrom(),getTimeTo());
+        return new TableEntry(getName(""),getShedule(),getTimeFrom(),getTimeTo());
     }
     public TableEntry setTableEntry(String n,String s,String tf, String tt){
         return new TableEntry(n,s,tf,tt);
     }
-    public ArrayList<TableEntry> getTableEntryList (ArrayList<TableEntry> tel){
+    public ArrayList<TableEntry> getTableEntryList (){
         PropReader propReader = new PropReader();
+        ArrayList<TableEntry> tableEntryArrayList = new ArrayList<>();
         try {
             map.putAll(propReader.readRepProp(PropType.TIMETABLE));
             Iterator it = map.keySet().iterator();
             String temp = "";
             while (it.hasNext()){
-                TableEntry tempTE = new TableEntry();
                 temp = (String) it.next();
-
+                tableEntryArrayList.add(parseName(temp, map.get(temp)));
             }
+            //System.out.println(tableEntryArrayList);
         }
         catch (IOException exc){
             exc.printStackTrace();
         }
-
-        return new TableEntry();
+        return tableEntryArrayList;
     }
-    static String parseName(String key){
-        Matcher matcher =
-        key.
-        return new String();
+    static TableEntry parseName(String key, String val){
+        TableEntry tempTE = new TableEntry();
+        String[] strings = new String[3];
+        strings = key.split("\\.");
+        String[] strings2 = new String[2];
+        strings2 = val.split("-");
+        tempTE.setName(strings[2]);
+        tempTE.setShedule(strings[1]);
+        tempTE.setTimeFrom(strings2[0]);
+        tempTE.setTimeTo(strings2[1]);
+        return tempTE;
     }
 
     public String getName(String str) {
@@ -82,7 +90,7 @@ public class TableEntry {
 
     @Override
     public String toString() {
-        return "timetable."+ shedule + name + "=" + timeFrom + "-" + timeTo+ "\n";
+        return "timetable."+ shedule +"."+ name + "=" + timeFrom + "-" + timeTo+ "\n";
     }
 }
 

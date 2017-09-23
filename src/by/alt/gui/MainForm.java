@@ -6,6 +6,7 @@ import by.alt.Object.TableEntry;
 import lu.tudor.santec.jtimechooser.JTimeChooser;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,18 +15,19 @@ import java.util.*;
 import java.util.List;
 
 public class MainForm extends JFrame{
-    private MainForm mainF;
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
     private Font font;
     private MyMenuBar menuBar;
-    private TimeTable tt;
     private TimeTableEditor timeTableEditor;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    MyTableModel tableModel = new MyTableModel(tableEntryList);
+    // определяем список записей в таблице вкладки расписаний:
+    private ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
+    MyTableModel tableModel= new MyTableModel(tableEntryList);
+    JTable tt;
+
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -54,7 +56,6 @@ public class MainForm extends JFrame{
             this.addTab("Расписания",timeTables);
             depTab = new DepartmentsTab(x, y, w, h);
             this.addTab("Подразделения",depTab);
-
         }
     }
 
@@ -74,6 +75,7 @@ public class MainForm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     timeTableEditor = new TimeTableEditor(MainForm.this,"Добавление расписания");
                     timeTableEditor.setVisible(true);
+
                 }
             });
             tTabSubPan1.add(addButton);
@@ -87,12 +89,12 @@ public class MainForm extends JFrame{
             });
             tTabSubPan1.add(editButton);
             addButton("Удалить",tTabSubPan1);
-
-            for (int i = 0; i < 30; i++) {
+            //tableEntryList.addAll(new TableEntry().getTableEntryList());
+      /*      for (int i = 0; i < 30; i++) {
                 tableEntryList.add(new TableEntry("Имя " + i, "Режим " + i, "Время начала " + i, "Время окончания " + i));
-            }
+            }*/
 
-            JTable tt = new JTable(tableModel);
+            tt = new JTable(tableModel);
             tt.setRowSelectionAllowed(true);
             tt.setRowHeight(25);
             tTabSubPan2.add(tt,BorderLayout.NORTH);
@@ -116,13 +118,21 @@ public class MainForm extends JFrame{
     }
     class MyMenuBar extends JMenuBar{
         MyMenuBar(){
-            JMenu fileMenu = new JMenu("File");
+            JMenu fileMenu = new JMenu("Файл");
             fileMenu.setFont(font);
             fileMenu.setVisible(true);
-            JMenuItem newMenu = new JMenuItem("New");
+            JMenuItem newMenu = new JMenuItem("Новый");
             newMenu.setFont(font);
             fileMenu.add(newMenu);
-            JMenuItem openItem = new JMenuItem("Open");
+            JMenuItem openItem = new JMenuItem("Открыть");
+            openItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    tableEntryList.addAll(new TableEntry().getTableEntryList());
+                    tableModel.fireTableStructureChanged();
+                    tt.updateUI();
+                }
+            });
             openItem.setFont(font);
             fileMenu.add(openItem);
             newMenu.setVisible(true);

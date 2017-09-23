@@ -2,12 +2,13 @@ package by.alt.Object;
 
 
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MyTableModel implements TableModel {
+public class MyTableModel extends AbstractTableModel {
     private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
 
     private List<TableEntry> entries;
@@ -50,7 +51,7 @@ public class MyTableModel implements TableModel {
         TableEntry entry = entries.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return entry.getName();
+                return entry.getName("");
             case 1:
                 return entry.getShedule();
             case 2:

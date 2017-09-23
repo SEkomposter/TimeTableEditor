@@ -1,4 +1,6 @@
 package by.alt.DAO;
+//import by.alt.Object.PropReader;
+
 import by.alt.Object.PropReader;
 
 import java.sql.Connection;
@@ -16,7 +18,7 @@ public class DBReader{
         }catch (ClassNotFoundException exc){
             exc.printStackTrace();
         }
-        connection= DriverManager.getConnection("jdbc:mysql://" +propReader.ReadCommonProps(parameter1)+":"+propReader.ReadCommonProps(parameter2)+"/tc-db-main",propReader.ReadCommonProps(parameter3),propReader.ReadCommonProps(parameter4));
+        connection= DriverManager.getConnection("jdbc:mysql://" +propReader.readCommonProps(parameter1)+":"+propReader.readCommonProps(parameter2)+"/tc-db-main",propReader.readCommonProps(parameter3),propReader.readCommonProps(parameter4));
         return connection;
     }
     public void closeConnectionToDB() throws SQLException{

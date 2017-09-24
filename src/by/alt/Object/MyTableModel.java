@@ -51,7 +51,7 @@ public class MyTableModel extends AbstractTableModel {
         TableEntry entry = entries.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return entry.getName("");
+                return entry.getName();
             case 1:
                 return entry.getShedule();
             case 2:

@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
-public class TimeTableEditor extends JDialog {
+public class TimeTableEditor extends JDialog{
     private static JTextField nameField;
     private static JComboBox sheduleCombo;
     public static JTimeChooser fromTime;
@@ -19,7 +19,7 @@ public class TimeTableEditor extends JDialog {
     TimeTableEditor(Frame owner, String title){
         super(owner,title,ModalityType.DOCUMENT_MODAL);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        // setBounds((int)(MainForm.this.getWidth()/2)-250,(int)(MainForm.this.getHeight()/2)-100,500,330);
+        //setBounds((int)(MainForm.this.getWidth()/2)-250,(int)(MainForm.this.getHeight()/2)-100,500,330);
         setPreferredSize(new Dimension(500,330));
         setMinimumSize(new Dimension(500,330));
         setMaximumSize(new Dimension(500,330));
@@ -86,9 +86,17 @@ public class TimeTableEditor extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TableEntry addedTableEntry = new TableEntry();
-                MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
-                MainForm.tableUpdate();
-                dispose();
+                addedTableEntry = addedTableEntry.getTableEntryFromDialog();
+                //определяем есть ли такая запись в списке параметров и выводит предупреждение
+                if (addedTableEntry.isEntryPresentInList()) {
+                    WarningDialog warning = new WarningDialog(TimeTableEditor.this,"Ошибка ввода","Такое расписание уже существует!",ModalityType.DOCUMENT_MODAL);
+                    warning.setVisible(true);
+                }
+                else {
+                    MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                    MainForm.tableUpdate();
+                    dispose();
+                }
             }
         });
         JButton cancelB = new JButton("Отмена");

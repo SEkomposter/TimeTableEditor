@@ -1,19 +1,17 @@
 package by.alt.Object;
 
 
+
 import by.alt.gui.MainForm;
 import by.alt.gui.TimeTableEditor;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TableEntry {
-    private String name, shedule,timeFrom,timeTo;
+    private String name, shedule, timeFrom, timeTo;
     Map<String,String> map = new LinkedHashMap<>();
     public TableEntry(){}
     public TableEntry(String n,String s,String tf, String tt){
@@ -63,8 +61,18 @@ public class TableEntry {
         tempTE.setTimeTo(strings2[1]);
         return tempTE;
     }
+    public boolean isEntryPresentInList(){
+        //определяем есть ли такая запись в списке параметров
+        boolean isPresents = false;
+        Iterator it = MainForm.tableEntryList.iterator();
+        while(it.hasNext()&!isPresents)
+        {
+            if (it.next().toString().startsWith(PropType.TIMETABLE.toString() + "." + this.getShedule() + "." + this.getName())) isPresents = true;
+        }
+        return isPresents;
+    }
 
-    public String getName(String str) {
+    public String getName() {
         return name;
     }
 
@@ -98,7 +106,7 @@ public class TableEntry {
 
     @Override
     public String toString() {
-        return "timetable."+ shedule +"."+ name + "=" + timeFrom + "-" + timeTo+ "\n";
+        return "timetable."+ shedule +"."+ name + "=" + timeFrom + "-" + timeTo;
     }
 }
 

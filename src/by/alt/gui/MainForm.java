@@ -3,25 +3,21 @@ package by.alt.gui;
 
 import by.alt.Object.MyTableModel;
 import by.alt.Object.TableEntry;
-import lu.tudor.santec.jtimechooser.JTimeChooser;
-
+import by.alt.Object.*;
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 public class MainForm extends JFrame{
     private JTabbedPane tabbedPane1;
-    private JPanel panel1;
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
     private Font font;
     private MyMenuBar menuBar;
-    private TimeTableEditor timeTableEditor;
+    static TimeTableEditor timeTableEditor;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
@@ -136,6 +132,21 @@ public class MainForm extends JFrame{
             });
             openItem.setFont(font);
             fileMenu.add(openItem);
+            JMenuItem saveAsItem = new JMenuItem("Сохранить как...");
+            saveAsItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    PropReader reader = new PropReader();
+                    try {
+                        reader.writeRepProp(reader.preparePropsForWrite(tableEntryList));
+                        //System.out.println (tableEntryList);
+                    }catch (IOException exc){
+                        exc.printStackTrace();
+                    }
+                }
+            });
+            saveAsItem.setFont(font);
+            fileMenu.add(saveAsItem);
             newMenu.setVisible(true);
             add(fileMenu);
         }

@@ -47,6 +47,10 @@ public class MyTableModel extends AbstractTableModel {
         return entries.size();
     }
 
+    public void removeRow(int rowIndex){
+        entries.remove(rowIndex);
+    }
+
     public Object getValueAt(int rowIndex, int columnIndex) {
         TableEntry entry = entries.get(rowIndex);
         switch (columnIndex) {

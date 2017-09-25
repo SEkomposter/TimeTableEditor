@@ -23,9 +23,8 @@ public class MainForm extends JFrame{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    public static MyTableModel tableModel= new MyTableModel(tableEntryList);
+    public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JTable tt;
-
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -44,9 +43,7 @@ public class MainForm extends JFrame{
         getContentPane().add(tabbedPane1);
         this.setJMenuBar(menuBar);
         repaint();
-
     }
-
     public static void tableUpdate(){
         tableModel.fireTableStructureChanged();
         tt.updateUI();
@@ -77,7 +74,6 @@ public class MainForm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     timeTableEditor = new TimeTableEditor(MainForm.this,"Добавление расписания", new AddB());
                     timeTableEditor.setVisible(true);
-
                 }
             });
             tTabSubPan1.add(addButton);
@@ -96,7 +92,10 @@ public class MainForm extends JFrame{
             delButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    while(!(new ConfirmationDialog((JDialog) getParent(),"Удаление расписания","Вы действительно хотите удалить расписание?", Dialog.ModalityType.DOCUMENT_MODAL).isConfirmed())){
+                        tableModel.removeRow(tt.getSelectedRow());
+                    }
+                    tableUpdate();
                 }
             });
             tTabSubPan1.add(delButton);
@@ -110,7 +109,6 @@ public class MainForm extends JFrame{
                 public void valueChanged(ListSelectionEvent event) {
                     // do some actions here, for example
                     // print first column value from selected row
-                    //System.out.println(tt.getValueAt(tt.getSelectedRow(), 0).toString());
                     editButton.setEnabled(true);
                     delButton.setEnabled(true);
                 }
@@ -137,8 +135,7 @@ public class MainForm extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     tableEntryList.clear();
-                    tableModel.fireTableStructureChanged();
-                    tt.updateUI();
+                    tableUpdate();
                 }
             });
             newItem.setFont(font);
@@ -149,8 +146,9 @@ public class MainForm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     tableEntryList.clear();
                     tableEntryList.addAll(new TableEntry().getTableEntryList());
-                    tableModel.fireTableStructureChanged();
-                    tt.updateUI();
+                    //tableModel.fireTableStructureChanged();
+                    //tt.updateUI();
+                    tableUpdate();
                 }
             });
             openItem.setFont(font);

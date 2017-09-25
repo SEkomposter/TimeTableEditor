@@ -16,10 +16,21 @@ public class TimeTableEditor extends JDialog{
     private static JComboBox sheduleCombo;
     public static JTimeChooser fromTime;
     public static JTimeChooser toTime;
-    TimeTableEditor(Frame owner, String title){
+    JButton diffButton = new JButton();
+    private int rowNumber;
+    private TableEntry tableEntry;
+    TimeTableEditor(Frame owner, String title, JButton button, int rowNumber){
+        this(owner,title, button);
+        this.rowNumber = rowNumber;
+        tableEntry = new TableEntry();
+        nameField.setText((String) MainForm.tableModel.getValueAt(rowNumber,0));
+        sheduleCombo.setSelectedItem((String)MainForm.tableModel.getValueAt(rowNumber,1));
+        //(String)MainForm.tableModel.getValueAt(rowNumber,2),(String)MainForm.tableModel.getValueAt(rowNumber,3),(String)MainForm.tableModel.getValueAt(rowNumber,4)
+    }
+    TimeTableEditor(Frame owner, String title, JButton button){
         super(owner,title,ModalityType.DOCUMENT_MODAL);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        //setBounds((int)(MainForm.this.getWidth()/2)-250,(int)(MainForm.this.getHeight()/2)-100,500,330);
+        setBounds((int)(this.getParent().getWidth()/2)-250,(int)(this.getParent().getHeight()/2)-100,500,330);
         setPreferredSize(new Dimension(500,330));
         setMinimumSize(new Dimension(500,330));
         setMaximumSize(new Dimension(500,330));
@@ -60,8 +71,8 @@ public class TimeTableEditor extends JDialog{
         row2.add(sheduleLabel);
         row2.add(Box.createRigidArea(new Dimension(83,1)));
         sheduleCombo = new JComboBox();
-        sheduleCombo.addItem(Shedules.DAY);
-        sheduleCombo.addItem(Shedules.NIGHT);
+        sheduleCombo.addItem(Shedules.DAY.toString());
+        sheduleCombo.addItem(Shedules.NIGHT.toString());
         row2.add(sheduleCombo);
         row2.add(Box.createRigidArea(new Dimension(100,1)));
 
@@ -81,24 +92,6 @@ public class TimeTableEditor extends JDialog{
         row4.add(toTime);
         row4.add(Box.createRigidArea(new Dimension(250,1)));
 
-        JButton addB = new JButton("Добавить" );
-        addB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TableEntry addedTableEntry = new TableEntry();
-                addedTableEntry = addedTableEntry.getTableEntryFromDialog();
-                //определяем есть ли такая запись в списке параметров и выводит предупреждение
-                if (addedTableEntry.isEntryPresentInList()) {
-                    WarningDialog warning = new WarningDialog(TimeTableEditor.this,"Ошибка ввода","Такое расписание уже существует!",ModalityType.DOCUMENT_MODAL);
-                    warning.setVisible(true);
-                }
-                else {
-                    MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
-                    MainForm.tableUpdate();
-                    dispose();
-                }
-            }
-        });
         JButton cancelB = new JButton("Отмена");
         cancelB.addActionListener(new ActionListener() {
             @Override
@@ -106,7 +99,8 @@ public class TimeTableEditor extends JDialog{
                 dispose();
             }
         });
-        row5.add(addB);
+        diffButton = button;
+        row5.add(diffButton);
         row5.add(Box.createRigidArea(new Dimension(70,1)));
         row5.add(cancelB);
     }
@@ -130,5 +124,49 @@ public class TimeTableEditor extends JDialog{
         String hours = myFormatter.format(fromTime.getHours());
         String minutes = myFormatter.format(fromTime.getMinutes());
         return hours + "." + minutes;
+    }
+}
+class AddB extends JButton{
+    AddB(){
+        setText("Добавить");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableEntry addedTableEntry = new TableEntry();
+                addedTableEntry = addedTableEntry.getTableEntryFromDialog();
+                //определяем есть ли такая запись в списке параметров и выводит предупреждение
+                if (addedTableEntry.isEntryPresentInList()) {
+                    WarningDialog warning = new WarningDialog(MainForm.timeTableEditor,"Ошибка ввода","Такое расписание уже существует!", Dialog.ModalityType.DOCUMENT_MODAL);
+                    warning.setVisible(true);
+                }
+                else {
+                    MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                    MainForm.tableUpdate();
+                    MainForm.timeTableEditor.dispose();
+                }
+            }
+        });
+    }
+}
+class EditB extends JButton{
+    EditB(){
+        setText("Изменить");
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableEntry addedTableEntry = new TableEntry();
+                addedTableEntry = addedTableEntry.getTableEntryFromDialog();
+                //определяем есть ли такая запись в списке параметров и выводит предупреждение
+                if (addedTableEntry.isEntryPresentInList()) {
+                    WarningDialog warning = new WarningDialog(MainForm.timeTableEditor,"Ошибка ввода","Такое расписание уже существует!", Dialog.ModalityType.DOCUMENT_MODAL);
+                    warning.setVisible(true);
+                }
+                else {
+                    MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                    MainForm.tableUpdate();
+                    MainForm.timeTableEditor.dispose();
+                }
+            }
+        });
     }
 }

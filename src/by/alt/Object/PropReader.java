@@ -10,12 +10,11 @@ public class PropReader {
     String commProps = "common.properties";
     File filePath = new File("D:\\TimeTableEditor\\");
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
+    static Properties property = new Properties();
     public PropReader(){}
 
     Map<String,String> readRepProp(Enum en) throws IOException{
             FileInputStream fis;
-            Properties property = new Properties();
-
             try {
                 fis = new FileInputStream("src/resources/"+fileName);
                 property.load(fis);
@@ -37,7 +36,6 @@ public class PropReader {
     public void writeRepProp(Map<String,String> map) throws IOException{
 
         FileOutputStream fos;
-        Properties propertyOut = new Properties();
         try {
             fos = new FileOutputStream("src/resources/"+fileName);
 
@@ -45,9 +43,9 @@ public class PropReader {
             String pr;
             while (it.hasNext()) {
                 pr=it.next().toString();
-                propertyOut.put(pr, map.get(pr));
+                property.setProperty(pr, map.get(pr));
             }
-            propertyOut.store(fos,"");
+            property.store(fos,"");
             readRepProp(PropType.TIMETABLE);
             //System.out.println(propertiesIn);
             fos.close();

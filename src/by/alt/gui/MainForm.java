@@ -5,6 +5,8 @@ import by.alt.Object.MyTableModel;
 import by.alt.Object.TableEntry;
 import by.alt.Object.*;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +23,7 @@ public class MainForm extends JFrame{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    static MyTableModel tableModel= new MyTableModel(tableEntryList);
+    public static MyTableModel tableModel= new MyTableModel(tableEntryList);
     static JTable tt;
 
 
@@ -73,37 +75,49 @@ public class MainForm extends JFrame{
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeTableEditor = new TimeTableEditor(MainForm.this,"Добавление расписания");
+                    timeTableEditor = new TimeTableEditor(MainForm.this,"Добавление расписания", new AddB());
                     timeTableEditor.setVisible(true);
 
                 }
             });
             tTabSubPan1.add(addButton);
             JButton editButton = new JButton("Редактировать");
+            editButton.setEnabled(false);
+            tTabSubPan1.add(editButton);
             editButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeTableEditor = new TimeTableEditor(MainForm.this,"редактирование расписания");
+                    timeTableEditor = new TimeTableEditor(MainForm.this,"Редактирование расписания", new EditB(), tt.getSelectedRow());
                     timeTableEditor.setVisible(true);
                 }
             });
-            tTabSubPan1.add(editButton);
-            addButton("Удалить",tTabSubPan1);
+            JButton delButton = new JButton("Удалить");
+            delButton.setEnabled(false);
+            delButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+            tTabSubPan1.add(delButton);
 
             tt = new JTable(tableModel);
             tt.setRowSelectionAllowed(true);
             tt.setRowHeight(25);
             tTabSubPan2.add(tt,BorderLayout.NORTH);
             tTabSubPan2.add(new JScrollPane(tt));
+            tt.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+                public void valueChanged(ListSelectionEvent event) {
+                    // do some actions here, for example
+                    // print first column value from selected row
+                    //System.out.println(tt.getValueAt(tt.getSelectedRow(), 0).toString());
+                    editButton.setEnabled(true);
+                    delButton.setEnabled(true);
+                }
+            });
             setVisible(true);
         }
 
-    }
-    private static void addButton (String caption, Container container){
-        JButton button = new JButton(caption);
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setAlignmentY(Component.TOP_ALIGNMENT);
-        container.add(button);
     }
     class DepartmentsTab extends JPanel{
         DepartmentsTab(){}
@@ -118,13 +132,22 @@ public class MainForm extends JFrame{
             JMenu fileMenu = new JMenu("Файл");
             fileMenu.setFont(font);
             fileMenu.setVisible(true);
-            JMenuItem newMenu = new JMenuItem("Новый");
-            newMenu.setFont(font);
-            fileMenu.add(newMenu);
+            JMenuItem newItem = new JMenuItem("Новый");
+            newItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    tableEntryList.clear();
+                    tableModel.fireTableStructureChanged();
+                    tt.updateUI();
+                }
+            });
+            newItem.setFont(font);
+            fileMenu.add(newItem);
             JMenuItem openItem = new JMenuItem("Открыть");
             openItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    tableEntryList.clear();
                     tableEntryList.addAll(new TableEntry().getTableEntryList());
                     tableModel.fireTableStructureChanged();
                     tt.updateUI();
@@ -147,7 +170,7 @@ public class MainForm extends JFrame{
             });
             saveAsItem.setFont(font);
             fileMenu.add(saveAsItem);
-            newMenu.setVisible(true);
+            newItem.setVisible(true);
             add(fileMenu);
         }
     }

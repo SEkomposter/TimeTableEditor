@@ -111,6 +111,8 @@ public class MainForm extends JFrame{
             tt.setRowHeight(25);
             tTabSubPan2.add(tt,BorderLayout.NORTH);
             tTabSubPan2.add(new JScrollPane(tt));
+            tt.setAutoCreateRowSorter(true);
+            tt.getTableHeader().setReorderingAllowed(false);
             tt.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
                 public void valueChanged(ListSelectionEvent event) {
                     // do some actions here, for example

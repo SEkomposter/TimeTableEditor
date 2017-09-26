@@ -14,6 +14,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static by.alt.gui.MainForm.tableModel;
+import static by.alt.gui.MainForm.tableUpdate;
+import static by.alt.gui.MainForm.tt;
+
 public class TimeTableEditor extends JDialog{
     private static JTextField nameField;
     private static JComboBox sheduleCombo;
@@ -29,10 +33,10 @@ public class TimeTableEditor extends JDialog{
         this.rowNumber = rowNumber;
         tableEntry = new TableEntry();
         // считываем данные с записи в таблице и помещаем их на форму редактирования расписания:
-        nameField.setText((String) MainForm.tableModel.getValueAt(rowNumber,0));
-        sheduleCombo.setSelectedItem((String)MainForm.tableModel.getValueAt(rowNumber,1));
-        fromTime.setTime(parseDateGotFromForm((String) MainForm.tableModel.getValueAt(rowNumber,2)));
-        toTime.setTime(parseDateGotFromForm((String) MainForm.tableModel.getValueAt(rowNumber,3)));
+        nameField.setText((String) tableModel.getValueAt(rowNumber,0));
+        sheduleCombo.setSelectedItem((String) tableModel.getValueAt(rowNumber,1));
+        fromTime.setTime(parseDateGotFromForm((String) tableModel.getValueAt(rowNumber,2)));
+        toTime.setTime(parseDateGotFromForm((String) tableModel.getValueAt(rowNumber,3)));
     }
     //конструктор для формы создания нового расписания:
     TimeTableEditor(Frame owner, String title, JButton button){
@@ -141,11 +145,9 @@ public class TimeTableEditor extends JDialog{
         }catch (ParseException exc){
             exc.printStackTrace();
         }
-        //String[] temp;
-        //temp = time.split("\\.");
-        //date.setTime((Long.valueOf(temp[0])*3600000)+(Long.valueOf(temp[1])*60000));
         return date;
     }
+
 }
 class DifferentB extends JButton{
     DifferentB(String text){
@@ -155,32 +157,46 @@ class DifferentB extends JButton{
             public void actionPerformed(ActionEvent e) {
                 TableEntry addedTableEntry = new TableEntry();
                 addedTableEntry = addedTableEntry.getTableEntryFromDialog();
-                //определяем есть ли такая запись в списке параметров и выводит предупреждение
-                if (addedTableEntry.isEntryPresentInList()) {
+
+                if(addedTableEntry.getTableEntryFromDialog().getName().equals("")){
                     JOptionPane.showMessageDialog(MainForm.timeTableEditor.getContentPane(),
-                            "Расписание с таким именем уже существует!",
+                            "Имя расписания обязательно к заполнению!",
                             "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else {
-                    MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
-                    MainForm.tableUpdate();
-                    MainForm.timeTableEditor.dispose();
-                }
+                }else
+                    {
+                switch(text){
+                    case "Добавить":
+                        {
+                            //определяем есть ли такая запись в списке параметров и выводит предупреждение
+                            if (addedTableEntry.isEntryPresentInList()) {
+                                JOptionPane.showMessageDialog(MainForm.timeTableEditor.getContentPane(),
+                                "Расписание с таким именем уже существует!",
+                                "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            else {
+                                MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                                tableUpdate();
+                                MainForm.timeTableEditor.dispose();
+                            }
+                            break;
+                        }
+                    case "Изменить":
+                        {
+                            if (addedTableEntry.isEntryPresentInList()) {
+                                JOptionPane.showMessageDialog(MainForm.timeTableEditor.getContentPane(),
+                                        "Расписание с таким именем уже существует!",
+                                        "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            else {
+                                tableModel.removeRow(tt.getSelectedRow());
+                                MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                                tableUpdate();
+                                MainForm.timeTableEditor.dispose();
+                            }
+                        }
+                }}
             }
         });
     }
 }
-class EditB extends JButton{
-    EditB(){
-        setText("Изменить");
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TableEntry addedTableEntry = new TableEntry();
-                addedTableEntry = addedTableEntry.getTableEntryFromDialog();
-                //определяем есть ли такая запись в списке параметров и выводит предупреждение
-                }
 
-        });
-    }
-}

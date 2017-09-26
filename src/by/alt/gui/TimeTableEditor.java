@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TimeTableEditor extends JDialog{
     private static JTextField nameField;
@@ -19,14 +22,19 @@ public class TimeTableEditor extends JDialog{
     JButton diffButton = new JButton();
     private int rowNumber;
     private TableEntry tableEntry;
+
+    //конструктор для формы редактирования существующего расписания
     TimeTableEditor(Frame owner, String title, JButton button, int rowNumber){
         this(owner,title, button);
         this.rowNumber = rowNumber;
         tableEntry = new TableEntry();
+        // считываем данные с записи в таблице и помещаем их на форму редактирования расписания:
         nameField.setText((String) MainForm.tableModel.getValueAt(rowNumber,0));
         sheduleCombo.setSelectedItem((String)MainForm.tableModel.getValueAt(rowNumber,1));
-        //(String)MainForm.tableModel.getValueAt(rowNumber,2),(String)MainForm.tableModel.getValueAt(rowNumber,3),(String)MainForm.tableModel.getValueAt(rowNumber,4)
+        fromTime.setTime(parseDateGotFromForm((String) MainForm.tableModel.getValueAt(rowNumber,2)));
+        toTime.setTime(parseDateGotFromForm((String) MainForm.tableModel.getValueAt(rowNumber,3)));
     }
+    //конструктор для формы создания нового расписания:
     TimeTableEditor(Frame owner, String title, JButton button){
         super(owner,title,ModalityType.DOCUMENT_MODAL);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -125,10 +133,23 @@ public class TimeTableEditor extends JDialog{
         String minutes = myFormatter.format(fromTime.getMinutes());
         return hours + "." + minutes;
     }
+    //получаем дату из соответствующего строкового поля объекта TableEntry:
+    public Date parseDateGotFromForm(String time) {
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("hh.mm").parse(time);
+        }catch (ParseException exc){
+            exc.printStackTrace();
+        }
+        //String[] temp;
+        //temp = time.split("\\.");
+        //date.setTime((Long.valueOf(temp[0])*3600000)+(Long.valueOf(temp[1])*60000));
+        return date;
+    }
 }
-class AddB extends JButton{
-    AddB(){
-        setText("Добавить");
+class DifferentB extends JButton{
+    DifferentB(String text){
+        setText(text);
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,8 +157,9 @@ class AddB extends JButton{
                 addedTableEntry = addedTableEntry.getTableEntryFromDialog();
                 //определяем есть ли такая запись в списке параметров и выводит предупреждение
                 if (addedTableEntry.isEntryPresentInList()) {
-                    WarningDialog warning = new WarningDialog(MainForm.timeTableEditor,"Ошибка ввода","Такое расписание уже существует!", Dialog.ModalityType.DOCUMENT_MODAL);
-                    warning.setVisible(true);
+                    JOptionPane.showMessageDialog(MainForm.timeTableEditor.getContentPane(),
+                            "Расписание с таким именем уже существует!",
+                            "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else {
                     MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
@@ -157,16 +179,8 @@ class EditB extends JButton{
                 TableEntry addedTableEntry = new TableEntry();
                 addedTableEntry = addedTableEntry.getTableEntryFromDialog();
                 //определяем есть ли такая запись в списке параметров и выводит предупреждение
-                if (addedTableEntry.isEntryPresentInList()) {
-                    WarningDialog warning = new WarningDialog(MainForm.timeTableEditor,"Ошибка ввода","Такое расписание уже существует!", Dialog.ModalityType.DOCUMENT_MODAL);
-                    warning.setVisible(true);
                 }
-                else {
-                    MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
-                    MainForm.tableUpdate();
-                    MainForm.timeTableEditor.dispose();
-                }
-            }
+
         });
     }
 }

@@ -19,7 +19,7 @@ public class MainForm extends JFrame{
     private DepartmentsTab depTab;
     private Font font;
     private MyMenuBar menuBar;
-    static TimeTableEditor timeTableEditor;
+    public static TimeTableEditor timeTableEditor;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
@@ -72,7 +72,7 @@ public class MainForm extends JFrame{
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeTableEditor = new TimeTableEditor(MainForm.this,"Добавление расписания", new AddB());
+                    timeTableEditor = new TimeTableEditor(MainForm.this,"Добавление расписания", new DifferentB("Добавить"));
                     timeTableEditor.setVisible(true);
                 }
             });
@@ -83,7 +83,7 @@ public class MainForm extends JFrame{
             editButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    timeTableEditor = new TimeTableEditor(MainForm.this,"Редактирование расписания", new EditB(), tt.getSelectedRow());
+                    timeTableEditor = new TimeTableEditor(MainForm.this,"Редактирование расписания", new DifferentB("Изменить"), tt.getSelectedRow());
                     timeTableEditor.setVisible(true);
                 }
             });
@@ -92,10 +92,16 @@ public class MainForm extends JFrame{
             delButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    while(!(new ConfirmationDialog((JDialog) getParent(),"Удаление расписания","Вы действительно хотите удалить расписание?", Dialog.ModalityType.DOCUMENT_MODAL).isConfirmed())){
+                    int n = JOptionPane.showConfirmDialog(
+                            MainForm.this,
+                            "Вы действительно хотите удалить расписание?",
+                            "Удаление расписания",
+                            JOptionPane.YES_NO_OPTION);
+                    // если нажата кнопка "ДА", удаляем строку:
+                    if (n == JOptionPane.YES_NO_OPTION) {
                         tableModel.removeRow(tt.getSelectedRow());
+                        tableUpdate();
                     }
-                    tableUpdate();
                 }
             });
             tTabSubPan1.add(delButton);

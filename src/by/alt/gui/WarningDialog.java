@@ -13,4 +13,5 @@ public class WarningDialog extends JDialog{
         setBounds((int)own.getBounds().getX()+100,(int)own.getBounds().getY()+100,width,height);
         add(new JLabel(label),BorderLayout.CENTER);
     }
+
 }

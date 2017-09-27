@@ -17,6 +17,7 @@ public class MainForm extends JFrame{
     private JTabbedPane tabbedPane1;
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
+    private UsersTab usersTab;
     private Font font;
     private MyMenuBar menuBar;
     public static TimeTableEditor timeTableEditor;
@@ -56,6 +57,8 @@ public class MainForm extends JFrame{
             this.addTab("Расписания",timeTables);
             depTab = new DepartmentsTab(x, y, w, h);
             this.addTab("Подразделения",depTab);
+            usersTab = new UsersTab(x, y, w, h);
+            this.addTab("Сотрудники",usersTab);
         }
     }
 
@@ -103,8 +106,8 @@ public class MainForm extends JFrame{
                         int rowDeleted = 0;
                         for(int i:selections) {
                             new PropReader().removeProperty(PropType.TIMETABLE.toString() + "." + tt.getValueAt(i-rowDeleted, 1) + "." + tt.getValueAt(i-rowDeleted, 0));
-                            tableModel.removeRow(i);
-                            ++rowDeleted;
+                            tableModel.removeRow(i-rowDeleted);
+                            rowDeleted++;
                         }
 
                         tableUpdate();
@@ -120,6 +123,7 @@ public class MainForm extends JFrame{
             tTabSubPan2.add(new JScrollPane(tt));
             tt.setAutoCreateRowSorter(true);
             tt.getTableHeader().setReorderingAllowed(false);
+
             tt.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
                 public void valueChanged(ListSelectionEvent event) {
                     // do some actions here, for example
@@ -132,14 +136,7 @@ public class MainForm extends JFrame{
         }
 
     }
-    class DepartmentsTab extends JPanel{
-        DepartmentsTab(){}
-        DepartmentsTab(int x, int y,int w, int h){
-            setBounds(x, y, w, h);
-            add(new JButton("Department"));
-            setVisible(true);
-        }
-    }
+
     class MyMenuBar extends JMenuBar{
         MyMenuBar(){
             JMenu fileMenu = new JMenu("Файл");
@@ -185,6 +182,49 @@ public class MainForm extends JFrame{
             add(fileMenu);
         }
     }
+    class DepartmentsTab extends JPanel{
+        DepartmentsTab(){}
+        DepartmentsTab(int x, int y,int w, int h){
+            setBounds(x, y, w, h);
 
+            setVisible(true);
+        }
+    }
+    class UsersTab extends JPanel{
+        JPanel basicLayer = new JPanel();
+        JLabel timeTableLabel = new JLabel("Расписание:");
+        JComboBox timeTableCombo = new JComboBox();
+        UsersTab(){}
+        UsersTab(int x, int y,int w, int h){
+            add(basicLayer);
+            setBounds(x, y, w, h);
+            //add(new JButton("Users"));
+            setVisible(true);
+            basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
+//            basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
+
+            JPanel row1 = new JPanel();
+            row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
+            JPanel row2 = new JPanel();
+            row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
+            JPanel row3 = new JPanel();
+            row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
+
+            basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
+            basicLayer.add(row1);
+            basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
+            basicLayer.add(row2);
+            basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
+            basicLayer.add(row3);
+            basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
+
+            row1.add(Box.createRigidArea(new Dimension(80,1)));
+            row1.add(timeTableLabel);
+            row1.add(Box.createRigidArea(new Dimension(30,1)));
+            row1.add(timeTableCombo);
+            row1.add(Box.createRigidArea(new Dimension(300,1)));
+
+        }
+    }
 }
 

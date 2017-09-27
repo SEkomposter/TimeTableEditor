@@ -170,7 +170,7 @@ class DifferentB extends JButton{
                             //определяем есть ли такая запись в списке параметров и выводит предупреждение
                             if (addedTableEntry.isEntryPresentInList()) {
                                 JOptionPane.showMessageDialog(MainForm.timeTableEditor.getContentPane(),
-                                "Расписание с таким именем уже существует!",
+                                "Расписание с таким именем и режимом уже существует!",
                                 "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
                             }
                             else {
@@ -182,9 +182,13 @@ class DifferentB extends JButton{
                         }
                     case "Изменить":
                         {
-                            if (addedTableEntry.isEntryPresentInList()) {
+                            //проверяем, не было ли изменено имя расписания в форме по сравнению с выбранной строкой таблицы (false - не изменено):
+                            boolean option1 = addedTableEntry.isChanged(tt,addedTableEntry);
+                            //проверка, если в таблице строка с таким именем:
+                            boolean option2 = addedTableEntry.isEntryPresentInList();
+                            if (option1&option2) {
                                 JOptionPane.showMessageDialog(MainForm.timeTableEditor.getContentPane(),
-                                        "Расписание с таким именем уже существует!",
+                                        "Расписание с таким именем и режимом уже существует!",
                                         "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
                             }
                             else {

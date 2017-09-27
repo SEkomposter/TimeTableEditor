@@ -20,6 +20,7 @@ public class PropReader {
                 property.load(fis);
                 Iterator it = property.keySet().iterator();
                 String pr;
+                properties.clear();
                 while (it.hasNext()) {
                     pr=it.next().toString();
                     if (pr.startsWith(en.toString()))
@@ -74,6 +75,9 @@ public class PropReader {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
         return property.get(propName).toString();
+    }
+    public void removeProperty(String prop){
+            property.remove(prop);
     }
 
 }

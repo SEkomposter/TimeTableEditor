@@ -1,14 +1,17 @@
 package by.alt.Object;
 
-
-
 import by.alt.gui.MainForm;
 import by.alt.gui.TimeTableEditor;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static by.alt.gui.MainForm.tableEntryList;
+import static by.alt.gui.MainForm.tableModel;
 
 public class TableEntry {
     private String name, shedule, timeFrom, timeTo;
@@ -25,12 +28,7 @@ public class TableEntry {
     public TableEntry getTableEntryFromDialog(){
         return new TableEntry(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog(),TimeTableEditor.getFromTimeFromDialog(),TimeTableEditor.getToTimeFromDialog());
     }
-    public void setTableEntry(String n,String s,String tf, String tt){
-        setName(n);
-        setShedule(s);
-        setTimeTo(tt);
-        setTimeFrom(tf);
-    }
+
     public ArrayList<TableEntry> getTableEntryList (){
         PropReader propReader = new PropReader();
         ArrayList<TableEntry> tableEntryArrayList = new ArrayList<>();
@@ -42,12 +40,20 @@ public class TableEntry {
                 temp = (String) it.next();
                 tableEntryArrayList.add(parseName(temp, map.get(temp)));
             }
-            //System.out.println(tableEntryArrayList);
         }
         catch (IOException exc){
             exc.printStackTrace();
         }
         return tableEntryArrayList;
+    }
+    public static TableEntry getTableEntry(String name){
+        Iterator iterator = tableEntryList.iterator();
+        TableEntry tempEntry = new TableEntry();
+        while (iterator.hasNext()){
+            tempEntry = (TableEntry)iterator.next();
+            if(tempEntry.getName().equals(name)) return tempEntry;
+        }
+        return null;
     }
     static TableEntry parseName(String key, String val){
         TableEntry tempTE = new TableEntry();
@@ -70,6 +76,12 @@ public class TableEntry {
             if (it.next().toString().startsWith(PropType.TIMETABLE.toString() + "." + this.getShedule() + "." + this.getName())) isPresents = true;
         }
         return isPresents;
+    }
+    public boolean isChanged(JTable table, TableEntry tableEntry) {
+        //определяем не было ли изменено имя расписания в форме по сравнению с выбранной строкой таблицы (false - не изменено)
+        String str1 = PropType.TIMETABLE.toString() + "." + tableEntry.getTableEntryFromDialog().getShedule() + "." + tableEntry.getTableEntryFromDialog().getName();
+        String str2 = PropType.TIMETABLE.toString() + "." +  tableModel.getValueAt(table.getSelectedRow(),1)+ "." +  tableModel.getValueAt(table.getSelectedRow(),0);
+        return !str1.equals(str2);
     }
 
     public String getName() {

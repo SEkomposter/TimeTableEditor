@@ -99,7 +99,14 @@ public class MainForm extends JFrame{
                             JOptionPane.YES_NO_OPTION);
                     // если нажата кнопка "ДА", удаляем строку:
                     if (n == JOptionPane.YES_NO_OPTION) {
-                        tableModel.removeRow(tt.getSelectedRow());
+                        int[] selections = tt.getSelectedRows();
+                        int rowDeleted = 0;
+                        for(int i:selections) {
+                            new PropReader().removeProperty(PropType.TIMETABLE.toString() + "." + tt.getValueAt(i-rowDeleted, 1) + "." + tt.getValueAt(i-rowDeleted, 0));
+                            tableModel.removeRow(i);
+                            ++rowDeleted;
+                        }
+
                         tableUpdate();
                     }
                 }
@@ -154,8 +161,6 @@ public class MainForm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     tableEntryList.clear();
                     tableEntryList.addAll(new TableEntry().getTableEntryList());
-                    //tableModel.fireTableStructureChanged();
-                    //tt.updateUI();
                     tableUpdate();
                 }
             });
@@ -168,7 +173,7 @@ public class MainForm extends JFrame{
                     PropReader reader = new PropReader();
                     try {
                         reader.writeRepProp(reader.preparePropsForWrite(tableEntryList));
-                        //System.out.println (tableEntryList);
+
                     }catch (IOException exc){
                         exc.printStackTrace();
                     }
@@ -178,12 +183,6 @@ public class MainForm extends JFrame{
             fileMenu.add(saveAsItem);
             newItem.setVisible(true);
             add(fileMenu);
-        }
-    }
-    class TimeTable extends JTable{
-        TimeTable(){
-            super();
-            setVisible(true);
         }
     }
 

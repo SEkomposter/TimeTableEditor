@@ -116,7 +116,6 @@ public class MainForm extends JFrame{
                 }
             });
             tTabSubPan1.add(delButton);
-
             tt = new JTable(tableModel);
             tt.setRowSelectionAllowed(true);
             tt.setRowHeight(25);
@@ -187,13 +186,21 @@ public class MainForm extends JFrame{
         DepartmentsTab(){}
         DepartmentsTab(int x, int y,int w, int h){
             setBounds(x, y, w, h);
-
             setVisible(true);
         }
     }
     class UsersTab extends JPanel{
         JPanel basicLayer = new JPanel();
         JLabel timeTableLabel = new JLabel("Расписание:");
+        JLabel treeLabel1 = new JLabel("Сотрудники, добавленные в расписание:");
+        JLabel treeLabel2 = new JLabel("Сотрудники, отсутствующие в расписании:");
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
+        JPanel panel3 = new JPanel();
+        JTree addedUsers = new JTree();
+        JTree freeUsers = new JTree();
+        JButton addButton = new JButton("<= Добавить");
+        JButton removeButton = new JButton("Убрать       =>");
 
         UsersTab(){}
         UsersTab(int x, int y,int w, int h){
@@ -201,20 +208,21 @@ public class MainForm extends JFrame{
             setBounds(x, y, w, h);
             setVisible(true);
             basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
+            removeButton.setSize(addButton.getSize());
             //basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
-
             JPanel row1 = new JPanel();
             row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
             JPanel row2 = new JPanel();
             row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
             JPanel row3 = new JPanel();
             row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
+            //row3.setBackground(Color.white);
 
             basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
             basicLayer.add(row1);
             basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
             basicLayer.add(row2);
-            basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
+            basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
             basicLayer.add(row3);
             basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
 
@@ -224,6 +232,28 @@ public class MainForm extends JFrame{
             row1.add(timeTableCombo);
             row1.add(Box.createRigidArea(new Dimension(300,1)));
 
+            row2.add(Box.createRigidArea(new Dimension(50,1)));
+            row2.add(treeLabel1);
+            row2.add(Box.createRigidArea(new Dimension(300,1)));
+            row2.add(treeLabel2);
+            row2.add(Box.createRigidArea(new Dimension(80,1)));
+
+            row3.add(Box.createRigidArea(new Dimension(20,1)));
+            row3.add(panel1);
+            row3.add(Box.createRigidArea(new Dimension(20,1)));
+            row3.add(panel2);
+            row3.add(Box.createRigidArea(new Dimension(20,1)));
+            row3.add(panel3);
+            row3.add(Box.createRigidArea(new Dimension(20,1)));
+
+            panel1.add(addedUsers);
+            panel3.add(freeUsers);
+            panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
+            panel2.add(Box.createRigidArea(new Dimension(1,50)));
+            panel2.add(addButton);
+            panel2.add(Box.createRigidArea(new Dimension(1,40)));
+            panel2.add(removeButton);
+            panel2.add(Box.createRigidArea(new Dimension(1,250)));
         }
         public JComboBox fillCombo(JComboBox jComboBox){
             Iterator iterator = MainForm.tableEntryList.iterator();

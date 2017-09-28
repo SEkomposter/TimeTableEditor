@@ -1,6 +1,7 @@
 package by.alt.gui;
 
 
+import by.alt.Main;
 import by.alt.Object.MyTableModel;
 import by.alt.Object.TableEntry;
 import by.alt.Object.*;
@@ -17,7 +18,7 @@ public class MainForm extends JFrame{
     private JTabbedPane tabbedPane1;
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
-    private UsersTab usersTab;
+    private static UsersTab usersTab;
     private Font font;
     private MyMenuBar menuBar;
     public static TimeTableEditor timeTableEditor;
@@ -25,6 +26,7 @@ public class MainForm extends JFrame{
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
+    static JComboBox timeTableCombo = new JComboBox();
     static JTable tt;
 
     public static void main(String[] args) {
@@ -108,9 +110,8 @@ public class MainForm extends JFrame{
                             new PropReader().removeProperty(PropType.TIMETABLE.toString() + "." + tt.getValueAt(i-rowDeleted, 1) + "." + tt.getValueAt(i-rowDeleted, 0));
                             tableModel.removeRow(i-rowDeleted);
                             rowDeleted++;
+                            updateComponents();
                         }
-
-                        tableUpdate();
                     }
                 }
             });
@@ -147,7 +148,7 @@ public class MainForm extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     tableEntryList.clear();
-                    tableUpdate();
+                    updateComponents();
                 }
             });
             newItem.setFont(font);
@@ -158,7 +159,7 @@ public class MainForm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     tableEntryList.clear();
                     tableEntryList.addAll(new TableEntry().getTableEntryList());
-                    tableUpdate();
+                    updateComponents();
                 }
             });
             openItem.setFont(font);
@@ -193,15 +194,14 @@ public class MainForm extends JFrame{
     class UsersTab extends JPanel{
         JPanel basicLayer = new JPanel();
         JLabel timeTableLabel = new JLabel("Расписание:");
-        JComboBox timeTableCombo = new JComboBox();
+
         UsersTab(){}
         UsersTab(int x, int y,int w, int h){
             add(basicLayer);
             setBounds(x, y, w, h);
-            //add(new JButton("Users"));
             setVisible(true);
             basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
-//            basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
+            //basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
 
             JPanel row1 = new JPanel();
             row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
@@ -225,6 +225,18 @@ public class MainForm extends JFrame{
             row1.add(Box.createRigidArea(new Dimension(300,1)));
 
         }
+        public JComboBox fillCombo(JComboBox jComboBox){
+            Iterator iterator = MainForm.tableEntryList.iterator();
+            while (iterator.hasNext()) {
+                jComboBox.addItem(iterator.next());
+            }
+            return jComboBox;
+        }
+    }
+    public void updateComponents(){
+        tableUpdate();
+        timeTableCombo.removeAllItems();
+        usersTab.fillCombo(timeTableCombo);
     }
 }
 

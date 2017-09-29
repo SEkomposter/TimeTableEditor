@@ -39,6 +39,7 @@ public class MainForm extends JFrame{
     }
     public MainForm(){
         setBounds(0,0,1000,600);
+        setMinimumSize(new Dimension(1000,600));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         menuBar = new MyMenuBar();
@@ -204,39 +205,112 @@ public class MainForm extends JFrame{
 
         UsersTab(){}
         UsersTab(int x, int y,int w, int h){
+            this.setLayout(null);
+            this.setBounds(x,y,w,h);
+            this.setPreferredSize(new Dimension(w,h));
             add(basicLayer);
-            setBounds(x, y, w, h);
             setVisible(true);
-            basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
-            removeButton.setSize(addButton.getSize());
+            addComponentListener(new java.awt.event.ComponentAdapter() {
+                public void componentResized(java.awt.event.ComponentEvent evt) {
+                    basicLayer.setBounds(getX(),getY(),getWidth(),getHeight());
+                }
+            });
+            basicLayer.setLayout(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
+            basicLayer.setBounds(x,y,w,h);
+            basicLayer.setBackground(Color.MAGENTA);
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 1;
+            c.gridy = 0;
+            c.weightx = 0.5;
+            basicLayer.add(timeTableLabel, c);
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 2;
+            c.gridy = 0;
+            c.gridwidth = 3;
+            c.weightx = 0.5;
+            basicLayer.add(timeTableCombo, c);
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 1;
+            c.gridy = 2;
+            c.gridwidth = 5;
+            c.weightx = 0.5;
+            basicLayer.add(treeLabel1, c);
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 6;
+            c.gridy = 2;
+            c.gridwidth = 5;
+            c.weightx = 0.5;
+            basicLayer.add(treeLabel2, c);
+
+            c.fill = GridBagConstraints.BOTH;
+            c.gridx = 0;
+            c.gridy = 4;
+            c.gridwidth = 5;
+            c.gridheight = 15;
+            c.weightx = 0.5;
+            basicLayer.add(addedUsers, c);
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 6;
+            c.gridy = 7;
+            c.gridwidth = 2;
+            c.gridheight = 1;
+            c.weightx = 0.5;
+            basicLayer.add(addButton, c);
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 6;
+            c.gridy = 9;
+            c.gridwidth = 2;
+            c.gridheight = 1;
+            c.weightx = 0.5;
+            basicLayer.add(addButton, c);
+
+            c.fill = GridBagConstraints.BOTH;
+            c.gridx = 8;
+            c.gridy = 4;
+            c.gridwidth = 5;
+            c.gridheight = 15;
+            c.weightx = 0.5;
+            basicLayer.add(addedUsers, c);
+            /*removeButton.setSize(addButton.getSize());
+            //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
             //basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
-            JPanel row1 = new JPanel();
-            row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
-            JPanel row2 = new JPanel();
+
+            JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            row1.setBackground(Color.cyan);
+            //row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
+            JPanel row2 = new JPanel(new GridLayout(0,4));
+            row2.setBackground(Color.green);
             row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
             JPanel row3 = new JPanel();
+            //row3.setBackground(Color.MAGENTA);
             row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
             //row3.setBackground(Color.white);
 
-            basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
-            basicLayer.add(row1);
-            basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
-            basicLayer.add(row2);
-            basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
-            basicLayer.add(row3);
-            basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
+            //basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
+            basicLayer.add(row1,BorderLayout.NORTH);
+            //basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
+            basicLayer.add(row2,BorderLayout.CENTER);
+            //basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
+            basicLayer.add(row3,BorderLayout.SOUTH);
+            //basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
 
-            row1.add(Box.createRigidArea(new Dimension(80,1)));
+            //row1.add(Box.createRigidArea(new Dimension(80,1)));
             row1.add(timeTableLabel);
-            row1.add(Box.createRigidArea(new Dimension(30,1)));
+            //row1.add(Box.createRigidArea(new Dimension(30,1)));
             row1.add(timeTableCombo);
-            row1.add(Box.createRigidArea(new Dimension(300,1)));
+            //row1.add(Box.createRigidArea(new Dimension(300,1)));
 
-            row2.add(Box.createRigidArea(new Dimension(50,1)));
+            //row2.add(Box.createRigidArea(new Dimension(50,1)));
             row2.add(treeLabel1);
-            row2.add(Box.createRigidArea(new Dimension(300,1)));
+            //row2.add(Box.createRigidArea(new Dimension(300,1)));
             row2.add(treeLabel2);
-            row2.add(Box.createRigidArea(new Dimension(80,1)));
+            //row2.add(Box.createRigidArea(new Dimension(80,1)));
 
             row3.add(Box.createRigidArea(new Dimension(20,1)));
             row3.add(panel1);
@@ -246,6 +320,7 @@ public class MainForm extends JFrame{
             row3.add(panel3);
             row3.add(Box.createRigidArea(new Dimension(20,1)));
 
+            panel1.setLayout(new FlowLayout());
             panel1.add(addedUsers);
             panel3.add(freeUsers);
             panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
@@ -254,6 +329,7 @@ public class MainForm extends JFrame{
             panel2.add(Box.createRigidArea(new Dimension(1,40)));
             panel2.add(removeButton);
             panel2.add(Box.createRigidArea(new Dimension(1,250)));
+            */
         }
         public JComboBox fillCombo(JComboBox jComboBox){
             Iterator iterator = MainForm.tableEntryList.iterator();

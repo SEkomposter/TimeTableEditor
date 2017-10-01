@@ -38,8 +38,8 @@ public class MainForm extends JFrame{
         });
     }
     public MainForm(){
-        setBounds(0,0,1000,600);
-        setMinimumSize(new Dimension(1000,600));
+        setBounds(0,0,1200,720);
+        setMinimumSize(new Dimension(1200,720));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         menuBar = new MyMenuBar();
@@ -219,63 +219,69 @@ public class MainForm extends JFrame{
             GridBagConstraints c = new GridBagConstraints();
             basicLayer.setBounds(x,y,w,h);
             basicLayer.setBackground(Color.MAGENTA);
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 1;
-            c.gridy = 0;
-            c.weightx = 0.5;
-            basicLayer.add(timeTableLabel, c);
 
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 2;
             c.gridy = 0;
-            c.gridwidth = 3;
+            c.gridwidth = 1;
             c.weightx = 0.5;
+            c.weighty = 0.1;
+            basicLayer.add(timeTableLabel, c);
+
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 3;
+            c.gridy = 0;
+            c.gridwidth = 4;
+            c.weightx = 0.5;
+            c.weighty = 0.1;
             basicLayer.add(timeTableCombo, c);
 
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 1;
             c.gridy = 2;
-            c.gridwidth = 5;
+            c.gridwidth = 2;
             c.weightx = 0.5;
+            c.weighty = 0.1;
             basicLayer.add(treeLabel1, c);
 
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 6;
             c.gridy = 2;
-            c.gridwidth = 5;
+            c.gridwidth = 2;
             c.weightx = 0.5;
+            c.weighty = 0.1;
             basicLayer.add(treeLabel2, c);
 
             c.fill = GridBagConstraints.BOTH;
             c.gridx = 0;
             c.gridy = 4;
-            c.gridwidth = 5;
+            c.gridwidth = 3;
             c.gridheight = 15;
-            c.weightx = 0.5;
+            c.weightx = 0.4;
             basicLayer.add(addedUsers, c);
 
             c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 6;
+            c.gridx = 4;
             c.gridy = 7;
-            c.gridwidth = 2;
+            c.gridwidth = 1;
             c.gridheight = 1;
-            c.weightx = 0.5;
+            c.weightx = 0.1;
             basicLayer.add(addButton, c);
 
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 6;
             c.gridy = 9;
-            c.gridwidth = 2;
+            c.gridwidth = 1;
             c.gridheight = 1;
-            c.weightx = 0.5;
+            c.weightx = 0.1;
             basicLayer.add(addButton, c);
 
             c.fill = GridBagConstraints.BOTH;
             c.gridx = 8;
             c.gridy = 4;
-            c.gridwidth = 5;
+            c.gridwidth = 3;
             c.gridheight = 15;
-            c.weightx = 0.5;
+            c.weightx = 0.4;
             basicLayer.add(addedUsers, c);
             /*removeButton.setSize(addButton.getSize());
             //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));

@@ -38,8 +38,8 @@ public class MainForm extends JFrame{
         });
     }
     public MainForm(){
-        setBounds(0,0,1200,720);
-        setMinimumSize(new Dimension(1200,720));
+        setBounds(0,0,1300,720);
+        setMinimumSize(new Dimension(1300,720));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         menuBar = new MyMenuBar();
@@ -207,6 +207,7 @@ public class MainForm extends JFrame{
         UsersTab(int x, int y,int w, int h){
             this.setLayout(null);
             this.setBounds(x,y,w,h);
+           // this.add(new JScrollPane(addedUsers));
             this.setPreferredSize(new Dimension(w,h));
             add(basicLayer);
             setVisible(true);
@@ -218,71 +219,90 @@ public class MainForm extends JFrame{
             basicLayer.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
             basicLayer.setBounds(x,y,w,h);
-            basicLayer.setBackground(Color.MAGENTA);
 
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 2;
+            c.fill = GridBagConstraints.NONE;
+            c.gridx = 0;
             c.gridy = 0;
             c.gridwidth = 1;
-            c.weightx = 0.5;
+            c.weightx = 0.0;
             c.weighty = 0.1;
+            c.insets = new Insets(0, 200, 0, 0);
+            c.anchor = GridBagConstraints.WEST;
             basicLayer.add(timeTableLabel, c);
 
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 3;
+            c.fill = GridBagConstraints.NONE;
+            c.gridx = 0;
             c.gridy = 0;
-            c.gridwidth = 4;
-            c.weightx = 0.5;
+            c.gridwidth = 1;
+            c.weightx = 0.0;
             c.weighty = 0.1;
+            c.insets = new Insets(0, 0, 0, 0);
+            c.anchor = GridBagConstraints.EAST;
             basicLayer.add(timeTableCombo, c);
 
             c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 1;
+            c.gridx = 0;
             c.gridy = 2;
-            c.gridwidth = 2;
+            c.gridwidth = 1;
             c.weightx = 0.5;
             c.weighty = 0.1;
+            c.insets = new Insets(0, 20, 0, 0);
             basicLayer.add(treeLabel1, c);
 
             c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 6;
+            c.gridx = 4;
             c.gridy = 2;
             c.gridwidth = 2;
             c.weightx = 0.5;
             c.weighty = 0.1;
+            c.insets = new Insets(0, 0, 0, 0);
             basicLayer.add(treeLabel2, c);
 
             c.fill = GridBagConstraints.BOTH;
             c.gridx = 0;
             c.gridy = 4;
-            c.gridwidth = 3;
-            c.gridheight = 15;
-            c.weightx = 0.4;
-            basicLayer.add(addedUsers, c);
-
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 4;
-            c.gridy = 7;
-            c.gridwidth = 1;
-            c.gridheight = 1;
-            c.weightx = 0.1;
-            basicLayer.add(addButton, c);
-
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 6;
-            c.gridy = 9;
-            c.gridwidth = 1;
-            c.gridheight = 1;
-            c.weightx = 0.1;
-            basicLayer.add(addButton, c);
+            c.gridwidth = 2;
+            c.gridheight = 3;
+            c.weightx = 0.45;
+            c.weighty = 0.8;
+            c.ipadx = 0;
+            c.insets = new Insets(0, 20, 30, 0);
+            c.anchor = GridBagConstraints.NORTHWEST;
+            basicLayer.add(new JScrollPane(addedUsers),c);
 
             c.fill = GridBagConstraints.BOTH;
-            c.gridx = 8;
+            c.gridx = 4;
             c.gridy = 4;
-            c.gridwidth = 3;
-            c.gridheight = 15;
-            c.weightx = 0.4;
-            basicLayer.add(addedUsers, c);
+            c.gridwidth = 1;
+            c.gridheight = 3;
+            c.weightx = 0.45;
+            c.weighty = 0.8;
+            c.insets = new Insets(0, 0, 30, 10);
+            basicLayer.add(new JScrollPane(freeUsers),c);
+
+            c.fill = GridBagConstraints.NONE;
+            c.gridx = 2;
+            c.gridy = 4;
+            c.gridwidth = 1;
+            c.gridheight = 1;
+            c.weightx = 0.05;
+            c.weighty = 0.0;
+            c.insets = new Insets(50, 20, 0, 0);
+
+            basicLayer.add(addButton, c);
+
+            c.fill = GridBagConstraints.NONE;
+            c.gridx = 2;
+            c.gridy = 5;
+            c.gridwidth = 1;
+            c.gridheight = 1;
+            c.weightx = 0.05;
+            c.weighty = 0.0;
+            c.insets = new Insets(50, 20, 0, 0);
+            basicLayer.add(removeButton, c);
+
+
+
             /*removeButton.setSize(addButton.getSize());
             //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
             //basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));

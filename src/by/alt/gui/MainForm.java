@@ -6,8 +6,10 @@ import by.alt.Object.MyTableModel;
 import by.alt.Object.TableEntry;
 import by.alt.Object.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -219,23 +221,25 @@ public class MainForm extends JFrame{
             basicLayer.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
             basicLayer.setBounds(x,y,w,h);
+            timeTableCombo.setBackground(Color.white);
 
             c.fill = GridBagConstraints.NONE;
             c.gridx = 0;
             c.gridy = 0;
             c.gridwidth = 1;
             c.weightx = 0.0;
-            c.weighty = 0.1;
+            c.weighty = 0.0;
             c.insets = new Insets(0, 200, 0, 0);
             c.anchor = GridBagConstraints.WEST;
             basicLayer.add(timeTableLabel, c);
+            timeTableLabel.setBorder(new BasicBorders.MarginBorder());
 
             c.fill = GridBagConstraints.NONE;
             c.gridx = 0;
             c.gridy = 0;
             c.gridwidth = 1;
             c.weightx = 0.0;
-            c.weighty = 0.1;
+            c.weighty = 0.0;
             c.insets = new Insets(0, 0, 0, 0);
             c.anchor = GridBagConstraints.EAST;
             basicLayer.add(timeTableCombo, c);

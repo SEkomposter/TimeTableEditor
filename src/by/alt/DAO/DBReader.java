@@ -28,9 +28,12 @@ public class DBReader{
     }
     public void QueryToDB(String query)throws SQLException{
         Statement stm = this.ConnectToDB().createStatement();
-        stm.addBatch("SELECT * FROM `tc-db-main`.personal");
-        System.out.println(stm.executeQuery("SELECT * FROM `tc-db-main`.personal"));
-        Iterator it = stm.executeQuery("SELECT * FROM `tc-db-main`.personal")..
-
+        ResultSet resultSet = (com.mysql.jdbc.ResultSet)stm.executeQuery("SELECT `id`,`parent_id`,`name`,`type` " +
+                "FROM `tc-db-main`.personal;");
+        int i=0;
+        while (resultSet.next()){
+            System.out.println(resultSet.getString("ID") + " = " + resultSet.getString("NAME") + " " + resultSet.getString("TYPE"));
+            i++;
+        }
     }
 }

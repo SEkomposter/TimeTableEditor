@@ -32,7 +32,7 @@ public class DBReader{
                 "FROM `tc-db-main`.personal;");
         int i=0;
         while (resultSet.next()){
-            System.out.println(resultSet.getString("ID") + " = " + resultSet.getString("NAME") + " " + resultSet.getString("TYPE"));
+            System.out.println(resultSet.getString("ID") + " = " + resultSet.getString("NAME") + " " + resultSet.getString("TYPE") + " " +resultSet.getString("PARENT_ID"));
             i++;
         }
     }

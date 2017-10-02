@@ -48,11 +48,11 @@
         <entry file="file://$PROJECT_DIR$/src/by/alt/DAO/DBReader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="34" column="103" lean-forward="false" selection-start-line="34" selection-start-column="103" selection-end-line="34" selection-end-column="103" />
+              <caret line="34" column="168" lean-forward="false" selection-start-line="34" selection-start-column="168" selection-end-line="34" selection-end-column="168" />
               <folding>
-                <marker date="1506970505214" expanded="true" signature="1308:1346" ph="SELECT paren... " />
-                <marker date="1506970505214" expanded="true" signature="1308:1393" ph="SELECT * FRO... personal" />
-                <marker date="1506970505214" expanded="true" signature="1308:1394" ph="SELECT paren... " />
+                <marker date="1506970603608" expanded="true" signature="1308:1346" ph="SELECT paren... " />
+                <marker date="1506970603608" expanded="true" signature="1308:1393" ph="SELECT * FRO... personal" />
+                <marker date="1506970603608" expanded="true" signature="1308:1394" ph="SELECT paren... " />
               </folding>
             </state>
           </provider>
@@ -810,7 +810,7 @@
       <workItem from="1506538528828" duration="4875000" />
       <workItem from="1506631201353" duration="2487000" />
       <workItem from="1506866034800" duration="12174000" />
-      <workItem from="1506967880695" duration="2604000" />
+      <workItem from="1506967880695" duration="2742000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1505858589712</created>
@@ -896,11 +896,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506891891126</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="01.10.2017">
+      <created>1506970518384</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1506970518384</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71554000" />
+    <option name="totallyTimeSpent" value="71692000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -925,7 +932,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.51059" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.48940998" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.49394855" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1345,11 +1352,11 @@
     <entry file="file://$PROJECT_DIR$/src/by/alt/DAO/DBReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="34" column="103" lean-forward="false" selection-start-line="34" selection-start-column="103" selection-end-line="34" selection-end-column="103" />
+          <caret line="34" column="168" lean-forward="false" selection-start-line="34" selection-start-column="168" selection-end-line="34" selection-end-column="168" />
           <folding>
-            <marker date="1506970505214" expanded="true" signature="1308:1346" ph="SELECT paren... " />
-            <marker date="1506970505214" expanded="true" signature="1308:1393" ph="SELECT * FRO... personal" />
-            <marker date="1506970505214" expanded="true" signature="1308:1394" ph="SELECT paren... " />
+            <marker date="1506970603608" expanded="true" signature="1308:1346" ph="SELECT paren... " />
+            <marker date="1506970603608" expanded="true" signature="1308:1393" ph="SELECT * FRO... personal" />
+            <marker date="1506970603608" expanded="true" signature="1308:1394" ph="SELECT paren... " />
           </folding>
         </state>
       </provider>

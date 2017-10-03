@@ -26,14 +26,8 @@ public class DBReader{
     public void closeConnectionToDB() throws SQLException{
         connection.close();
     }
-    public void QueryToDB(String query)throws SQLException{
+    public ResultSet QueryToDB(String query)throws SQLException{
         Statement stm = this.ConnectToDB().createStatement();
-        ResultSet resultSet = (com.mysql.jdbc.ResultSet)stm.executeQuery("SELECT `id`,`parent_id`,`name`,`type` " +
-                "FROM `tc-db-main`.personal;");
-        int i=0;
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("ID") + " = " + resultSet.getString("NAME") + " " + resultSet.getString("TYPE") + " " +resultSet.getString("PARENT_ID"));
-            i++;
-        }
+        return (com.mysql.jdbc.ResultSet)stm.executeQuery(query);
     }
 }

@@ -8,9 +8,7 @@ public class Node implements SurvObject {
     private Node node;
     private ArrayList<SurvObject> list = new ArrayList<>();
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id;}
 
     public void setId(int id) {
         this.id = id;

@@ -1,5 +1,6 @@
 package by.alt;
 import by.alt.DAO.DBReader;
+import by.alt.DAO.DaoClass;
 import by.alt.Object.PropReader;
 import by.alt.gui.*;
 
@@ -9,14 +10,10 @@ public class Main {
 
     public static void main(String[] args) {
         PropReader propReader = new PropReader();
-       try {
-            DBReader dbr = new DBReader();
-            dbr.QueryToDB("1");
+        DaoClass dao = new DaoClass();
+        dao.getChildNodeList(dao.getRootNode().getId());
 
-        }
-        catch (SQLException exc){
-            exc.printStackTrace();
-        }
+
         //MainForm.main(args);
 
     }

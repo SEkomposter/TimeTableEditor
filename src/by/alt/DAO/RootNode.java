@@ -6,28 +6,43 @@ import java.util.ArrayList;
 import static by.alt.DAO.ObjectType.DEP;
 
 public class RootNode implements SurvObject{
-    private static final String NAME = "Объект";
+    private static String name = "";
     private static final String TYPE = DEP.toString();
     private static final int ID = 0;
-    private ArrayList<SurvObject> list = new ArrayList<>();
+    private boolean hasChildNode = false;
+    private ArrayList<SurvObject> childObjList = new ArrayList<>();
+    RootNode(){}
+    RootNode(String name){
+        setName(name);
+    }
 
     public int getId() {
         return ID;
     }
 
     public String getName() {
-        return NAME;
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
         return TYPE;
     }
 
-    public ArrayList<SurvObject> getList() {
-        return list;
+    public ArrayList<SurvObject> getChildObjList() {
+        return childObjList;
     }
 
-    public void setList(ArrayList<SurvObject> list) {
-        this.list = list;
+    public void setChildObjList(ArrayList<SurvObject> list) {
+        this.childObjList = list;
+    }
+
+    public boolean isHasChildNode() {
+        return hasChildNode;
+    }
+    public void setHasChild(boolean hasChildNode) {
+        this.hasChildNode = hasChildNode;
     }
 }

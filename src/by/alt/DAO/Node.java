@@ -3,10 +3,17 @@ package by.alt.DAO;
 import java.util.ArrayList;
 
 public class Node implements SurvObject {
-    private String name, type;
+    private String name;
+    private String type = ObjectType.DEP.toString();
     private int id, parent_id;
-    private Node node;
-    private ArrayList<SurvObject> list = new ArrayList<>();
+    private ArrayList<SurvObject> childObjList = new ArrayList<>();
+    private boolean hasChildNode = false;
+    Node(){}
+    Node(int id,String name, int parent_id){
+        this.id = id;
+        this.name = name;
+        this.parent_id = parent_id;
+    }
 
     public int getId() {return id;}
 
@@ -38,19 +45,18 @@ public class Node implements SurvObject {
         this.parent_id = parent_id;
     }
 
-    public Node getNode() {
-        return node;
+    public ArrayList<SurvObject> getChildObjList() {
+        return childObjList;
     }
 
-    public void setNode(Node node) {
-        this.node = node;
+    public void setChildObjList(ArrayList<SurvObject> list) {
+        this.childObjList = list;
     }
 
-    public ArrayList<SurvObject> getList() {
-        return list;
+    public boolean isHasChildNode() {
+        return hasChildNode;
     }
-
-    public void setList(ArrayList<SurvObject> list) {
-        this.list = list;
+    public void setHasChildNode(boolean hasChildNode) {
+        this.hasChildNode = hasChildNode;
     }
 }

@@ -1,6 +1,7 @@
 package by.alt;
 import by.alt.DAO.DBReader;
 import by.alt.DAO.DaoClass;
+import by.alt.DAO.RootNode;
 import by.alt.Object.PropReader;
 import by.alt.gui.*;
 
@@ -11,8 +12,8 @@ public class Main {
     public static void main(String[] args) {
         PropReader propReader = new PropReader();
         DaoClass dao = new DaoClass();
-        dao.getChildNodeList(dao.getRootNode().getId());
-
+        System.out.println(dao.getChildNodeList(0));
+        //DaoClass.getObjectId();
 
         //MainForm.main(args);
 

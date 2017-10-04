@@ -28,6 +28,6 @@ public class DBReader{
     }
     public ResultSet QueryToDB(String query)throws SQLException{
         Statement stm = this.ConnectToDB().createStatement();
-        return (com.mysql.jdbc.ResultSet)stm.executeQuery("SELECT name, type FROM tc-db-main.personal WHERE id = 0;");
+        return (com.mysql.jdbc.ResultSet)stm.executeQuery(query);
     }
 }

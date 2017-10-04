@@ -31,12 +31,16 @@ public class DaoClass {
         }
     }
     public ArrayList<Node> getChildNodeList(int parent_id){
+        childNodeList = new ArrayList<Node>();
         try {
-           ResultSet resultSet = dbReader.QueryToDB("SELECT `id`,`name`,`type`, `parent_id` WHERE `parent_id` = " + String.valueOf(parent_id) + " FROM `personal`");
-           rootNode = new RootNode(resultSet.getString("NAME"));
+           ResultSet resultSet = dbReader.QueryToDB("SELECT `id`,`name`,`type`, `parent_id`  FROM `personal` Where parent_id = "+String.valueOf(parent_id)+" AND type= 1;");
+           while (resultSet.next()){
+               childNodeList.add(new Node(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));
+           }
         }catch (SQLException exc){
             exc.printStackTrace();
         }
+
         return childNodeList;
     }
 }

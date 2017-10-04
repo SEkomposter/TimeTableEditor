@@ -9,10 +9,14 @@ public class Node implements SurvObject {
     private ArrayList<SurvObject> childObjList = new ArrayList<>();
     private boolean hasChildNode = false;
     Node(){}
-    Node(int id,String name, int parent_id){
+    Node(int id, String name, int parent_id){
         this.id = id;
         this.name = name;
         this.parent_id = parent_id;
+    }
+    @Override
+    public String toString(){
+        return String.valueOf(getId()) + "  " + getName() + "  " + String.valueOf(getParent_id());
     }
 
     public int getId() {return id;}

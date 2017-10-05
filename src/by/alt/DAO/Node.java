@@ -18,7 +18,15 @@ public class Node implements SurvObject {
     public String toString(){
         return String.valueOf(getId()) + "  " + getName() + "  " + String.valueOf(getParent_id());
     }
-
+    public int hashCode(){
+        return this.getName().hashCode();
+    }
+    public boolean equals(Object obj){
+        if (!(obj instanceof Node))
+            return false;
+        Node entry = (Node) obj;
+        return name.equals(entry.name);
+    }
     public int getId() {return id;}
 
     public void setId(int id) {

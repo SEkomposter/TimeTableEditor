@@ -12,5 +12,6 @@ public interface SurvObject {
     public String getType();
 
     //public void setType(String type);
+    public int hashCode();
 
 }

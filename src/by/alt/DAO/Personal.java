@@ -35,4 +35,13 @@ public class Personal implements SurvObject{
     public void setNode(Node node) {
         this.node = node;
     }
+    public int hashCode(){
+        return this.getName().hashCode();
+    }
+    public boolean equals(Object obj){
+        if (!(obj instanceof Node))
+            return false;
+        Node entry = (Node) obj;
+        return name.equals(entry.getName());
+    }
 }

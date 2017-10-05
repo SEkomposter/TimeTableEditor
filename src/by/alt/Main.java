@@ -12,8 +12,9 @@ public class Main {
     public static void main(String[] args) {
         PropReader propReader = new PropReader();
         DaoClass dao = new DaoClass();
-        System.out.println(dao.getChildNodeList(0));
+       // System.out.println(dao.getChildNodeList(0));
         //DaoClass.getObjectId();
+        System.out.println(dao.getPositionList());
 
         //MainForm.main(args);
 

@@ -5,13 +5,14 @@ import com.mysql.jdbc.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 public class DaoClass {
     static RootNode rootNode;
     private Node node;
     private ArrayList<Node> childNodeList;
-    private LinkedHashSet<String> positionList;
+    private LinkedHashSet<Position> positionList;
     private static DBReader dbReader = new DBReader();
     public RootNode getRootNode(){
         try {
@@ -46,14 +47,25 @@ public class DaoClass {
         }
         return childNodeList;
     }
-    public LinkedHashSet<String> getPositionList(){
+    public LinkedHashSet<Position> getPositionList(){
+        LinkedHashSet<String> tempSet = new LinkedHashSet();
         positionList = new LinkedHashSet<>();
+        String position;
         try {
-            ResultSet resultSet = dbReader.QueryToDB("SELECT `id`, `name`,`type`, `pos`  FROM `personal` Where `pos` IS NOT NULL");
+            ResultSet resultSet = dbReader.QueryToDB("SELECT `id`, `name`,`type`, `pos`,`parent_id`  FROM `personal` WHERE `pos` IS NOT NULL");
             while (resultSet.next()){
-                positionList.add(resultSet.getString("POS"));
-                System.out.println(resultSet.getString("POS"));
+                tempSet.add(resultSet.getString("POS"));
             }
+            System.out.println(tempSet);
+            Iterator it = tempSet.iterator();
+             while (it.hasNext()){
+                position = it.next().toString();
+
+                resultSet = dbReader.QueryToDB("SELECT `id`, `name`,`type`,`parent_id`  FROM `personal` WHERE `name` = \"" + position + "\" AND `pos` IS NULL" );}
+                while (resultSet.next()){
+                positionList.add(new Position(resultSet.getInt("ID"),resultSet.getString("NAME")));
+                }
+            System.out.println(positionList);
         }catch (SQLException exc){
             exc.printStackTrace();
         }

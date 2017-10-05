@@ -12,6 +12,11 @@ public class Main {
     public static void main(String[] args) {
         PropReader propReader = new PropReader();
         DaoClass dao = new DaoClass();
+        try{
+            DBReader.ConnectToDB();
+        }catch (SQLException exc){
+            exc.printStackTrace();
+        }
        // System.out.println(dao.getChildNodeList(0));
         //DaoClass.getObjectId();
         System.out.println(dao.getPositionList());

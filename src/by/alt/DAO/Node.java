@@ -8,7 +8,7 @@ public class Node implements SurvObject {
     private String name;
     private String type = ObjectType.DEP.toString();
     private int id, parent_id;
-    private ArrayList<? extends SurvObject> childObjList = new ArrayList<>();
+    private ArrayList<SurvObject> childObjList = new ArrayList<>();
     private boolean hasChildNode = false;
     Node(){}
     Node(int id, String name, int parent_id){
@@ -18,7 +18,7 @@ public class Node implements SurvObject {
     }
     @Override
     public String toString(){
-        return String.valueOf(getId()) + "  " + getName() + "  " + String.valueOf(getParent_id());
+        return String.valueOf(getId()) + "  " + getName() + "(DEP)  " + String.valueOf(getParent_id());
     }
    // public int hashCode(){
    //     return this.getName().hashCode();
@@ -59,7 +59,7 @@ public class Node implements SurvObject {
         this.parent_id = parent_id;
     }
 
-    public ArrayList<? extends SurvObject> getChildObjList() {
+    public ArrayList<SurvObject> getChildObjList() {
         return childObjList;
     }
 
@@ -76,7 +76,6 @@ public class Node implements SurvObject {
             }
         }
     }
-
     public boolean isHasChildNode() {
         return hasChildNode;
     }

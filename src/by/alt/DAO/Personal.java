@@ -51,4 +51,7 @@ public class Personal implements SurvObject{
         Node entry = (Node) obj;
         return name.equals(entry.getName());
     }
+    public String toString(){
+        return String.valueOf(getId()) + "  " + getName() + "(EMP)  " + String.valueOf(getParent_id());
+    }
 }

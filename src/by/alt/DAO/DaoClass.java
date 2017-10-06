@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class DaoClass {
     static RootNode rootNode;
     private Node node;
-    private ArrayList<? extends SurvObject> childList;
+    private ArrayList<SurvObject> childList;
     private static DBReader dbReader = new DBReader();
     public RootNode getRootNode(){
         try {
@@ -33,13 +33,13 @@ public class DaoClass {
     }
 
 
-    public ArrayList<? extends SurvObject> getChildList(int parent_id){
+    public ArrayList<SurvObject> getChildList(int parent_id){
         childList = new ArrayList<>();
         try {
            ResultSet resultSet = dbReader.QueryToDB("SELECT `id`,`name`,`type`, `status`, `parent_id`  FROM `personal` WHERE parent_id = "+String.valueOf(parent_id)+" AND status = 1");
            while (resultSet.next()){
-               if (resultSet.getInt("TYPE")==1){
-                    childList.add(new Node(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));}
+               if (resultSet.getString("TYPE").equals("DEP")){
+                    childList.add( new Node(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));}
                else{
                    childList.add(new Personal(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));
                }

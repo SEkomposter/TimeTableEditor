@@ -77,7 +77,15 @@ public class Node implements SurvObject {
         }
     }
     public boolean isHasChildNode() {
-        return hasChildNode;
+        boolean option1 = false, option2 = false;
+        if(childObjList.size()!=0) option1=true;
+        Iterator it = childObjList.iterator();
+        Object tempObj = null;
+        while(it.hasNext()){
+            tempObj = it.next();
+            if (tempObj instanceof Node) option2=true;
+        }
+        return option1&option2;
     }
     public void setHasChildNode(boolean hasChildNode) {
         this.hasChildNode = hasChildNode;

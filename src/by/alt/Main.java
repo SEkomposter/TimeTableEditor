@@ -17,9 +17,8 @@ public class Main {
         }catch (SQLException exc){
             exc.printStackTrace();
         }
-       // System.out.println(dao.getChildNodeList(0));
+        dao.getChildNodeList(0);
         //DaoClass.getObjectId();
-        System.out.println(dao.getPositionList());
 
         //MainForm.main(args);
 

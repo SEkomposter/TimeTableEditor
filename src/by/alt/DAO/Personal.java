@@ -7,6 +7,13 @@ public class Personal implements SurvObject{
     private int id, parent_id;
     private Node node;
 
+    Personal(){}
+    Personal(int id, String name, int parent_id){
+        this.id = id;
+        this.name = name;
+        this.parent_id = parent_id;
+    }
+
     public int getId() {
         return id;
     }

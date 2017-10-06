@@ -2,6 +2,7 @@ package by.alt.DAO;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static by.alt.DAO.ObjectType.DEP;
 
@@ -10,7 +11,8 @@ public class RootNode implements SurvObject{
     private static final String TYPE = DEP.toString();
     private static final int ID = 0;
     private boolean hasChildNode = false;
-    private ArrayList<SurvObject> childObjList = new ArrayList<>();
+    private ArrayList<? extends SurvObject> childObjList = new ArrayList<>();
+    private static RootNode rootNode = new RootNode("Объект");
     RootNode(){}
     RootNode(String name){
         setName(name);
@@ -31,11 +33,11 @@ public class RootNode implements SurvObject{
         return TYPE;
     }
 
-    public ArrayList<SurvObject> getChildObjList() {
+    public ArrayList<? extends SurvObject> getChildObjList() {
         return childObjList;
     }
 
-    public void setChildObjList(ArrayList<SurvObject> list) {
+    public void setChildObjList(ArrayList<? extends SurvObject> list) {
         this.childObjList = list;
     }
 
@@ -44,5 +46,17 @@ public class RootNode implements SurvObject{
     }
     public void setHasChild(boolean hasChildNode) {
         this.hasChildNode = hasChildNode;
+    }
+    public static RootNode getRootNode(){return rootNode;}
+    public void removeChildObject(int id){
+        SurvObject deleted = null;
+        Iterator it = this.getChildObjList().iterator();
+        while (it.hasNext()){
+            deleted = (SurvObject) it.next();
+            if (deleted.getId() == id){
+                break;
+            }
+        }
+        childObjList.remove(deleted);
     }
 }

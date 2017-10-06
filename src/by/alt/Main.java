@@ -12,13 +12,17 @@ public class Main {
     public static void main(String[] args) {
         PropReader propReader = new PropReader();
         DaoClass dao = new DaoClass();
+
         try{
             DBReader.ConnectToDB();
         }catch (SQLException exc){
             exc.printStackTrace();
         }
-        dao.getChildNodeList(0);
+        RootNode.getRootNode().setChildObjList(dao.getChildList(0));
+        System.out.println(RootNode.getRootNode().getChildObjList());
         //DaoClass.getObjectId();
+        //RootNode.getRootNode().removeChildObject(10);
+       // System.out.println(RootNode.getRootNode().getChildObjList());
 
         //MainForm.main(args);
 

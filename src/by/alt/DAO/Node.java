@@ -1,12 +1,14 @@
 package by.alt.DAO;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class Node implements SurvObject {
     private String name;
     private String type = ObjectType.DEP.toString();
     private int id, parent_id;
-    private ArrayList<SurvObject> childObjList = new ArrayList<>();
+    private ArrayList<? extends SurvObject> childObjList = new ArrayList<>();
     private boolean hasChildNode = false;
     Node(){}
     Node(int id, String name, int parent_id){
@@ -57,12 +59,22 @@ public class Node implements SurvObject {
         this.parent_id = parent_id;
     }
 
-    public ArrayList<SurvObject> getChildObjList() {
+    public ArrayList<? extends SurvObject> getChildObjList() {
         return childObjList;
     }
 
-    public void setChildObjList(ArrayList<SurvObject> list) {
-        this.childObjList = list;
+    public void setChildObjList(Collection list) {
+        this.childObjList.addAll(list);
+    }
+    public void removeChildObject(int id){
+        SurvObject deleted;
+        Iterator it = this.getChildObjList().iterator();
+        while (it.hasNext()){
+            deleted = (SurvObject) it.next();
+            if (deleted.getId() == id){
+                childObjList.remove(deleted);
+            }
+        }
     }
 
     public boolean isHasChildNode() {

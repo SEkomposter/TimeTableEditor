@@ -64,6 +64,7 @@ public class Node implements SurvObject {
     }
 
     public void setChildObjList(Collection list) {
+        this.childObjList.clear();
         this.childObjList.addAll(list);
     }
     public void removeChildObject(int id){

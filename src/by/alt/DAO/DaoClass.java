@@ -10,12 +10,14 @@ import java.util.Iterator;
 public class DaoClass {
     private ArrayList<SurvObject> childList;
     private static DBReader dbReader = new DBReader();
-
+    public static ArrayList<Node> endNodes;
+    public static ArrayList<Personal> allPersonal;
     public RootNode getRootNode(){
         return new RootNode();
     }
     public ArrayList<SurvObject> fillChildList(Node node){
         childList = new ArrayList<>();
+        Personal tempPers;
         try {
            ResultSet resultSet = dbReader.QueryToDB("SELECT `id`,`name`,`type`, `status`, `parent_id`  FROM `personal` WHERE parent_id = "+String.valueOf(node.getId())+" AND status = 1");
            while (resultSet.next()){
@@ -23,7 +25,9 @@ public class DaoClass {
                     childList.add( new Node(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));
                     node.setHasChildNode(true);}
                else{
-                   childList.add(new Personal(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));
+                   tempPers = new Personal(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID"));
+                   childList.add(tempPers);
+                   allPersonal.add(tempPers);
                }
            }
            node.setChildObjList(childList);
@@ -44,5 +48,13 @@ public class DaoClass {
                 if(tempSO instanceof Node) buildObjTree((Node) tempSO);
             }
         }
+        else {
+            endNodes.add(node);
+        }
+    }
+    public void refreshObjTree(){
+        allPersonal.clear();
+        endNodes.clear();
+        buildObjTree(getRootNode());
     }
 }

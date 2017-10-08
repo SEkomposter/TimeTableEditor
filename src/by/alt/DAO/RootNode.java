@@ -13,7 +13,7 @@ public class RootNode extends Node{
     private boolean hasChildNode = false;
     private ArrayList<SurvObject> childObjList = new ArrayList<>();
    // private static RootNode rootNode = new RootNode("Объект");
-    public RootNode(){}
+    RootNode(){}
     RootNode(String name){
         setName(name);
     }

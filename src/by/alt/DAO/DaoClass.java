@@ -4,51 +4,45 @@ import com.mysql.jdbc.ResultSet;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class DaoClass {
-    static RootNode rootNode;
-    private Node node;
     private ArrayList<SurvObject> childList;
     private static DBReader dbReader = new DBReader();
+
     public RootNode getRootNode(){
-        try {
-            ResultSet resultSet = dbReader.QueryToDB("SELECT `name`, `type` FROM `personal` WHERE `id` = 0;");
-            rootNode = new RootNode(resultSet.getString("NAME"));
-        }catch (SQLException exc){
-            exc.printStackTrace();
-        }
-        return rootNode;
+        return new RootNode();
     }
-    public static void getObjectId (){
-        try {
-            ResultSet resultSet = dbReader.QueryToDB("SELECT `name`, `id` FROM `personal`");
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("ID") + "  " + resultSet.getString("NAME"));
-                //rootNode = new RootNode(resultSet.getString("NAME"));
-            }
-        }catch (SQLException exc){
-            exc.printStackTrace();
-        }
-    }
-
-
-    public ArrayList<SurvObject> getChildList(int parent_id){
+    public ArrayList<SurvObject> fillChildList(Node node){
         childList = new ArrayList<>();
         try {
-           ResultSet resultSet = dbReader.QueryToDB("SELECT `id`,`name`,`type`, `status`, `parent_id`  FROM `personal` WHERE parent_id = "+String.valueOf(parent_id)+" AND status = 1");
+           ResultSet resultSet = dbReader.QueryToDB("SELECT `id`,`name`,`type`, `status`, `parent_id`  FROM `personal` WHERE parent_id = "+String.valueOf(node.getId())+" AND status = 1");
            while (resultSet.next()){
                if (resultSet.getString("TYPE").equals("DEP")){
-                    childList.add( new Node(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));}
+                    childList.add( new Node(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));
+                    node.setHasChildNode(true);}
                else{
                    childList.add(new Personal(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID")));
                }
-
            }
+           node.setChildObjList(childList);
         }catch (SQLException exc){
             exc.printStackTrace();
         }
         return childList;
     }
-
+    public void buildObjTree(Node node){
+        ArrayList<SurvObject> temp = fillChildList(node);
+        SurvObject tempSO;
+        //System.out.println(temp);
+        //System.out.println("_____________________________");
+        if (node.isHasChildNode()){
+            Iterator it = temp.iterator();
+            while (it.hasNext()){
+                tempSO = (SurvObject) it.next();
+                if(tempSO instanceof Node) buildObjTree((Node) tempSO);
+            }
+        }
+    }
 }

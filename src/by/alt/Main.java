@@ -18,7 +18,7 @@ public class Main {
             exc.printStackTrace();
         }
         dao.buildObjTree(dao.getRootNode());
-
+        System.out.println(dao.getEndNodes());
         //RootNode.getRootNode().removeChildObject(10);
        // System.out.println(RootNode.getRootNode().getChildObjList());
 

@@ -10,8 +10,8 @@ import java.util.Iterator;
 public class DaoClass {
     private ArrayList<SurvObject> childList;
     private static DBReader dbReader = new DBReader();
-    public static ArrayList<Node> endNodes;
-    public static ArrayList<Personal> allPersonal;
+    public static ArrayList<Node> endNodes = new ArrayList<>();
+    public static ArrayList<Personal> allPersonal = new ArrayList<>();
     public RootNode getRootNode(){
         return new RootNode();
     }
@@ -27,7 +27,7 @@ public class DaoClass {
                else{
                    tempPers = new Personal(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID"));
                    childList.add(tempPers);
-                   allPersonal.add(tempPers);
+                   //allPersonal.add(tempPers);
                }
            }
            node.setChildObjList(childList);
@@ -56,5 +56,13 @@ public class DaoClass {
         allPersonal.clear();
         endNodes.clear();
         buildObjTree(getRootNode());
+    }
+
+    public ArrayList<Node> getEndNodes() {
+        return endNodes;
+    }
+
+    public ArrayList<Personal> getAllPersonal() {
+        return allPersonal;
     }
 }

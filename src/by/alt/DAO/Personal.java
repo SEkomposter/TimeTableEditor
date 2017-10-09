@@ -1,7 +1,7 @@
 package by.alt.DAO;
 import static by.alt.DAO.ObjectType.EMP;
 
-public class Personal implements SurvObject{
+public class Personal implements SurvObject, Comparable{
     private String name;
     private static final String TYPE = EMP.toString();
     private int id, parent_id;
@@ -52,6 +52,13 @@ public class Personal implements SurvObject{
         return name.equals(entry.getName());
     }
     public String toString(){
-        return String.valueOf(getId()) + "  " + getName() + "(EMP)  " + String.valueOf(getParent_id());
+        //return String.valueOf(getId()) + "  " + getName() + "(EMP)  " + String.valueOf(getParent_id());
+        return getName();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+       // if (o instanceof  Personal)
+        return  (((Personal) o).name.compareToIgnoreCase(this.getName())<0?1: ((Personal)o).name.compareToIgnoreCase(this.name)==0?0:-1);
     }
 }

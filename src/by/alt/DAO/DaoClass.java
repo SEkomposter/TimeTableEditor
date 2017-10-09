@@ -3,15 +3,14 @@ package by.alt.DAO;
 import com.mysql.jdbc.ResultSet;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 
 public class DaoClass {
     private ArrayList<SurvObject> childList;
     private static DBReader dbReader = new DBReader();
     public static ArrayList<Node> endNodes = new ArrayList<>();
-    public static ArrayList<Personal> allPersonal = new ArrayList<>();
+    public static TreeSet<Personal> allPersonal = new TreeSet<>();
     public RootNode getRootNode(){
         return new RootNode();
     }
@@ -27,7 +26,7 @@ public class DaoClass {
                else{
                    tempPers = new Personal(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID"));
                    childList.add(tempPers);
-                   //allPersonal.add(tempPers);
+                   allPersonal.add(tempPers);
                }
            }
            node.setChildObjList(childList);
@@ -62,7 +61,7 @@ public class DaoClass {
         return endNodes;
     }
 
-    public ArrayList<Personal> getAllPersonal() {
+    public TreeSet<Personal> getAllPersonal() {
         return allPersonal;
     }
 }

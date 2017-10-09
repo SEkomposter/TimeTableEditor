@@ -208,6 +208,7 @@ public class MainForm extends JFrame{
         JTree freeUsers;
         JButton addButton = new JButton("<= Добавить");
         JButton removeButton = new JButton("Убрать       =>");
+        PersonalTreeModel treeModel = new PersonalTreeModel();
 
         UsersTab(){}
         UsersTab(int x, int y,int w, int h){
@@ -216,13 +217,8 @@ public class MainForm extends JFrame{
            // this.add(new JScrollPane(addedUsers));
             this.setPreferredSize(new Dimension(w,h));
 
-            DefaultMutableTreeNode rootAdded = new DefaultMutableTreeNode(daoObject.getRootNode());
-            DefaultMutableTreeNode rootFree = new DefaultMutableTreeNode(daoObject.getRootNode());
-            DefaultTreeModel treeModelAdded = new DefaultTreeModel(rootAdded, true);
-            DefaultTreeModel treeModelFree = new DefaultTreeModel(rootFree, true);
-
-            addedUsers = new JTree(treeModelAdded);
-            freeUsers = new JTree(treeModelFree);
+            addedUsers = new JTree(treeModel.treeModelAddedPersonal);
+            freeUsers = new JTree(treeModel.treeModelFreePersonal);
             add(basicLayer);
             setVisible(true);
             addComponentListener(new java.awt.event.ComponentAdapter() {

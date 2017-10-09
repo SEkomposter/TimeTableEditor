@@ -17,12 +17,12 @@ public class Main {
         }catch (SQLException exc){
             exc.printStackTrace();
         }
-        dao.buildObjTree(dao.getRootNode());
-        System.out.println(dao.getEndNodes());
+        //dao.buildObjTree(dao.getRootNode());
+       // System.out.println(dao.getEndNodes());
         //RootNode.getRootNode().removeChildObject(10);
        // System.out.println(RootNode.getRootNode().getChildObjList());
 
-        //MainForm.main(args);
+        MainForm.main(args);
 
     }
 }

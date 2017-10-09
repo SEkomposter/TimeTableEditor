@@ -1,6 +1,7 @@
 package by.alt.gui;
 
 
+import by.alt.DAO.DaoClass;
 import by.alt.Main;
 import by.alt.Object.MyTableModel;
 import by.alt.Object.TableEntry;
@@ -10,6 +11,8 @@ import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicBorders;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +24,7 @@ public class MainForm extends JFrame{
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
     private static UsersTab usersTab;
+    private DaoClass daoObject = new DaoClass();
     private Font font;
     private MyMenuBar menuBar;
     public static TimeTableEditor timeTableEditor;
@@ -200,8 +204,8 @@ public class MainForm extends JFrame{
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
-        JTree addedUsers = new JTree();
-        JTree freeUsers = new JTree();
+        JTree addedUsers;
+        JTree freeUsers;
         JButton addButton = new JButton("<= Добавить");
         JButton removeButton = new JButton("Убрать       =>");
 
@@ -211,6 +215,14 @@ public class MainForm extends JFrame{
             this.setBounds(x,y,w,h);
            // this.add(new JScrollPane(addedUsers));
             this.setPreferredSize(new Dimension(w,h));
+
+            DefaultMutableTreeNode rootAdded = new DefaultMutableTreeNode(daoObject.getRootNode());
+            DefaultMutableTreeNode rootFree = new DefaultMutableTreeNode(daoObject.getRootNode());
+            DefaultTreeModel treeModelAdded = new DefaultTreeModel(rootAdded, true);
+            DefaultTreeModel treeModelFree = new DefaultTreeModel(rootFree, true);
+
+            addedUsers = new JTree(treeModelAdded);
+            freeUsers = new JTree(treeModelFree);
             add(basicLayer);
             setVisible(true);
             addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -306,7 +318,6 @@ public class MainForm extends JFrame{
             basicLayer.add(removeButton, c);
 
 
-
             /*removeButton.setSize(addButton.getSize());
             //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
             //basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
@@ -368,11 +379,16 @@ public class MainForm extends JFrame{
             }
             return jComboBox;
         }
+        public void refreshFreePersonal(){
+
+
+        }
     }
     public void updateComponents(){
         tableUpdate();
         timeTableCombo.removeAllItems();
         usersTab.fillCombo(timeTableCombo);
+        usersTab.refreshFreePersonal();
     }
 }
 

@@ -18,7 +18,8 @@ public class Node implements SurvObject {
     }
     @Override
     public String toString(){
-        return String.valueOf(getId()) + "  " + getName() + "(DEP)  " + String.valueOf(getParent_id());
+        //return String.valueOf(getId()) + "  " + getName() + "(DEP)  " + String.valueOf(getParent_id());
+        return getName();
     }
    // public int hashCode(){
    //     return this.getName().hashCode();

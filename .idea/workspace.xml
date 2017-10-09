@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="179baa62-75c8-4e73-8053-ba57ac431e86" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/alt/Object/PersonalTreeModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/DaoClass.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/DaoClass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/Personal.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/Personal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Main.java" afterPath="$PROJECT_DIR$/src/by/alt/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Object/PersonalTreeModel.java" afterPath="$PROJECT_DIR$/src/by/alt/Object/PersonalTreeModel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,22 +76,22 @@
       <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="210" column="55" lean-forward="false" selection-start-line="210" selection-start-column="55" selection-end-line="210" selection-end-column="55" />
+            <state relative-caret-position="221">
+              <caret line="216" column="52" lean-forward="true" selection-start-line="216" selection-start-column="52" selection-end-line="216" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PersonalTreeModel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PersonalTreeModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PersonalTreeModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+            <state relative-caret-position="289">
+              <caret line="19" column="31" lean-forward="true" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#689#690#0" expanded="true" />
-                <element signature="e#721#722#0" expanded="true" />
+                <element signature="e#731#732#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,11 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/by/alt/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="20" column="47" lean-forward="false" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+              <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -176,13 +173,13 @@
         <option value="$PROJECT_DIR$/src/by/alt/DAO/DBReader.java" />
         <option value="$PROJECT_DIR$/src/by/alt/DAO/RootNode.java" />
         <option value="$PROJECT_DIR$/src/by/alt/DAO/Node.java" />
-        <option value="$PROJECT_DIR$/src/by/alt/Main.java" />
         <option value="$PROJECT_DIR$/src/by/alt/Object/SortedPersonalList.java" />
         <option value="$PROJECT_DIR$/src/by/alt/DAO/DaoClass.java" />
         <option value="$PROJECT_DIR$/src/by/alt/DAO/Personal.java" />
         <option value="$PROJECT_DIR$/src/by/alt/Object/MyTreeModel.java" />
         <option value="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
         <option value="$PROJECT_DIR$/src/by/alt/Object/PersonalTreeModel.java" />
+        <option value="$PROJECT_DIR$/src/by/alt/Main.java" />
       </list>
     </option>
   </component>
@@ -887,7 +884,7 @@
       <workItem from="1507147610504" duration="2269000" />
       <workItem from="1507233266280" duration="6675000" />
       <workItem from="1507320443428" duration="10632000" />
-      <workItem from="1507576051268" duration="6236000" />
+      <workItem from="1507576051268" duration="6444000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1505858589712</created>
@@ -1057,11 +1054,18 @@
       <option name="project" value="LOCAL" />
       <updated>1507496988387</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="10.10.2017">
+      <created>1507584050317</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1507584050317</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105581000" />
+    <option name="totallyTimeSpent" value="105789000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1172,7 +1176,8 @@
     <MESSAGE value="01.10.2017" />
     <MESSAGE value="07.10.2017" />
     <MESSAGE value="08.10.2017" />
-    <option name="LAST_COMMIT_MESSAGE" value="08.10.2017" />
+    <MESSAGE value="10.10.2017" />
+    <option name="LAST_COMMIT_MESSAGE" value="10.10.2017" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1485,14 +1490,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="47" lean-forward="false" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/Object/SortedPersonalList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1523,6 +1520,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PersonalTreeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="31" lean-forward="true" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#731#732#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/DAO/Personal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1533,8 +1542,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="210" column="55" lean-forward="false" selection-start-line="210" selection-start-column="55" selection-end-line="210" selection-end-column="55" />
+        <state relative-caret-position="221">
+          <caret line="216" column="52" lean-forward="true" selection-start-line="216" selection-start-column="52" selection-end-line="216" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -1551,15 +1560,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PersonalTreeModel.java">
+    <entry file="file://$PROJECT_DIR$/src/by/alt/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#689#690#0" expanded="true" />
-            <element signature="e#721#722#0" expanded="true" />
-          </folding>
+          <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

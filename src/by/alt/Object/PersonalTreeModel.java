@@ -14,12 +14,12 @@ public class PersonalTreeModel {
     public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, true);
     public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, true);
     public PersonalTreeModel(){
-        rootFreePersonal.
+        fillList(rootFreePersonal);
     }
     static void fillList(DefaultMutableTreeNode treeNode){
         Object[] tempArray =  daoObject.getAllPersonal().toArray();
         for (int i=0; i< tempArray.length; i++){
-            treeNode.add(tempArray[i]);
+            treeNode.add(new DefaultMutableTreeNode(tempArray[i],false));
         }
     }
 }

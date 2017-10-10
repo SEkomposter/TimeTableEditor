@@ -1,5 +1,6 @@
 package by.alt.Object;
 
+import by.alt.DAO.Personal;
 import sun.misc.ASCIICaseInsensitiveComparator;
 
 import java.io.*;
@@ -90,8 +91,8 @@ public class PropReader {
             String temp = "";
             while (it.hasNext()){
                 temp = (String) it.next();
-                if (en==PropType.TIMETABLE) tableEntryArrayList.add(parseName(temp, map.get(temp)));
-                else t
+                if (en==PropType.TIMETABLE) tableEntryArrayList.add(parseTimeTable(temp, map.get(temp)));
+                else tableEntryArrayList.add(parseUsersGroups(temp, map.get(temp)));
             }
         }
         catch (IOException exc){
@@ -99,7 +100,7 @@ public class PropReader {
         }
         return tableEntryArrayList;
     }
-    static TableEntry parseName(String key, String val){
+    static TableEntry parseTimeTable(String key, String val){
         TableEntry tempTE = new TableEntry();
         String[] strings = new String[3];
         strings = key.split("\\.");
@@ -111,5 +112,16 @@ public class PropReader {
         tempTE.setTimeTo(strings2[1]);
         return tempTE;
     }
-
+    static TableEntry parseUsersGroups(String key, String val) {
+        TableEntry tempTE = new TableEntry();
+        String[] strings = new String[3];
+        strings = key.split("\\.");
+        String[] strings2 = val.split("\\,");
+        //strings2 = val.split("-");
+        tempTE.setName(strings[2]);
+        tempTE.setShedule(strings[1]);
+        for (int i = 0; i < strings2.length; i++)
+            tempTE.addPersonal(new Personal(strings2[i]));
+        return tempTE;
+    }
 }

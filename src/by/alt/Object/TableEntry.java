@@ -1,21 +1,20 @@
 package by.alt.Object;
 
+import by.alt.DAO.Personal;
 import by.alt.gui.MainForm;
 import by.alt.gui.TimeTableEditor;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static by.alt.gui.MainForm.tableEntryList;
 import static by.alt.gui.MainForm.tableModel;
 
 public class TableEntry {
     private String name, shedule, timeFrom, timeTo;
-    Map<String,String> map = new LinkedHashMap<>();
+
+    private Set<Personal> personalAdded = new TreeSet<Personal>();
     public TableEntry(){}
     public TableEntry(String n,String s,String tf, String tt){
         this.setName(n);
@@ -29,44 +28,6 @@ public class TableEntry {
         return new TableEntry(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog(),TimeTableEditor.getFromTimeFromDialog(),TimeTableEditor.getToTimeFromDialog());
     }
 
-    public ArrayList<TableEntry> getTableEntryList (){
-        PropReader propReader = new PropReader();
-        ArrayList<TableEntry> tableEntryArrayList = new ArrayList<>();
-        try {
-            map.putAll(propReader.readRepProp(PropType.TIMETABLE));
-            Iterator it = map.keySet().iterator();
-            String temp = "";
-            while (it.hasNext()){
-                temp = (String) it.next();
-                tableEntryArrayList.add(parseName(temp, map.get(temp)));
-            }
-        }
-        catch (IOException exc){
-            exc.printStackTrace();
-        }
-        return tableEntryArrayList;
-    }
-    public static TableEntry getTableEntry(String name){
-        Iterator iterator = tableEntryList.iterator();
-        TableEntry tempEntry = new TableEntry();
-        while (iterator.hasNext()){
-            tempEntry = (TableEntry)iterator.next();
-            if(tempEntry.getName().equals(name)) return tempEntry;
-        }
-        return null;
-    }
-    static TableEntry parseName(String key, String val){
-        TableEntry tempTE = new TableEntry();
-        String[] strings = new String[3];
-        strings = key.split("\\.");
-        String[] strings2 = new String[2];
-        strings2 = val.split("-");
-        tempTE.setName(strings[2]);
-        tempTE.setShedule(strings[1]);
-        tempTE.setTimeFrom(strings2[0]);
-        tempTE.setTimeTo(strings2[1]);
-        return tempTE;
-    }
     public boolean isEntryPresentInList(){
         //определяем есть ли такая запись в списке параметров
         boolean isPresents = false;
@@ -119,6 +80,27 @@ public class TableEntry {
     @Override
     public String toString() {
         return "timetable."+ shedule +"."+ name + "=" + timeFrom + "-" + timeTo;
+    }
+
+
+    public void setPersonalAdded(Set<Personal> personalAdded) {
+        this.personalAdded = personalAdded;
+    }
+
+    public void addPersonal(Personal newPers) {
+        personalAdded.add(newPers);
+    }
+
+    public void removePersonal(Personal delPers) {
+        personalAdded.remove(delPers);
+    }
+
+    public void addAllPersonal(TreeSet<Personal> personalTreeSet) {
+        personalAdded.addAll(personalTreeSet);
+    }
+
+    public void clearUserTime() {
+        personalAdded.clear();
     }
 }
 

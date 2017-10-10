@@ -11,6 +11,8 @@ public class PropReader {
     File filePath = new File("D:\\TimeTableEditor\\");
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
     static Properties property = new Properties();
+
+    ArrayList<TableEntry> tableEntryArrayList = new ArrayList<>();
     public PropReader(){}
 
     Map<String,String> readRepProp(Enum en) throws IOException{
@@ -78,6 +80,36 @@ public class PropReader {
     }
     public void removeProperty(String prop){
             property.remove(prop);
+    }
+
+    public ArrayList<TableEntry> getTableEntryList (PropType en){
+        Map<String,String> map = new LinkedHashMap<>();
+        try {
+            map.putAll(readRepProp(en));
+            Iterator it = map.keySet().iterator();
+            String temp = "";
+            while (it.hasNext()){
+                temp = (String) it.next();
+                if (en==PropType.TIMETABLE) tableEntryArrayList.add(parseName(temp, map.get(temp)));
+                else t
+            }
+        }
+        catch (IOException exc){
+            exc.printStackTrace();
+        }
+        return tableEntryArrayList;
+    }
+    static TableEntry parseName(String key, String val){
+        TableEntry tempTE = new TableEntry();
+        String[] strings = new String[3];
+        strings = key.split("\\.");
+        String[] strings2 = new String[2];
+        strings2 = val.split("-");
+        tempTE.setName(strings[2]);
+        tempTE.setShedule(strings[1]);
+        tempTE.setTimeFrom(strings2[0]);
+        tempTE.setTimeTo(strings2[1]);
+        return tempTE;
     }
 
 }

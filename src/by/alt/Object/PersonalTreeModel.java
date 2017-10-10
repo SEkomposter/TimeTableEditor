@@ -9,17 +9,23 @@ import javax.swing.tree.DefaultTreeModel;
 
 public class PersonalTreeModel {
     private static DaoClass daoObject = new DaoClass();
-    DefaultMutableTreeNode rootAddedPersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
-    DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
-    public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, true);
-    public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, true);
-    public PersonalTreeModel(){
-        fillList(rootFreePersonal);
-    }
-    static void fillList(DefaultMutableTreeNode treeNode){
+    private DefaultMutableTreeNode rootAddedPersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
+    private DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
+    public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, false);
+    public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, false);
+    //public PersonalTreeModel(){
+     //   fillList(rootFreePersonal);
+    //}
+    public void fillList(DefaultMutableTreeNode treeNode){
         Object[] tempArray =  daoObject.getAllPersonal().toArray();
         for (int i=0; i< tempArray.length; i++){
             treeNode.add(new DefaultMutableTreeNode(tempArray[i],false));
         }
+    }
+    public DefaultMutableTreeNode getRootAddedPersonal(){
+        return this.rootAddedPersonal;
+    }
+    public DefaultMutableTreeNode getRootFreePersonal(){
+        return this.rootFreePersonal;
     }
 }

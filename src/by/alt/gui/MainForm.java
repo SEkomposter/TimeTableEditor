@@ -24,6 +24,7 @@ public class MainForm extends JFrame{
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
     private static UsersTab usersTab;
+    PropReader propReader = new PropReader();
     private DaoClass daoObject = new DaoClass();
     private Font font;
     private MyMenuBar menuBar;
@@ -31,6 +32,7 @@ public class MainForm extends JFrame{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
+
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JComboBox timeTableCombo = new JComboBox();
     static JTable tt;
@@ -164,7 +166,8 @@ public class MainForm extends JFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     tableEntryList.clear();
-                    tableEntryList.addAll(new TableEntry().getTableEntryList());
+                    tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
+                    //readRepProp
                     updateComponents();
                 }
             });
@@ -376,9 +379,12 @@ public class MainForm extends JFrame{
             return jComboBox;
         }
         public void refreshFreePersonal(){
-
-
+            daoObject.buildObjTree(daoObject.getRootNode());
+            treeModel.fillList(treeModel.getRootFreePersonal());
+            freeUsers.expandRow(0);
+            //addedUsers.repaint();
         }
+
     }
     public void updateComponents(){
         tableUpdate();

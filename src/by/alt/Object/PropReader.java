@@ -116,12 +116,19 @@ public class PropReader {
         UserTime tempTE = new UserTime();
         String[] strings = new String[3];
         strings = key.split("\\.");
-        String[] strings2 = val.split("\\,");
-        //strings2 = val.split("-");
+         //   strings2 = val.split(",");
         tempTE.setName(strings[2]);
         tempTE.setShedule(strings[1]);
-        for (int i = 0; i < strings2.length; i++)
-            tempTE.addPersonal(new Personal(strings2[i]));
+        String[] strings2 = new String[val.split(",").length];
+        int i =0;
+        for (String s: val.split(","))  {
+            strings2[i] = s;
+            i++;
+        }
+        i=0;
+        for (i = 0; i < strings2.length; i++){
+            if (strings2[i].startsWith(" ")) strings2[i] = strings2[i].substring(1);
+            tempTE.addPersonal(new Personal(strings2[i]));}
         return tempTE;
     }
 }

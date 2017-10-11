@@ -16,8 +16,14 @@ public class PersonalTreeModel {
     //public PersonalTreeModel(){
      //   fillList(rootFreePersonal);
     //}
-    public void fillList(DefaultMutableTreeNode treeNode){
-        Object[] tempArray =  daoObject.getAllPersonal().toArray();
+    public void fillTreeFreePersonal(DefaultMutableTreeNode treeNode){
+        Object[] tempArray = daoObject.getAllPersonal().toArray();
+        for (int i=0; i< tempArray.length; i++){
+            treeNode.add(new DefaultMutableTreeNode(tempArray[i],false));
+        }
+    }
+    public static void fillTreeAddedPersonal(DefaultMutableTreeNode treeNode, UserTime userTime){
+        Object[] tempArray =  userTime.getPersonalAdded().toArray();
         for (int i=0; i< tempArray.length; i++){
             treeNode.add(new DefaultMutableTreeNode(tempArray[i],false));
         }

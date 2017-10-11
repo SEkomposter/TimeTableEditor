@@ -14,7 +14,6 @@ import static by.alt.gui.MainForm.tableModel;
 public class TableEntry {
     private String name, shedule, timeFrom, timeTo;
 
-
     public TableEntry(){}
     public TableEntry(String n,String s,String tf, String tt){
         this.setName(n);

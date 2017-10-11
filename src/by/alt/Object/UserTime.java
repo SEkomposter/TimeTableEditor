@@ -6,12 +6,7 @@ import by.alt.DAO.Personal;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class UserTime extends TableEntry {
-    private String name, shedule, timeFrom, timeTo;
-    public UserTime(){
-        super();
-
-    }
+public class UserTime extends TableEntry implements Comparable{
 
     private Set<Personal> personalAdded = new TreeSet<Personal>();
 
@@ -21,6 +16,9 @@ public class UserTime extends TableEntry {
 
     public void addPersonal(Personal newPers) {
         personalAdded.add(newPers);
+    }
+    public Set<Personal> getPersonalAdded(){
+        return personalAdded;
     }
 
     public void removePersonal(Personal delPers) {
@@ -36,7 +34,11 @@ public class UserTime extends TableEntry {
     }
     @Override
     public String toString() {
-        return "userTime."+ shedule +"."+ name;
+        return "userTime."+ super.getShedule() +"."+ super.getName();
+    }
+    @Override
+    public int compareTo(Object o) {
+        return  (((UserTime)o).toString().compareToIgnoreCase(this.toString())<0?1: ((UserTime)o).toString().compareToIgnoreCase(this.toString())==0?0:-1);
     }
 
 }

@@ -16,6 +16,8 @@ import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.*;
 
@@ -32,7 +34,7 @@ public class MainForm extends JFrame{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-
+    private static TreeSet<UserTime> userTimeList = new TreeSet<>();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JComboBox timeTableCombo = new JComboBox();
     static JTable tt;
@@ -233,6 +235,17 @@ public class MainForm extends JFrame{
             GridBagConstraints c = new GridBagConstraints();
             basicLayer.setBounds(x,y,w,h);
             timeTableCombo.setBackground(Color.white);
+            timeTableCombo.addItemListener(
+                    new ItemListener() {
+                        public void itemStateChanged(ItemEvent ev)
+                        {
+                            if(ev.getStateChange() == ItemEvent.SELECTED) {
+                                refreshPersonal();
+                            }
+
+                        }
+                    }
+            );
 
             c.fill = GridBagConstraints.NONE;
             c.gridx = 0;
@@ -379,10 +392,15 @@ public class MainForm extends JFrame{
             }
             return jComboBox;
         }
-        public void refreshFreePersonal(){
+        public void refreshPersonal(){
             daoObject.buildObjTree(daoObject.getRootNode());
-            treeModel.fillList(treeModel.getRootFreePersonal());
+            treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal());
             freeUsers.expandRow(0);
+            TableEntry tmp = (TableEntry)MainForm.timeTableCombo.getSelectedItem();
+            //Iterator it
+
+            treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) MainForm.timeTableCombo.getSelectedItem());
+            addedUsers.expandRow(0);
             //addedUsers.repaint();
         }
 
@@ -391,7 +409,7 @@ public class MainForm extends JFrame{
         tableUpdate();
         timeTableCombo.removeAllItems();
         usersTab.fillCombo(timeTableCombo);
-        usersTab.refreshFreePersonal();
+        usersTab.refreshPersonal();
     }
 }
 

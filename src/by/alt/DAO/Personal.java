@@ -61,7 +61,6 @@ public class Personal implements SurvObject, Comparable{
 
     @Override
     public int compareTo(Object o) {
-       // if (o instanceof  Personal)
         return  (((Personal) o).name.compareToIgnoreCase(this.getName())<0?1: ((Personal)o).name.compareToIgnoreCase(this.name)==0?0:-1);
     }
 }

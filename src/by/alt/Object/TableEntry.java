@@ -14,7 +14,7 @@ import static by.alt.gui.MainForm.tableModel;
 public class TableEntry {
     private String name, shedule, timeFrom, timeTo;
 
-    private Set<Personal> personalAdded = new TreeSet<Personal>();
+
     public TableEntry(){}
     public TableEntry(String n,String s,String tf, String tt){
         this.setName(n);
@@ -82,25 +82,5 @@ public class TableEntry {
         return "timetable."+ shedule +"."+ name + "=" + timeFrom + "-" + timeTo;
     }
 
-
-    public void setPersonalAdded(Set<Personal> personalAdded) {
-        this.personalAdded = personalAdded;
-    }
-
-    public void addPersonal(Personal newPers) {
-        personalAdded.add(newPers);
-    }
-
-    public void removePersonal(Personal delPers) {
-        personalAdded.remove(delPers);
-    }
-
-    public void addAllPersonal(TreeSet<Personal> personalTreeSet) {
-        personalAdded.addAll(personalTreeSet);
-    }
-
-    public void clearUserTime() {
-        personalAdded.clear();
-    }
 }
 

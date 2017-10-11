@@ -113,7 +113,7 @@ public class PropReader {
         return tempTE;
     }
     static TableEntry parseUsersGroups(String key, String val) {
-        TableEntry tempTE = new TableEntry();
+        UserTime tempTE = new UserTime();
         String[] strings = new String[3];
         strings = key.split("\\.");
         String[] strings2 = val.split("\\,");

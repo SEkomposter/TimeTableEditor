@@ -165,8 +165,8 @@ public class MainForm extends JFrame{
             openItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    tableEntryList.clear();
-                    tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
+                 //   tableEntryList.clear();
+                  //  tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
                     //readRepProp
                     updateComponents();
                 }
@@ -372,7 +372,8 @@ public class MainForm extends JFrame{
             */
         }
         public JComboBox fillCombo(JComboBox jComboBox){
-            Iterator iterator = MainForm.tableEntryList.iterator();
+            //Iterator iterator = MainForm.tableEntryList.iterator();
+            Iterator iterator = propReader.getTableEntryList(PropType.USERTIME).iterator();
             while (iterator.hasNext()) {
                 jComboBox.addItem(iterator.next());
             }

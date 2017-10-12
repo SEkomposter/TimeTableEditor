@@ -242,7 +242,6 @@ public class MainForm extends JFrame{
                             if(ev.getStateChange() == ItemEvent.SELECTED) {
                                 refreshPersonal();
                             }
-
                         }
                     }
             );
@@ -329,8 +328,38 @@ public class MainForm extends JFrame{
             c.insets = new Insets(50, 20, 0, 0);
             basicLayer.add(removeButton, c);
 
+        }
+        public JComboBox fillCombo(JComboBox jComboBox){
+            //Iterator iterator = MainForm.tableEntryList.iterator();
+            Iterator iterator = propReader.getTableEntryList(PropType.USERTIME).iterator();
+            while (iterator.hasNext()) {
+                jComboBox.addItem(iterator.next());
+            }
+            return jComboBox;
+        }
+        public void refreshPersonal(){
+            treeModel.delAllPersonal(treeModel.getRootFreePersonal());
+            treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
+            daoObject.buildObjTree(daoObject.getRootNode());
+            treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) MainForm.timeTableCombo.getSelectedItem());
+            treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal());
 
-            /*removeButton.setSize(addButton.getSize());
+            treeModel.removeAddedFromFree(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal());
+            freeUsers.expandRow(0);
+            addedUsers.expandRow(0);
+            treeModel.treeModelAddedPersonal.reload();
+            treeModel.treeModelFreePersonal.reload();
+            //addedUsers.;
+        }
+
+    }
+    public void updateComponents(){
+        tableUpdate();
+        timeTableCombo.removeAllItems();
+        usersTab.fillCombo(timeTableCombo);
+        usersTab.refreshPersonal();
+    }
+    /*removeButton.setSize(addButton.getSize());
             //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
             //basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
 
@@ -383,33 +412,5 @@ public class MainForm extends JFrame{
             panel2.add(removeButton);
             panel2.add(Box.createRigidArea(new Dimension(1,250)));
             */
-        }
-        public JComboBox fillCombo(JComboBox jComboBox){
-            //Iterator iterator = MainForm.tableEntryList.iterator();
-            Iterator iterator = propReader.getTableEntryList(PropType.USERTIME).iterator();
-            while (iterator.hasNext()) {
-                jComboBox.addItem(iterator.next());
-            }
-            return jComboBox;
-        }
-        public void refreshPersonal(){
-            daoObject.buildObjTree(daoObject.getRootNode());
-            treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal());
-            freeUsers.expandRow(0);
-            TableEntry tmp = (TableEntry)MainForm.timeTableCombo.getSelectedItem();
-            //Iterator it
-
-            treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) MainForm.timeTableCombo.getSelectedItem());
-            addedUsers.expandRow(0);
-            //addedUsers.repaint();
-        }
-
-    }
-    public void updateComponents(){
-        tableUpdate();
-        timeTableCombo.removeAllItems();
-        usersTab.fillCombo(timeTableCombo);
-        usersTab.refreshPersonal();
-    }
 }
 

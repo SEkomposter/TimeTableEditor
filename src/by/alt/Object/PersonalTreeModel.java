@@ -28,6 +28,13 @@ public class PersonalTreeModel {
             treeNode.add(new DefaultMutableTreeNode(tempArray[i],false));
         }
     }
+    public void delAllPersonal (DefaultMutableTreeNode treeNode){
+        treeNode.removeAllChildren();
+    }
+    public void removeAddedFromFree(DefaultMutableTreeNode added,DefaultMutableTreeNode free){
+        //added.getFirstChild();
+        for (int i=0;i<added.getChildCount();i++) free.remove(free.getIndex(added.getChildAt(i)));
+    }
     public DefaultMutableTreeNode getRootAddedPersonal(){
         return this.rootAddedPersonal;
     }

@@ -9,8 +9,8 @@ import javax.swing.tree.DefaultTreeModel;
 
 public class PersonalTreeModel {
     private static DaoClass daoObject = new DaoClass();
-    private DefaultMutableTreeNode rootAddedPersonal = new ExtMutableTreeNode(daoObject.getRootNode());
-    private DefaultMutableTreeNode rootFreePersonal = new ExtMutableTreeNode(daoObject.getRootNode());
+    private DefaultMutableTreeNode rootAddedPersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
+    private DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
     public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, false);
     public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, false);
     //public PersonalTreeModel(){
@@ -33,13 +33,17 @@ public class PersonalTreeModel {
     }
     public void removeAddedFromFree(DefaultMutableTreeNode added,DefaultMutableTreeNode free){
         //added.getFirstChild();
-        int j=0;
+
         for (int i=0;i<added.getChildCount();i++) {
-            System.out.println(added.getChildAt(j));
-            System.out.println(free.getIndex(added.getChildAt(j)));
-            free.remove(free.getIndex(added.getChildAt(j)));
-            j++;
+            for (int j=0;j<free.getChildCount();j++)
+                if(free.getChildAt(j)==added.getChildAt(i)) free.remove(i);
+
+            //System.out.println(free.getIndex(added.getChildAt(j)));
+            //free.remove(free.getIndex(added.getChildAt(j)));
+
         }
+
+
     }
     public DefaultMutableTreeNode getRootAddedPersonal(){
         return this.rootAddedPersonal;

@@ -1,4 +1,8 @@
 package by.alt.DAO;
+import javax.swing.tree.TreeNode;
+
+import java.util.Enumeration;
+
 import static by.alt.DAO.ObjectType.EMP;
 
 public class Personal implements SurvObject, Comparable{
@@ -48,12 +52,18 @@ public class Personal implements SurvObject, Comparable{
     public int hashCode(){
         return this.getName().hashCode();
     }
-    public boolean equals(Object obj){
+   /* public boolean equals(Object obj){
         if (!(obj instanceof Node))
             return false;
         Node entry = (Node) obj;
         return name.equals(entry.getName());
-    }
+    }*/
+   public boolean equals(Object obj){
+       //if (!(obj instanceof Personal))
+        //   return false;
+
+       return this.getName().equals(((Personal)obj).getName());
+   }
     public String toString(){
         //return String.valueOf(getId()) + "  " + getName() + "(EMP)  " + String.valueOf(getParent_id());
         return getName();
@@ -63,4 +73,5 @@ public class Personal implements SurvObject, Comparable{
     public int compareTo(Object o) {
         return  (((Personal) o).name.compareToIgnoreCase(this.getName())<0?1: ((Personal)o).name.compareToIgnoreCase(this.name)==0?0:-1);
     }
+
 }

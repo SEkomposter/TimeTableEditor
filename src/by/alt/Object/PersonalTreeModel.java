@@ -36,7 +36,8 @@ public class PersonalTreeModel {
 
         for (int i=0;i<added.getChildCount();i++) {
             for (int j=0;j<free.getChildCount();j++)
-                if(free.getChildAt(j)==added.getChildAt(i)) free.remove(i);
+                if(free.getNextLeaf().getUserObject().equals(added.getNextLeaf().getUserObject())) free.remove(i);
+
 
             //System.out.println(free.getIndex(added.getChildAt(j)));
             //free.remove(free.getIndex(added.getChildAt(j)));

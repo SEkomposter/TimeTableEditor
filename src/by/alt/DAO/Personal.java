@@ -59,9 +59,6 @@ public class Personal implements SurvObject, Comparable{
         return name.equals(entry.getName());
     }*/
    public boolean equals(Object obj){
-       //if (!(obj instanceof Personal))
-        //   return false;
-
        return this.getName().equals(((Personal)obj).getName());
    }
     public String toString(){

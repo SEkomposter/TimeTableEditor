@@ -10,9 +10,9 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -221,9 +221,12 @@ public class MainForm extends JFrame{
             this.setBounds(x,y,w,h);
            // this.add(new JScrollPane(addedUsers));
             this.setPreferredSize(new Dimension(w,h));
-
+            TreeSelectionModel selModel = new DefaultTreeSelectionModel();
+            selModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
             addedUsers = new JTree(treeModel.treeModelAddedPersonal);
             freeUsers = new JTree(treeModel.treeModelFreePersonal);
+            freeUsers.setSelectionModel(selModel);
+            freeUsers.addTreeSelectionListener(new PersonalSelectionListener());
             add(basicLayer);
             setVisible(true);
             addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -245,6 +248,15 @@ public class MainForm extends JFrame{
                         }
                     }
             );
+            addButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                     treeModel.movePersonal(treeModel.getRootFreePersonal(),treeModel.getRootAddedPersonal(),freeUsers.getSelectionPaths());
+                    treeModel.treeModelAddedPersonal.reload();
+                    treeModel.treeModelFreePersonal.reload();
+                    //System.out.println(s.getLastPathComponent().toString());
+                }
+            });
 
             c.fill = GridBagConstraints.NONE;
             c.gridx = 0;
@@ -315,9 +327,7 @@ public class MainForm extends JFrame{
             c.weightx = 0.05;
             c.weighty = 0.0;
             c.insets = new Insets(50, 20, 0, 0);
-
             basicLayer.add(addButton, c);
-
             c.fill = GridBagConstraints.NONE;
             c.gridx = 2;
             c.gridy = 5;
@@ -343,13 +353,11 @@ public class MainForm extends JFrame{
             daoObject.buildObjTree(daoObject.getRootNode());
             treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) MainForm.timeTableCombo.getSelectedItem());
             treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal());
-
             treeModel.removeAddedFromFree(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal());
             freeUsers.expandRow(0);
             addedUsers.expandRow(0);
             treeModel.treeModelAddedPersonal.reload();
             treeModel.treeModelFreePersonal.reload();
-            //addedUsers.;
         }
 
     }

@@ -34,7 +34,7 @@ public class MainForm extends JFrame{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    private static TreeSet<UserTime> userTimeList = new TreeSet<>();
+    private static ArrayList<UserTime> userTimeList = new ArrayList<>();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JComboBox timeTableCombo = new JComboBox();
     static JTable tt;
@@ -170,8 +170,10 @@ public class MainForm extends JFrame{
                     tableEntryList.clear();
                     tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
                     tableUpdate();
-                    timeTableCombo.removeAllItems();
-                    usersTab.fillCombo(timeTableCombo);
+                    userTimeList.clear();;
+                    userTimeList.addAll(propReader.getTableEntryList(PropType.USERTIME));
+                    //timeTableCombo.removeAllItems();
+                    //usersTab.fillCombo(timeTableCombo);
                     //updateComponents();
                 }
             });

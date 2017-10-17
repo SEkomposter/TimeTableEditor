@@ -34,7 +34,7 @@ public class MainForm extends JFrame{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    private static ArrayList<UserTime> userTimeList = new ArrayList<>();
+    private static ArrayList<TableEntry> userTimeList = new ArrayList<TableEntry>();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JComboBox timeTableCombo = new JComboBox();
     static JTable tt;
@@ -170,7 +170,7 @@ public class MainForm extends JFrame{
                     tableEntryList.clear();
                     tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
                     tableUpdate();
-                    userTimeList.clear();;
+                    userTimeList.clear();
                     userTimeList.addAll(propReader.getTableEntryList(PropType.USERTIME));
                     //timeTableCombo.removeAllItems();
                     //usersTab.fillCombo(timeTableCombo);
@@ -344,8 +344,8 @@ public class MainForm extends JFrame{
 
         }
         public JComboBox fillCombo(JComboBox jComboBox){
-            //Iterator iterator = MainForm.tableEntryList.iterator();
-            Iterator iterator = propReader.getTableEntryList(PropType.USERTIME).iterator();
+            Iterator iterator = MainForm.userTimeList.iterator();
+            //Iterator iterator = propReader.getTableEntryList(PropType.USERTIME).iterator();
             while (iterator.hasNext()) {
                 jComboBox.addItem(iterator.next());
             }

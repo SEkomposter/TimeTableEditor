@@ -167,10 +167,12 @@ public class MainForm extends JFrame{
             openItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                 //   tableEntryList.clear();
-                  //  tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
-                    //readRepProp
-                    updateComponents();
+                    tableEntryList.clear();
+                    tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
+                    tableUpdate();
+                    timeTableCombo.removeAllItems();
+                    usersTab.fillCombo(timeTableCombo);
+                    //updateComponents();
                 }
             });
             openItem.setFont(font);
@@ -251,7 +253,7 @@ public class MainForm extends JFrame{
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                     treeModel.movePersonal(treeModel.getRootFreePersonal(),treeModel.getRootAddedPersonal(),freeUsers.getSelectionPaths());
+                    treeModel.movePersonal(treeModel.getRootFreePersonal(),treeModel.getRootAddedPersonal(),freeUsers.getSelectionPaths());
                     treeModel.treeModelAddedPersonal.reload();
                     treeModel.treeModelFreePersonal.reload();
                     //System.out.println(s.getLastPathComponent().toString());
@@ -362,9 +364,9 @@ public class MainForm extends JFrame{
 
     }
     public void updateComponents(){
-        tableUpdate();
-        timeTableCombo.removeAllItems();
-        usersTab.fillCombo(timeTableCombo);
+        //
+        //timeTableCombo.removeAllItems();
+        //usersTab.fillCombo(timeTableCombo);
         usersTab.refreshPersonal();
     }
     /*removeButton.setSize(addButton.getSize());

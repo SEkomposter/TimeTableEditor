@@ -11,31 +11,45 @@ public class PropReader {
     String commProps = "common.properties";
     File filePath = new File("D:\\TimeTableEditor\\");
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
+    HashMap<String,String> tempProperties = new LinkedHashMap<String,String>();
     static Properties property = new Properties();
 
     ArrayList<TableEntry> tableEntryArrayList = new ArrayList<>();
     public PropReader(){}
-
-    Map<String,String> readRepProp(Enum en) throws IOException{
-            FileInputStream fis;
-            try {
-                fis = new FileInputStream("src/resources/"+fileName);
-                property.load(fis);
-                Iterator it = property.keySet().iterator();
-                String pr;
-                properties.clear();
-                while (it.hasNext()) {
-                    pr=it.next().toString();
-                    if (pr.startsWith(en.toString()))
-                        properties.put(pr, property.getProperty(pr));
-                }
-               // System.out.print(properties);
-                fis.close();
-            } catch (IOException e) {
-                System.err.println("ОШИБКА: Файл свойств отсуствует!");
+    Map<String,String> readRepProp() throws IOException{
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream("src/resources/"+fileName);
+            property.load(fis);
+            Iterator it = property.keySet().iterator();
+            String pr;
+            properties.clear();
+            while (it.hasNext()) {
+                pr=it.next().toString();
+                // if (pr.startsWith(en.toString()))
+                properties.put(pr, property.getProperty(pr));
             }
+            // System.out.print(properties);
+            fis.close();
+        } catch (IOException e) {
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        }
 
-    return properties;
+        return properties;
+    }
+    Map<String,String> readRepProp(Enum en) throws IOException{
+                readRepProp();
+                tempProperties.clear();
+                Iterator it = properties.keySet().iterator();
+                String pr;
+                Object tempObj = new Object();
+                while (it.hasNext()) {
+                    tempObj=it.next();
+                    pr = tempObj.toString();
+                    if (pr.startsWith(en.toString()))
+                        tempProperties.put(tempObj.toString(),properties.get(tempObj).toString());
+                }
+    return tempProperties;
     }
     public void writeRepProp(Map<String,String> map) throws IOException{
 

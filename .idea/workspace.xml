@@ -141,12 +141,12 @@
       <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="344" column="9" lean-forward="true" selection-start-line="344" selection-start-column="9" selection-end-line="344" selection-end-column="9" />
+            <state relative-caret-position="148">
+              <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
               <folding>
                 <element signature="e#1323#1335#0" expanded="true" />
-                <element signature="e#9883#10116#0" expanded="true" />
-                <element signature="e#10115#10116#0" expanded="true" />
+                <element signature="e#9879#10112#0" expanded="true" />
+                <element signature="e#10111#10112#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -844,7 +844,7 @@
       <workItem from="1507752504719" duration="5852000" />
       <workItem from="1507791464302" duration="1886000" />
       <workItem from="1508186520880" duration="3665000" />
-      <workItem from="1508233627255" duration="9162000" />
+      <workItem from="1508233627255" duration="9223000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1505858589712</created>
@@ -1063,11 +1063,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508253667020</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="17.10.2017">
+      <created>1508253803586</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1508253803586</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126406000" />
+    <option name="totallyTimeSpent" value="126467000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1550,12 +1557,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/MainForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="344" column="9" lean-forward="true" selection-start-line="344" selection-start-column="9" selection-end-line="344" selection-end-column="9" />
+        <state relative-caret-position="148">
+          <caret line="357" column="0" lean-forward="false" selection-start-line="357" selection-start-column="0" selection-end-line="357" selection-end-column="0" />
           <folding>
             <element signature="e#1323#1335#0" expanded="true" />
-            <element signature="e#9883#10116#0" expanded="true" />
-            <element signature="e#10115#10116#0" expanded="true" />
+            <element signature="e#9879#10112#0" expanded="true" />
+            <element signature="e#10111#10112#0" expanded="true" />
           </folding>
         </state>
       </provider>

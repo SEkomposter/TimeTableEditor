@@ -172,8 +172,8 @@ public class MainForm extends JFrame{
                     tableUpdate();
                     userTimeList.clear();
                     userTimeList.addAll(propReader.getTableEntryList(PropType.USERTIME));
-                    //timeTableCombo.removeAllItems();
-                    //usersTab.fillCombo(timeTableCombo);
+                    timeTableCombo.removeAllItems();
+                    usersTab.fillCombo(timeTableCombo);
                     //updateComponents();
                 }
             });

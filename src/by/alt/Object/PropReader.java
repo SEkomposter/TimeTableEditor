@@ -99,6 +99,7 @@ public class PropReader {
 
     public ArrayList<TableEntry> getTableEntryList (PropType en){
         Map<String,String> map = new LinkedHashMap<>();
+        map.clear();
         try {
             map.putAll(readRepProp(en));
             Iterator it = map.keySet().iterator();

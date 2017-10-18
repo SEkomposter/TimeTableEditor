@@ -1,6 +1,7 @@
 package by.alt.Object;
 
 import by.alt.DAO.Personal;
+import by.alt.DAO.SurvObject;
 import by.alt.gui.MainForm;
 import by.alt.gui.TimeTableEditor;
 
@@ -11,7 +12,7 @@ import java.util.*;
 import static by.alt.gui.MainForm.tableEntryList;
 import static by.alt.gui.MainForm.tableModel;
 
-public class TableEntry {
+public class TableEntry implements Comparable{
     private String name, shedule, timeFrom, timeTo;
 
     public TableEntry(){}
@@ -20,6 +21,14 @@ public class TableEntry {
         this.setShedule(s);
         this.setTimeFrom(tf);
         this.setTimeTo(tt);
+    }
+    @Override
+    public int compareTo(Object o) {
+        return  (((TableEntry)o).toString().compareToIgnoreCase(this.toString())<0?1: ((TableEntry)o).toString().compareToIgnoreCase(this.toString())==0?0:-1);
+    }
+
+    public void addPersonal(Personal newPers) {
+        //personalAdded.add(newPers);
     }
 
     //Читаем данные из формы добавления или редактирования расписания

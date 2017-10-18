@@ -9,8 +9,6 @@ public interface SurvObject {
 
    // public void setName(String name);
 
-    public String getType();
-
     //public void setType(String type);
     public int hashCode();
 

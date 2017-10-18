@@ -26,7 +26,7 @@ public class MainForm extends JFrame{
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
     private static UsersTab usersTab;
-    PropReader propReader = new PropReader();
+    private PropReader propReader;
     private DaoClass daoObject = new DaoClass();
     private Font font;
     private MyMenuBar menuBar;
@@ -35,6 +35,7 @@ public class MainForm extends JFrame{
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
     private static ArrayList<TableEntry> userTimeList = new ArrayList<TableEntry>();
+    private static ArrayList<TableEntry> groupTimeList = new ArrayList<TableEntry>();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JComboBox timeTableCombo = new JComboBox();
     static JTable tt;
@@ -167,11 +168,14 @@ public class MainForm extends JFrame{
             openItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    propReader = new PropReader();
                     tableEntryList.clear();
-                    tableEntryList.addAll(propReader.getTableEntryList(PropType.TIMETABLE));
+                    tableEntryList.addAll(propReader.getPropertiesList(PropType.TIMETABLE));
                     tableUpdate();
                     userTimeList.clear();
-                    userTimeList.addAll(propReader.getTableEntryList(PropType.USERTIME));
+                    userTimeList.addAll(propReader.getPropertiesList(PropType.USERTIME));
+                    groupTimeList.clear();
+                    groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
                     timeTableCombo.removeAllItems();
                     usersTab.fillCombo(timeTableCombo);
                     //updateComponents();
@@ -183,10 +187,11 @@ public class MainForm extends JFrame{
             saveAsItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    PropReader reader = new PropReader();
                     try {
-                        reader.writeRepProp(reader.preparePropsForWrite(tableEntryList));
-
+                        propReader.writeRepProp(tableEntryList);
+                        propReader.writeRepProp(userTimeList);
+                        propReader.writeRepProp(groupTimeList);
+                        propReader.readRepProp();
                     }catch (IOException exc){
                         exc.printStackTrace();
                     }

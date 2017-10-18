@@ -89,6 +89,8 @@ public class TableEntry implements Comparable{
     public String toString() {
         return "timetable."+ shedule +"."+ name + "=" + timeFrom + "-" + timeTo;
     }
-
+    public String toStringExt() {
+        return toString();
+    }
 }
 

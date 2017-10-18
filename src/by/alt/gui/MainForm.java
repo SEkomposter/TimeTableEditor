@@ -2,6 +2,7 @@ package by.alt.gui;
 
 
 import by.alt.DAO.DaoClass;
+import by.alt.DAO.Personal;
 import by.alt.Main;
 import by.alt.Object.MyTableModel;
 import by.alt.Object.TableEntry;
@@ -260,6 +261,9 @@ public class MainForm extends JFrame{
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    TreePath[] tp = freeUsers.getSelectionPaths();
+                    for (TreePath t:tp)
+                    ((UserTime)timeTableCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
                     treeModel.movePersonal(treeModel.getRootFreePersonal(),treeModel.getRootAddedPersonal(),freeUsers.getSelectionPaths());
                     treeModel.treeModelAddedPersonal.reload();
                     treeModel.treeModelFreePersonal.reload();

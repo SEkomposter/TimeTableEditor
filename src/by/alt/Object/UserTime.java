@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 public class UserTime extends TableEntry implements Comparable{
 
-    private Set<Personal> personalAdded = new TreeSet<Personal>();
+    private Set<Personal> personalAdded = new PersonalTreeSet<Personal>();
 
     public void setPersonalAdded(Set<Personal> personalAdded) {
         this.personalAdded = personalAdded;

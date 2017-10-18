@@ -43,7 +43,6 @@ public class PersonalTreeModel {
                 if (source.getChildAt(i).toString().equals(str)) source.remove(i);
             }
             target.add(new DefaultMutableTreeNode(str,false));
-
         }
     }
 

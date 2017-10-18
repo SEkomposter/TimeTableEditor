@@ -29,8 +29,14 @@ public class PropReader {
         String[] entries = new String[2];
         Iterator iterator = tableEntries.iterator();
         while (iterator.hasNext()){
-            entries = iterator.next().toString().split("=");
-            map.put(entries[0],entries[1]);
+            Object obj = iterator.next();
+            if (obj instanceof UserTime){
+                map.put(obj.toString(),((UserTime)obj).getPersonalAdded().toString());
+                }
+            else {
+                entries = obj.toString().split("=");
+                map.put(entries[0],entries[1]);
+            }
         }
         FileOutputStream fos;
         try {

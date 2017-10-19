@@ -1,5 +1,7 @@
 package by.alt.gui;
 
+import by.alt.Object.GroupTime;
+import by.alt.Object.UserTime;
 import by.alt.gui.MainForm;
 import by.alt.Object.Shedules;
 import by.alt.Object.TableEntry;
@@ -147,7 +149,6 @@ public class TimeTableEditor extends JDialog{
         }
         return date;
     }
-
 }
 class DifferentB extends JButton{
     DifferentB(String text){
@@ -174,7 +175,12 @@ class DifferentB extends JButton{
                                 "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
                             }
                             else {
-                                MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                                TableEntry te = addedTableEntry.getTableEntryFromDialog();
+                                MainForm.tableEntryList.add(te);
+                                UserTime ut = new UserTime(te.getName(),te.getShedule());
+                                MainForm.userTimeList.add(ut);
+                                MainForm.groupTimeList.add(ut);
+                                MainForm.timeTableCombo.addItem(ut);
                                 tableUpdate();
                                 MainForm.timeTableEditor.dispose();
                             }

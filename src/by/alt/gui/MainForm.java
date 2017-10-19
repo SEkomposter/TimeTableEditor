@@ -22,7 +22,7 @@ import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.*;
 
-public class MainForm extends JFrame{
+public class MainForm extends JFrame {
     private JTabbedPane tabbedPane1;
     private TimeTableTab timeTables;
     private DepartmentsTab depTab;
@@ -35,8 +35,8 @@ public class MainForm extends JFrame{
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    private static ArrayList<TableEntry> userTimeList = new ArrayList<TableEntry>();
-    private static ArrayList<TableEntry> groupTimeList = new ArrayList<TableEntry>();
+    public static ArrayList<TableEntry> userTimeList = new ArrayList<TableEntry>();
+    public static ArrayList<TableEntry> groupTimeList = new ArrayList<TableEntry>();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JComboBox timeTableCombo = new JComboBox();
     static JTable tt;
@@ -49,21 +49,33 @@ public class MainForm extends JFrame{
             }
         });
     }
-    public MainForm(){
-        setBounds(0,0,1300,720);
-        setMinimumSize(new Dimension(1300,720));
+
+    public MainForm() {
+        setBounds(0, 0, 1300, 720);
+        setMinimumSize(new Dimension(1300, 720));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         menuBar = new MyMenuBar();
-        tabbedPane1 = new myTabbedPane(this.getX(),this.getY(),this.getWidth(),getHeight());
+        tabbedPane1 = new myTabbedPane(this.getX(), this.getY(), this.getWidth(), getHeight());
         getContentPane().add(tabbedPane1);
         this.setJMenuBar(menuBar);
         repaint();
+        propReader = new PropReader();
     }
-    public static void tableUpdate(){
+
+    public static void tableUpdate() {
         tableModel.fireTableStructureChanged();
         tt.updateUI();
     }
+
+    public void readPropsFromConf() {
+        try {
+            propReader.readRepProp();
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+    }
+
     class myTabbedPane extends JTabbedPane{
         myTabbedPane(int x, int y,int w, int h){
             setBounds(x, y, w, h);
@@ -112,7 +124,7 @@ public class MainForm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     int n = JOptionPane.showConfirmDialog(
                             MainForm.this,
-                            "Вы действительно хотите удалить расписание?",
+                            "Также будут удалены связанные расписания для сотрудников и подразделений.\nВы действительно хотите удалить расписание?",
                             "Удаление расписания",
                             JOptionPane.YES_NO_OPTION);
                     // если нажата кнопка "ДА", удаляем строку:
@@ -120,8 +132,11 @@ public class MainForm extends JFrame{
                         int[] selections = tt.getSelectedRows();
                         int rowDeleted = 0;
                         for(int i:selections) {
-                            new PropReader().removeProperty(PropType.TIMETABLE.toString() + "." + tt.getValueAt(i-rowDeleted, 1) + "." + tt.getValueAt(i-rowDeleted, 0));
+                            propReader.removeProperty(PropType.TIMETABLE.toString() + "." + tt.getValueAt(i-rowDeleted, 1) + "." + tt.getValueAt(i-rowDeleted, 0));
                             tableModel.removeRow(i-rowDeleted);
+                            deleteTableEntry((String) tt.getValueAt(i-rowDeleted, 0), (String) tt.getValueAt(i-rowDeleted, 1));
+                            //timeTableCombo.removeAll();
+                           // usersTab.fillCombo(timeTableCombo);
                             rowDeleted++;
                             updateComponents();
                         }
@@ -147,7 +162,6 @@ public class MainForm extends JFrame{
             });
             setVisible(true);
         }
-
     }
 
     class MyMenuBar extends JMenuBar{
@@ -159,8 +173,12 @@ public class MainForm extends JFrame{
             newItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    propReader.removeAllProperties();
                     tableEntryList.clear();
-                    updateComponents();
+                    userTimeList.clear();
+                    groupTimeList.clear();
+                    timeTableCombo.removeAllItems();
+                    tableUpdate();
                 }
             });
             newItem.setFont(font);
@@ -169,7 +187,7 @@ public class MainForm extends JFrame{
             openItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    propReader = new PropReader();
+                    readPropsFromConf();
                     tableEntryList.clear();
                     tableEntryList.addAll(propReader.getPropertiesList(PropType.TIMETABLE));
                     tableUpdate();
@@ -263,11 +281,21 @@ public class MainForm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     TreePath[] tp = freeUsers.getSelectionPaths();
                     for (TreePath t:tp)
-                    ((UserTime)timeTableCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
+                        ((UserTime)timeTableCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
                     treeModel.movePersonal(treeModel.getRootFreePersonal(),treeModel.getRootAddedPersonal(),freeUsers.getSelectionPaths());
                     treeModel.treeModelAddedPersonal.reload();
                     treeModel.treeModelFreePersonal.reload();
-                    //System.out.println(s.getLastPathComponent().toString());
+                }
+            });
+            removeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    TreePath[] tp = addedUsers.getSelectionPaths();
+                    for (TreePath t:tp)
+                        ((UserTime)timeTableCombo.getSelectedItem()).removePersonal(t.getLastPathComponent().toString());
+                    treeModel.movePersonal(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal(),addedUsers.getSelectionPaths());
+                    treeModel.treeModelAddedPersonal.reload();
+                    treeModel.treeModelFreePersonal.reload();
                 }
             });
 
@@ -375,10 +403,14 @@ public class MainForm extends JFrame{
 
     }
     public void updateComponents(){
-        //
-        //timeTableCombo.removeAllItems();
-        //usersTab.fillCombo(timeTableCombo);
         usersTab.refreshPersonal();
+    }
+    public void deleteTableEntry(String nm, String shed){
+        Iterator it = userTimeList.iterator();
+        while(it.hasNext()) {
+            UserTime ut = (UserTime) it.next();
+            if (ut.getName().equalsIgnoreCase(nm)&&ut.getShedule().equalsIgnoreCase(shed)) userTimeList.remove(ut);
+        }
     }
     /*removeButton.setSize(addButton.getSize());
             //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));

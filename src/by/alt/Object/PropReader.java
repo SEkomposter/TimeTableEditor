@@ -17,11 +17,7 @@ public class PropReader {
     private static TreeSet<TableEntry> userTimeSet = new TreeSet<>();
     private static TreeSet<TableEntry> groupTimeSet = new TreeSet<>();
     public PropReader(){
-        try {
-            readRepProp();
-        }catch (IOException exc){
-            exc.printStackTrace();
-        }
+
     }
 
     public void writeRepProp(ArrayList<TableEntry> tableEntries) throws IOException{
@@ -69,6 +65,9 @@ public class PropReader {
     }
     public void removeProperty(String prop){
             property.remove(prop);
+    }
+    public void removeAllProperties(){
+        property.clear();
     }
 
     public TreeSet<? extends TableEntry> getPropertiesList (PropType en){

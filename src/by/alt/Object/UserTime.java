@@ -3,10 +3,16 @@ package by.alt.Object;
 
 import by.alt.DAO.Personal;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class UserTime extends TableEntry implements Comparable{
+    public UserTime(){}
+    public UserTime(String n,String s){
+        this.setName(n);
+        this.setShedule(s);
+    }
 
     private Set<Personal> personalAdded = new PersonalTreeSet<Personal>();
 
@@ -21,7 +27,14 @@ public class UserTime extends TableEntry implements Comparable{
         return personalAdded;
     }
 
-    public void removePersonal(Personal delPers) {
+    public void removePersonal(String name) {
+        Iterator iterator = personalAdded.iterator();
+        Personal delPers = new Personal();
+        while (iterator.hasNext()) {
+            delPers = (Personal) iterator.next();
+            if (delPers.toString().equalsIgnoreCase(name))
+             break;
+        }
         personalAdded.remove(delPers);
     }
 

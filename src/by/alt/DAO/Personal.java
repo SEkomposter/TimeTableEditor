@@ -11,7 +11,7 @@ public class Personal implements SurvObject, Comparable{
     private int id, parent_id;
     private Node node;
 
-    Personal(){}
+    public Personal(){}
     public Personal(String name){
         this.name = name;
     }

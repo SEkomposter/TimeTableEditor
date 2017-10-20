@@ -37,7 +37,7 @@ public class PropReader {
         FileOutputStream fos;
         try {
             fos = new FileOutputStream("src/resources/"+fileName);
-
+            property.clear();
             Iterator it = map.keySet().iterator();
             String pr;
             while (it.hasNext()) {

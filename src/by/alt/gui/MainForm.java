@@ -128,18 +128,20 @@ public class MainForm extends JFrame {
                             "Удаление расписания",
                             JOptionPane.YES_NO_OPTION);
                     // если нажата кнопка "ДА", удаляем строку:
+                    String shed="",nm="";
                     if (n == JOptionPane.YES_NO_OPTION) {
                         int[] selections = tt.getSelectedRows();
                         int rowDeleted = 0;
                         for(int i:selections) {
-                            propReader.removeProperty(PropType.TIMETABLE.toString() + "." + tt.getValueAt(i-rowDeleted, 1) + "." + tt.getValueAt(i-rowDeleted, 0));
+                            shed = (String) tt.getValueAt(i-rowDeleted, 1);
+                            nm = (String) tt.getValueAt(i-rowDeleted, 0);
+                            propReader.removeProperty(PropType.TIMETABLE.toString() + "." + shed + "." + nm);
                             tableModel.removeRow(i-rowDeleted);
-                            deleteTableEntry((String) tt.getValueAt(i-rowDeleted, 0), (String) tt.getValueAt(i-rowDeleted, 1));
-                            //timeTableCombo.removeAll();
-                           // usersTab.fillCombo(timeTableCombo);
+                            deleteUserTime(nm, shed);
                             rowDeleted++;
                             updateComponents();
                         }
+
                     }
                 }
             });
@@ -151,7 +153,6 @@ public class MainForm extends JFrame {
             tTabSubPan2.add(new JScrollPane(tt));
             tt.setAutoCreateRowSorter(true);
             tt.getTableHeader().setReorderingAllowed(false);
-
             tt.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
                 public void valueChanged(ListSelectionEvent event) {
                     // do some actions here, for example
@@ -196,7 +197,7 @@ public class MainForm extends JFrame {
                     groupTimeList.clear();
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
                     timeTableCombo.removeAllItems();
-                    usersTab.fillCombo(timeTableCombo);
+                    fillCombo(timeTableCombo, userTimeList);
                     //updateComponents();
                 }
             });
@@ -380,14 +381,7 @@ public class MainForm extends JFrame {
             basicLayer.add(removeButton, c);
 
         }
-        public JComboBox fillCombo(JComboBox jComboBox){
-            Iterator iterator = MainForm.userTimeList.iterator();
-            //Iterator iterator = propReader.getTableEntryList(PropType.USERTIME).iterator();
-            while (iterator.hasNext()) {
-                jComboBox.addItem(iterator.next());
-            }
-            return jComboBox;
-        }
+
         public void refreshPersonal(){
             treeModel.delAllPersonal(treeModel.getRootFreePersonal());
             treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
@@ -405,12 +399,45 @@ public class MainForm extends JFrame {
     public void updateComponents(){
         usersTab.refreshPersonal();
     }
-    public void deleteTableEntry(String nm, String shed){
-        Iterator it = userTimeList.iterator();
-        while(it.hasNext()) {
-            UserTime ut = (UserTime) it.next();
-            if (ut.getName().equalsIgnoreCase(nm)&&ut.getShedule().equalsIgnoreCase(shed)) userTimeList.remove(ut);
+    public void deleteUserTime(String nm, String shed){
+        ArrayList<TableEntry> tempList = new ArrayList<TableEntry>();
+        try {
+            Iterator it = userTimeList.iterator();
+            while(it.hasNext()) {
+                UserTime ut = (UserTime) it.next();
+                if (ut.getName().equalsIgnoreCase(nm) && ut.getShedule().equalsIgnoreCase(shed)) tempList.add(ut);
+            }
+
+            userTimeList.removeAll(tempList);
+            tempList.clear();
+            it = groupTimeList.iterator();
+            while(it.hasNext()) {
+                GroupTime gt = (GroupTime) it.next();
+                if (gt.getName().equalsIgnoreCase(nm) && gt.getShedule().equalsIgnoreCase(shed)) tempList.add(gt);
+            }
+            groupTimeList.removeAll(tempList);
+            timeTableCombo.removeAllItems();
+            fillCombo(timeTableCombo,userTimeList);
+            //it = groupTimeList.iterator();
+           // while (it.hasNext()) {
+            //    GroupTime gt = (GroupTime) it.next();
+            //    if (gt.getName().equalsIgnoreCase(nm) && gt.getShedule().equalsIgnoreCase(shed))
+            //            groupTimeList.remove(gt);
+                    //groupTimeCombo.removeAllItems();
+                    //fillCombo(groupTimeCombo,groupTimeList);
+            //    }
+            }catch (Exception exc){
+                exc.printStackTrace();
+            }
         }
+
+
+    public JComboBox fillCombo(JComboBox jComboBox,ArrayList list ){
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            jComboBox.addItem(iterator.next());
+        }
+        return jComboBox;
     }
     /*removeButton.setSize(addButton.getSize());
             //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));

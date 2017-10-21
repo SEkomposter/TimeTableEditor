@@ -5,6 +5,7 @@ import by.alt.DAO.DaoClass;
 import by.alt.DAO.Personal;
 
 import javax.swing.tree.*;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 public class PersonalTreeModel {
@@ -14,8 +15,9 @@ public class PersonalTreeModel {
     public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, false);
     public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, false);
 
-    public void fillTreeFreePersonal(DefaultMutableTreeNode treeNode){
-        Object[] tempArray = daoObject.getAllPersonal().toArray();
+    public void fillTreeFreePersonal(DefaultMutableTreeNode treeNode, Object[] tempArray){
+       //Object[] tempArray = daoObject.getAllPersonal().toArray();
+        delAllPersonal(treeNode);
         for (int i=0; i< tempArray.length; i++){
             treeNode.add(new DefaultMutableTreeNode(tempArray[i],false));
         }
@@ -33,8 +35,20 @@ public class PersonalTreeModel {
         for (int i=0;i<added.getChildCount();i++) {
             for (int j=0;j<free.getChildCount();j++)
                 if(free.getChildAt(j).toString().equals(added.getChildAt(i).toString())) free.remove(j);
-
         }
+    }
+    public void filterPersonal (String mask){
+        DefaultMutableTreeNode source = getRootFreePersonal();
+        ArrayList list = new ArrayList();
+            for (int i=0;i<source.getChildCount();i++) {
+                Object obj = source.getChildAt(i);
+                if (obj.toString().toLowerCase().startsWith(mask.toLowerCase()))
+                    list.add(obj);
+            }
+            source.removeAllChildren();
+            fillTreeFreePersonal(source, list.toArray());
+            removeAddedFromFree(getRootAddedPersonal(),source);
+       // if (!(source.getChildAt(i).toString().toLowerCase().startsWith(mask.toLowerCase()))) source.remove(i);
     }
     public void movePersonal (DefaultMutableTreeNode source, DefaultMutableTreeNode target, TreePath[] treePaths){
         for (TreePath tp:treePaths){

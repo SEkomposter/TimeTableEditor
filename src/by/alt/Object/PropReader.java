@@ -1,6 +1,7 @@
 package by.alt.Object;
 
 import by.alt.DAO.Personal;
+import by.alt.gui.MainForm;
 import sun.misc.ASCIICaseInsensitiveComparator;
 
 import java.io.*;
@@ -20,24 +21,28 @@ public class PropReader {
 
     }
 
-    public void writeRepProp(ArrayList<TableEntry> tableEntries) throws IOException{
+    public void writeRepProp() throws IOException{
         LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
         String[] entries = new String[2];
-        Iterator iterator = tableEntries.iterator();
-        while (iterator.hasNext()){
-            Object obj = iterator.next();
-            if (obj instanceof UserTime){
-                map.put(obj.toString(),((UserTime)obj).getPersonalAdded().toString());
+        ArrayList<TableEntry> tableEntries = new ArrayList<>();
+        tableEntries.addAll(MainForm.tableEntryList);
+        tableEntries.addAll(MainForm.groupTimeList);
+        tableEntries.addAll(MainForm.userTimeList);
+            Iterator iterator = tableEntries.iterator();
+            while (iterator.hasNext()) {
+                Object obj = iterator.next();
+                if (obj instanceof UserTime) {
+                    map.put(obj.toString(), ((UserTime) obj).getPersonalAdded().toString());
+                } else {
+                    entries = obj.toString().split("=");
+                    map.put(entries[0], entries[1]);
                 }
-            else {
-                entries = obj.toString().split("=");
-                map.put(entries[0],entries[1]);
             }
-        }
+        property.clear();
         FileOutputStream fos;
         try {
             fos = new FileOutputStream("src/resources/"+fileName);
-            property.clear();
+
             Iterator it = map.keySet().iterator();
             String pr;
             while (it.hasNext()) {

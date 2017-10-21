@@ -38,8 +38,6 @@ public class DaoClass {
     public void buildObjTree(Node node){
         ArrayList<SurvObject> temp = fillChildList(node);
         SurvObject tempSO;
-        //System.out.println(temp);
-        //System.out.println("_____________________________");
         if (node.isHasChildNode()){
             Iterator it = temp.iterator();
             while (it.hasNext()){

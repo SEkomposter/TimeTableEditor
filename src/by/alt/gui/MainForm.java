@@ -9,16 +9,11 @@ import by.alt.Object.TableEntry;
 import by.alt.Object.*;
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TreeSelectionListener;
+import javax.swing.event.*;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.tree.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.*;
 
@@ -28,7 +23,7 @@ public class MainForm extends JFrame {
     private DepartmentsTab depTab;
     private static UsersTab usersTab;
     private PropReader propReader;
-    private DaoClass daoObject = new DaoClass();
+    public static DaoClass daoObject = new DaoClass();
     private Font font;
     private MyMenuBar menuBar;
     public static TimeTableEditor timeTableEditor;
@@ -39,7 +34,11 @@ public class MainForm extends JFrame {
     public static ArrayList<TableEntry> groupTimeList = new ArrayList<TableEntry>();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JComboBox timeTableCombo = new JComboBox();
+    public static JTextField filterField;
     static JTable tt;
+    public static PersonalTreeModel treeModel = new PersonalTreeModel();
+    public static JTree addedUsers;
+    public static JTree freeUsers;
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -141,7 +140,6 @@ public class MainForm extends JFrame {
                             rowDeleted++;
                             updateComponents();
                         }
-
                     }
                 }
             });
@@ -179,6 +177,8 @@ public class MainForm extends JFrame {
                     userTimeList.clear();
                     groupTimeList.clear();
                     timeTableCombo.removeAllItems();
+                    treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
+                    treeModel.treeModelAddedPersonal.reload();
                     tableUpdate();
                 }
             });
@@ -208,9 +208,7 @@ public class MainForm extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        propReader.writeRepProp(tableEntryList);
-                        propReader.writeRepProp(userTimeList);
-                        propReader.writeRepProp(groupTimeList);
+                        propReader.writeRepProp();
                         propReader.readRepProp();
                     }catch (IOException exc){
                         exc.printStackTrace();
@@ -235,14 +233,13 @@ public class MainForm extends JFrame {
         JLabel timeTableLabel = new JLabel("Расписание:");
         JLabel treeLabel1 = new JLabel("Сотрудники, добавленные в расписание:");
         JLabel treeLabel2 = new JLabel("Сотрудники, отсутствующие в расписании:");
-        JPanel panel1 = new JPanel();
-        JPanel panel2 = new JPanel();
-        JPanel panel3 = new JPanel();
-        JTree addedUsers;
-        JTree freeUsers;
+        //JLabel filterLabel = new JLabel("Фильтр:");
+
+
         JButton addButton = new JButton("<= Добавить");
         JButton removeButton = new JButton("Убрать       =>");
-        PersonalTreeModel treeModel = new PersonalTreeModel();
+
+
 
         UsersTab(){}
         UsersTab(int x, int y,int w, int h){
@@ -266,6 +263,31 @@ public class MainForm extends JFrame {
             basicLayer.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
             basicLayer.setBounds(x,y,w,h);
+            filterField = new JTextField("Фильтр:");
+            filterField.setForeground(Color.GRAY);
+            filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
+            filterField.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
+                    treeModel.filterPersonal(filterField.getText());
+                    treeModel.treeModelFreePersonal.reload();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
+                    treeModel.filterPersonal(filterField.getText());
+                    treeModel.treeModelFreePersonal.reload();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
+                    treeModel.filterPersonal(filterField.getText());
+                    treeModel.treeModelFreePersonal.reload();
+                }
+            });
             timeTableCombo.setBackground(Color.white);
             timeTableCombo.addItemListener(
                     new ItemListener() {
@@ -280,13 +302,18 @@ public class MainForm extends JFrame {
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    TreePath[] tp = freeUsers.getSelectionPaths();
-                    for (TreePath t:tp)
-                        ((UserTime)timeTableCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
-                    treeModel.movePersonal(treeModel.getRootFreePersonal(),treeModel.getRootAddedPersonal(),freeUsers.getSelectionPaths());
-                    treeModel.treeModelAddedPersonal.reload();
-                    treeModel.treeModelFreePersonal.reload();
-                }
+                    try {
+                        TreePath[] tp = freeUsers.getSelectionPaths();
+                        for (TreePath t : tp)
+                            ((UserTime) timeTableCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
+                        treeModel.movePersonal(treeModel.getRootFreePersonal(), treeModel.getRootAddedPersonal(), freeUsers.getSelectionPaths());
+                        treeModel.treeModelAddedPersonal.reload();
+                        treeModel.treeModelFreePersonal.reload();
+                    }catch (NullPointerException exc){
+                        exc.printStackTrace();
+                        System.out.println("ничего не выбрано");
+                    }
+                    }
             });
             removeButton.addActionListener(new ActionListener() {
                 @Override
@@ -339,6 +366,15 @@ public class MainForm extends JFrame {
             c.insets = new Insets(0, 0, 0, 0);
             basicLayer.add(treeLabel2, c);
 
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 4;
+            c.gridy = 1;
+            c.gridwidth = 1;
+            c.weightx = 0.1;
+            c.weighty = 0.1;
+            c.insets = new Insets(0, 350, 0, 20);
+            basicLayer.add(filterField, c);
+
             c.fill = GridBagConstraints.BOTH;
             c.gridx = 0;
             c.gridy = 4;
@@ -370,6 +406,7 @@ public class MainForm extends JFrame {
             c.weighty = 0.0;
             c.insets = new Insets(50, 20, 0, 0);
             basicLayer.add(addButton, c);
+
             c.fill = GridBagConstraints.NONE;
             c.gridx = 2;
             c.gridy = 5;
@@ -379,25 +416,11 @@ public class MainForm extends JFrame {
             c.weighty = 0.0;
             c.insets = new Insets(50, 20, 0, 0);
             basicLayer.add(removeButton, c);
-
-        }
-
-        public void refreshPersonal(){
-            treeModel.delAllPersonal(treeModel.getRootFreePersonal());
-            treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
-            daoObject.buildObjTree(daoObject.getRootNode());
-            treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) MainForm.timeTableCombo.getSelectedItem());
-            treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal());
-            treeModel.removeAddedFromFree(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal());
-            freeUsers.expandRow(0);
-            addedUsers.expandRow(0);
-            treeModel.treeModelAddedPersonal.reload();
-            treeModel.treeModelFreePersonal.reload();
         }
 
     }
     public void updateComponents(){
-        usersTab.refreshPersonal();
+        this.refreshPersonal();
     }
     public void deleteUserTime(String nm, String shed){
         ArrayList<TableEntry> tempList = new ArrayList<TableEntry>();
@@ -407,7 +430,6 @@ public class MainForm extends JFrame {
                 UserTime ut = (UserTime) it.next();
                 if (ut.getName().equalsIgnoreCase(nm) && ut.getShedule().equalsIgnoreCase(shed)) tempList.add(ut);
             }
-
             userTimeList.removeAll(tempList);
             tempList.clear();
             it = groupTimeList.iterator();
@@ -418,19 +440,11 @@ public class MainForm extends JFrame {
             groupTimeList.removeAll(tempList);
             timeTableCombo.removeAllItems();
             fillCombo(timeTableCombo,userTimeList);
-            //it = groupTimeList.iterator();
-           // while (it.hasNext()) {
-            //    GroupTime gt = (GroupTime) it.next();
-            //    if (gt.getName().equalsIgnoreCase(nm) && gt.getShedule().equalsIgnoreCase(shed))
-            //            groupTimeList.remove(gt);
-                    //groupTimeCombo.removeAllItems();
-                    //fillCombo(groupTimeCombo,groupTimeList);
-            //    }
+
             }catch (Exception exc){
                 exc.printStackTrace();
             }
         }
-
 
     public JComboBox fillCombo(JComboBox jComboBox,ArrayList list ){
         Iterator iterator = list.iterator();
@@ -439,58 +453,18 @@ public class MainForm extends JFrame {
         }
         return jComboBox;
     }
-    /*removeButton.setSize(addButton.getSize());
-            //basicLayer.setLayout(new BoxLayout(basicLayer, BoxLayout.Y_AXIS));
-            //basicLayer.setBounds((int)(this.getParent().getX()),(int)(this.getParent().getY()),(int)(this.getParent().getWidth()),(int)(this.getParent().getHeight()));
+    public static void refreshPersonal(){
+        treeModel.delAllPersonal(treeModel.getRootFreePersonal());
+        treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
+        daoObject.buildObjTree(daoObject.getRootNode());
+        treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) MainForm.timeTableCombo.getSelectedItem());
+        treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
+        treeModel.removeAddedFromFree(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal());
+        freeUsers.expandRow(0);
+        addedUsers.expandRow(0);
+        treeModel.treeModelAddedPersonal.reload();
+        treeModel.treeModelFreePersonal.reload();
+    }
 
-            JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            row1.setBackground(Color.cyan);
-            //row1.setLayout(new BoxLayout(row1, BoxLayout.X_AXIS));
-            JPanel row2 = new JPanel(new GridLayout(0,4));
-            row2.setBackground(Color.green);
-            row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
-            JPanel row3 = new JPanel();
-            //row3.setBackground(Color.MAGENTA);
-            row3.setLayout(new BoxLayout(row3, BoxLayout.X_AXIS));
-            //row3.setBackground(Color.white);
-
-            //basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
-            basicLayer.add(row1,BorderLayout.NORTH);
-            //basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
-            basicLayer.add(row2,BorderLayout.CENTER);
-            //basicLayer.add(Box.createRigidArea(new Dimension(1,10)));
-            basicLayer.add(row3,BorderLayout.SOUTH);
-            //basicLayer.add(Box.createRigidArea(new Dimension(1,30)));
-
-            //row1.add(Box.createRigidArea(new Dimension(80,1)));
-            row1.add(timeTableLabel);
-            //row1.add(Box.createRigidArea(new Dimension(30,1)));
-            row1.add(timeTableCombo);
-            //row1.add(Box.createRigidArea(new Dimension(300,1)));
-
-            //row2.add(Box.createRigidArea(new Dimension(50,1)));
-            row2.add(treeLabel1);
-            //row2.add(Box.createRigidArea(new Dimension(300,1)));
-            row2.add(treeLabel2);
-            //row2.add(Box.createRigidArea(new Dimension(80,1)));
-
-            row3.add(Box.createRigidArea(new Dimension(20,1)));
-            row3.add(panel1);
-            row3.add(Box.createRigidArea(new Dimension(20,1)));
-            row3.add(panel2);
-            row3.add(Box.createRigidArea(new Dimension(20,1)));
-            row3.add(panel3);
-            row3.add(Box.createRigidArea(new Dimension(20,1)));
-
-            panel1.setLayout(new FlowLayout());
-            panel1.add(addedUsers);
-            panel3.add(freeUsers);
-            panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
-            panel2.add(Box.createRigidArea(new Dimension(1,50)));
-            panel2.add(addButton);
-            panel2.add(Box.createRigidArea(new Dimension(1,40)));
-            panel2.add(removeButton);
-            panel2.add(Box.createRigidArea(new Dimension(1,250)));
-            */
 }
 

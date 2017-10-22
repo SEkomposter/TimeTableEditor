@@ -222,6 +222,10 @@ public class MainForm extends JFrame {
         }
     }
     class DepartmentsTab extends JPanel{
+        JPanel basicLayer = new JPanel();
+        JLabel timeTableLabel = new JLabel("Расписание:");
+        JLabel treeLabel1 = new JLabel("Подразделения, добавленные в расписание:");
+        JLabel treeLabel2 = new JLabel("Сотрудники, отсутствующие в расписании:");
         DepartmentsTab(){}
         DepartmentsTab(int x, int y,int w, int h){
             setBounds(x, y, w, h);
@@ -233,13 +237,9 @@ public class MainForm extends JFrame {
         JLabel timeTableLabel = new JLabel("Расписание:");
         JLabel treeLabel1 = new JLabel("Сотрудники, добавленные в расписание:");
         JLabel treeLabel2 = new JLabel("Сотрудники, отсутствующие в расписании:");
-        //JLabel filterLabel = new JLabel("Фильтр:");
-
 
         JButton addButton = new JButton("<= Добавить");
         JButton removeButton = new JButton("Убрать       =>");
-
-
 
         UsersTab(){}
         UsersTab(int x, int y,int w, int h){

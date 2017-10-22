@@ -31,7 +31,8 @@ public class UserGroupTab extends JPanel{
     public static JTree addedUsers;
     public static JTree freeUsers;
     static JComboBox userTimeCombo = new JComboBox();
-    public static JTextField filterField;
+    GridBagConstraints c = new GridBagConstraints();
+
     public static PersonalTreeModel treeModel = new PersonalTreeModel();
     //static JComboBox userTimeCombo = new JComboBox();
 UserGroupTab() {}
@@ -54,33 +55,9 @@ UserGroupTab() {}
             }
         });
         basicLayer.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+
         basicLayer.setBounds(x, y, w, h);
-        filterField = new JTextField("Фильтр:");
-        filterField.setForeground(Color.GRAY);
-        filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
-        filterField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
-                treeModel.filterPersonal(filterField.getText());
-                treeModel.treeModelFreePersonal.reload();
-            }
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
-                treeModel.filterPersonal(filterField.getText());
-                treeModel.treeModelFreePersonal.reload();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
-                treeModel.filterPersonal(filterField.getText());
-                treeModel.treeModelFreePersonal.reload();
-            }
-        });
         userTimeCombo.setBackground(Color.white);
         userTimeCombo.addItemListener(
                 new ItemListener() {
@@ -157,14 +134,7 @@ UserGroupTab() {}
     c.insets = new Insets(0, 0, 0, 0);
     basicLayer.add(treeLabel2, c);
 
-    c.fill = GridBagConstraints.HORIZONTAL;
-    c.gridx = 4;
-    c.gridy = 1;
-    c.gridwidth = 1;
-    c.weightx = 0.1;
-    c.weighty = 0.1;
-    c.insets = new Insets(0, 350, 0, 20);
-    basicLayer.add(filterField, c);
+
 
     c.fill = GridBagConstraints.BOTH;
     c.gridx = 0;
@@ -208,7 +178,5 @@ UserGroupTab() {}
     c.insets = new Insets(50, 20, 0, 0);
     basicLayer.add(removeButton, c);
 }
-    public JTextField getFilterField(){
-        return filterField;
-    }
+
 }

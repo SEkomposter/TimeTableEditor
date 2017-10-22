@@ -33,8 +33,48 @@ public class UsersTab extends UserGroupTab {
     public static JTextField filterField;
     public static PersonalTreeModel treeModel = new PersonalTreeModel();
 */
+    public static JTextField filterField;
     UsersTab() {}
-    UsersTab(int x, int y, int w, int h){super(x,y,w,h);}
+    UsersTab(int x, int y, int w, int h){
+        super(x,y,w,h);
+        filterField = new JTextField("Фильтр:");
+        filterField.setForeground(Color.GRAY);
+        filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
+        filterField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
+                treeModel.filterPersonal(filterField.getText());
+                treeModel.treeModelFreePersonal.reload();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
+                treeModel.filterPersonal(filterField.getText());
+                treeModel.treeModelFreePersonal.reload();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
+                treeModel.filterPersonal(filterField.getText());
+                treeModel.treeModelFreePersonal.reload();
+            }
+        });
+        GridBagConstraints c = super.c;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 4;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.weightx = 0.1;
+        c.weighty = 0.1;
+        c.insets = new Insets(0, 350, 0, 20);
+        basicLayer.add(filterField, c);
+    }
+    public JTextField getFilterField(){
+        return filterField;
+    }
 /*
     UsersTab(int x, int y, int w, int h) {
         this.setLayout(null);

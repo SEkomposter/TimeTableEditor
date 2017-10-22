@@ -9,15 +9,15 @@ import java.awt.event.FocusListener;
 public class FilterFieldListener implements FocusListener {
     @Override
     public void focusGained(FocusEvent e) {
-        if(MainForm.getUsersTab().getFilterField().getText().equals("Фильтр:")){
-            MainForm.getUsersTab().getFilterField().setText("");
-            MainForm.getUsersTab().getFilterField().setForeground(Color.black);}
+        if(MainForm.usersTab.filterField.getText().equals("Фильтр:")){
+            MainForm.usersTab.filterField.setText("");
+            MainForm.usersTab.filterField.setForeground(Color.black);}
     }
     @Override
     public void focusLost(FocusEvent e) {
-        if(MainForm.getUsersTab().getFilterField().equals("")) {
-            MainForm.getUsersTab().getFilterField().setText("Фильтр:");
-            MainForm.getUsersTab().getFilterField().setForeground(Color.gray);
+        if(MainForm.usersTab.filterField.equals("")) {
+            MainForm.usersTab.filterField.setText("Фильтр:");
+            MainForm.usersTab.filterField.setForeground(Color.gray);
             MainForm.refreshPersonal();
         }
     }

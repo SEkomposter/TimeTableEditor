@@ -180,7 +180,7 @@ class DifferentB extends JButton{
                                 UserTime ut = new UserTime(te.getName(),te.getShedule());
                                 MainForm.userTimeList.add(ut);
                                 MainForm.groupTimeList.add(ut);
-                                MainForm.userTimeCombo.addItem(ut);
+                                MainForm.getUsersTab().userTimeCombo.addItem(ut);
                                 tableUpdate();
                                 MainForm.timeTableEditor.dispose();
                             }

@@ -17,7 +17,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class DepartmentsTab extends UserGroupTab {
-    JPanel basicLayer = new JPanel();
+    /*JPanel basicLayer = new JPanel();
     JLabel timeTableLabel = new JLabel("Расписание:");
     JLabel treeLabel1 = new JLabel("Подразделения, добавленные в расписание:");
     JLabel treeLabel2 = new JLabel("Подразделения, отсутствующие в расписании:");
@@ -27,8 +27,13 @@ public class DepartmentsTab extends UserGroupTab {
     public static JTree freeGroups;
     public static PersonalTreeModel groupTreeModel = new PersonalTreeModel();
     public static JComboBox groupTimeCombo = new JComboBox();
-
+*/
     DepartmentsTab(){}
+    DepartmentsTab(int x, int y,int w, int h){
+        super(x,y,w,h);
+    }
+
+  /*
     DepartmentsTab(int x, int y,int w, int h){
         this.setLayout(null);
         this.setBounds(x,y,w,h);
@@ -123,7 +128,6 @@ public class DepartmentsTab extends UserGroupTab {
         c.weighty = 0.1;
         c.insets = new Insets(0, 0, 0, 0);
         basicLayer.add(treeLabel2, c);
-/*
             c.fill = GridBagConstraints.HORIZONTAL;
             c.gridx = 4;
             c.gridy = 1;
@@ -131,7 +135,7 @@ public class DepartmentsTab extends UserGroupTab {
             c.weightx = 0.1;
             c.weighty = 0.1;
             c.insets = new Insets(0, 350, 0, 20);
-            basicLayer.add(filterField, c);*/
+            basicLayer.add(filterField, c);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
@@ -174,5 +178,5 @@ public class DepartmentsTab extends UserGroupTab {
         c.weighty = 0.0;
         c.insets = new Insets(50, 20, 0, 0);
         basicLayer.add(removeButton, c);
-    }
+    }*/
 }

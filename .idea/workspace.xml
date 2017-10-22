@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="179baa62-75c8-4e73-8053-ba57ac431e86" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/by/alt/gui/UsersTab.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Object/FilterFieldListener.java" afterPath="$PROJECT_DIR$/src/by/alt/Object/FilterFieldListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/TimeTableEditor.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/TimeTableEditor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,15 +74,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DepartmentsTab.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DepartmentsTab.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="48" />
+            <state relative-caret-position="221">
+              <caret line="180" column="7" lean-forward="false" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1610#1827#0" expanded="true" />
-                <element signature="e#1826#1827#0" expanded="true" />
+                <element signature="e#1213#1214#0" expanded="true" />
+                <element signature="e#1243#1244#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -109,7 +104,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UsersTab.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UsersTab.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/alt/gui/UsersTab.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-340">
@@ -217,9 +212,9 @@
         <option value="$PROJECT_DIR$/src/by/alt/Object/FilterFieldListener.java" />
         <option value="$PROJECT_DIR$/src/by/alt/gui/TimeTableEditor.java" />
         <option value="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
-        <option value="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" />
         <option value="$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java" />
         <option value="$PROJECT_DIR$/src/by/alt/gui/UsersTab.java" />
+        <option value="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" />
       </list>
     </option>
   </component>
@@ -821,7 +816,7 @@
       <workItem from="1508186520880" duration="3726000" />
       <workItem from="1508356766560" duration="3211000" />
       <workItem from="1508615138230" duration="9783000" />
-      <workItem from="1508700198490" duration="5291000" />
+      <workItem from="1508700198490" duration="5512000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1505858589712</created>
@@ -1054,11 +1049,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508702791433</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="22.10.2017">
+      <created>1508705529388</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1508705529388</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135590000" />
+    <option name="totallyTimeSpent" value="135811000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1534,18 +1536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1610#1827#0" expanded="true" />
-            <element signature="e#1826#1827#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/TimeTableEditor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1601,6 +1591,18 @@
           <caret line="32" column="41" lean-forward="true" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="180" column="7" lean-forward="false" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1213#1214#0" expanded="true" />
+            <element signature="e#1243#1244#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -28,9 +28,11 @@ public class DepartmentsTab extends UserGroupTab {
     public static PersonalTreeModel groupTreeModel = new PersonalTreeModel();
     public static JComboBox groupTimeCombo = new JComboBox();
 */
-    DepartmentsTab(){}
+    //DepartmentsTab(){}
     DepartmentsTab(int x, int y,int w, int h){
         super(x,y,w,h);
+        treeLabel1.setText("Подразделения, добавленные в расписание:");
+        treeLabel2.setText("Подразделения, отсутствующие в расписании:");
     }
 
   /*

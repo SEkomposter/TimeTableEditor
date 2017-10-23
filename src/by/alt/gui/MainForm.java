@@ -38,6 +38,7 @@ public class MainForm extends JFrame {
     static JTable tt;
     public static UsersTab usersTab;
     public static DepartmentsTab departmentsTab;
+    public static PersonalTreeModel treeModel = new PersonalTreeModel();
 
 
     public static void main(String[] args) {
@@ -48,7 +49,6 @@ public class MainForm extends JFrame {
             }
         });
     }
-
     public MainForm() {
         setBounds(0, 0, 1300, 720);
         setMinimumSize(new Dimension(1300, 720));
@@ -60,8 +60,8 @@ public class MainForm extends JFrame {
         this.setJMenuBar(menuBar);
         repaint();
         propReader = new PropReader();
-        usersTab = new UsersTab();
-        departmentsTab = new DepartmentsTab();
+        usersTab = new UsersTab(this.getX(), this.getY(), this.getWidth(), getHeight());
+        departmentsTab = new DepartmentsTab(this.getX(), this.getY(), this.getWidth(), getHeight());
     }
 
     public static void tableUpdate() {
@@ -178,9 +178,10 @@ public class MainForm extends JFrame {
                     tableEntryList.clear();
                     userTimeList.clear();
                     groupTimeList.clear();
-                    userTimeCombo.removeAllItems();
+                    getUsersTab().userTimeCombo.removeAllItems();
                     treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
-                    treeModel.treeModelAddedPersonal.reload();
+                    treeModel.getTreeModelAddedPersonal().reload();
+                    treeModel.getTreeModelFreePersonal().reload();
                     tableUpdate();
                 }
             });
@@ -198,9 +199,12 @@ public class MainForm extends JFrame {
                     userTimeList.addAll(propReader.getPropertiesList(PropType.USERTIME));
                     groupTimeList.clear();
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
-                    userTimeCombo.removeAllItems();
-                    fillCombo(userTimeCombo, userTimeList);
+                    getUsersTab().userTimeCombo.removeAllItems();
+                    getUsersTab().fillCombo(getUsersTab().userTimeCombo, userTimeList);
+                    usersTab.repaint();
+                    //usersTab.fillAllTrees();
                     //updateComponents();
+                    refreshPersonal();
                 }
             });
             openItem.setFont(font);
@@ -244,32 +248,25 @@ public class MainForm extends JFrame {
                 if (gt.getName().equalsIgnoreCase(nm) && gt.getShedule().equalsIgnoreCase(shed)) tempList.add(gt);
             }
             groupTimeList.removeAll(tempList);
-            userTimeCombo.removeAllItems();
-            fillCombo(userTimeCombo,userTimeList);
+            getUsersTab().userTimeCombo.removeAllItems();
+            getUsersTab().fillCombo(getUsersTab().userTimeCombo,userTimeList);
 
             }catch (Exception exc){
                 exc.printStackTrace();
             }
         }
 
-    public JComboBox fillCombo(JComboBox jComboBox,ArrayList list ){
-        Iterator iterator = list.iterator();
-        while (iterator.hasNext()) {
-            jComboBox.addItem(iterator.next());
-        }
-        return jComboBox;
-    }
     public static void refreshPersonal(){
         treeModel.delAllPersonal(treeModel.getRootFreePersonal());
         treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
         daoObject.buildObjTree(daoObject.getRootNode());
-        treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) userTimeCombo.getSelectedItem());
+        treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) getUsersTab().userTimeCombo.getSelectedItem());
         treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
         treeModel.removeAddedFromFree(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal());
-        freeUsers.expandRow(0);
-        addedUsers.expandRow(0);
-        treeModel.treeModelAddedPersonal.reload();
-        treeModel.treeModelFreePersonal.reload();
+        usersTab.freeUsers.expandRow(0);
+        usersTab.addedUsers.expandRow(0);
+        treeModel.getTreeModelAddedPersonal().reload();
+        treeModel.getTreeModelFreePersonal().reload();
     }
 
     public static DepartmentsTab getDepartmentsTab() {

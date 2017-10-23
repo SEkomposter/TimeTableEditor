@@ -17,8 +17,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import static by.alt.gui.MainForm.daoObject;
+import static by.alt.gui.MainForm.treeModel;
+
 
 public class UsersTab extends UserGroupTab {
     /*JPanel basicLayer = new JPanel();
@@ -30,38 +34,48 @@ public class UsersTab extends UserGroupTab {
     public static JTree addedUsers;
     public static JTree freeUsers;
     static JComboBox userTimeCombo = new JComboBox();
+    public static JTextField filterField;*/
+
+    //public static PersonalTreeModel treeModel2 = MainForm.treeModel;
     public static JTextField filterField;
-    public static PersonalTreeModel treeModel = new PersonalTreeModel();
-*/
-    public static JTextField filterField;
-    UsersTab() {}
+    public JComboBox userTimeCombo;
+
+    //UsersTab() {}
     UsersTab(int x, int y, int w, int h){
         super(x,y,w,h);
+        treeLabel1.setText("Сотрудники, добавленные в расписание:");
+        treeLabel2.setText("Сотрудники, отсутствующие в расписании:");
         filterField = new JTextField("Фильтр:");
         filterField.setForeground(Color.GRAY);
         filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
         filterField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
-                treeModel.filterPersonal(filterField.getText());
-                treeModel.treeModelFreePersonal.reload();
+                fillAllTrees();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
-                treeModel.filterPersonal(filterField.getText());
-                treeModel.treeModelFreePersonal.reload();
+                fillAllTrees();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
-                treeModel.filterPersonal(filterField.getText());
-                treeModel.treeModelFreePersonal.reload();
+                fillAllTrees();
             }
         });
+        userTimeCombo = new JComboBox();
+        userTimeCombo.setBackground(Color.white);
+        userTimeCombo.addItemListener(
+                new ItemListener() {
+                    public void itemStateChanged(ItemEvent ev) {
+                        if (ev.getStateChange() == ItemEvent.SELECTED) {
+                            MainForm.refreshPersonal();
+                        }
+                    }
+                }
+        );
+
         GridBagConstraints c = super.c;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 4;
@@ -71,10 +85,66 @@ public class UsersTab extends UserGroupTab {
         c.weighty = 0.1;
         c.insets = new Insets(0, 350, 0, 20);
         basicLayer.add(filterField, c);
+
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.weightx = 0.0;
+        c.weighty = 0.0;
+        c.insets = new Insets(0, 0, 0, 0);
+        c.anchor = GridBagConstraints.EAST;
+        basicLayer.add(userTimeCombo, c);
+
+        freeUsers.setSelectionModel(selModel);
+        freeUsers.addTreeSelectionListener(new PersonalSelectionListener());
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    TreePath[] tp = freeUsers.getSelectionPaths();
+                    for (TreePath t : tp)
+                        ((UserTime) userTimeCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
+                    treeModel.movePersonal(treeModel.getRootFreePersonal(), treeModel.getRootAddedPersonal(), freeUsers.getSelectionPaths());
+                    treeModel.getTreeModelAddedPersonal().reload();
+                    treeModel.getTreeModelFreePersonal().reload();
+                } catch (NullPointerException exc) {
+                    exc.printStackTrace();
+                    System.out.println("ничего не выбрано");
+                }
+            }
+        });
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TreePath[] tp = addedUsers.getSelectionPaths();
+                for (TreePath t : tp)
+                    ((UserTime) userTimeCombo.getSelectedItem()).removePersonal(t.getLastPathComponent().toString());
+                treeModel.movePersonal(treeModel.getRootAddedPersonal(), treeModel.getRootFreePersonal(), addedUsers.getSelectionPaths());
+                treeModel.getTreeModelAddedPersonal().reload();
+                treeModel.getTreeModelFreePersonal().reload();
+            }
+        });
+        fillAllTrees();
+        basicLayer.setVisible(true);
     }
     public JTextField getFilterField(){
         return filterField;
     }
+    public void fillAllTrees(){
+        treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
+        treeModel.filterPersonal(filterField.getText());
+        treeModel.getTreeModelFreePersonal().reload();
+    }
+    public JComboBox fillCombo(JComboBox jComboBox,ArrayList list ){
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            jComboBox.addItem(iterator.next());
+        }
+        return jComboBox;
+    }
+
 /*
     UsersTab(int x, int y, int w, int h) {
         this.setLayout(null);

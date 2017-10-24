@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="179baa62-75c8-4e73-8053-ba57ac431e86" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/UsersTab.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/UsersTab.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1380">
-              <caret line="121" column="8" lean-forward="false" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+              <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1302#1522#0" expanded="true" />
@@ -1071,11 +1068,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508847228763</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="24.10.2017">
+      <created>1508857979846</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1508857979846</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159689000" />
+    <option name="totallyTimeSpent" value="159890000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1562,7 +1566,7 @@
     <entry file="file://$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1380">
-          <caret line="121" column="8" lean-forward="false" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
+          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1302#1522#0" expanded="true" />

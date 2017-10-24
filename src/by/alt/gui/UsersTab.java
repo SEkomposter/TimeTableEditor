@@ -41,6 +41,8 @@ public class UsersTab extends UserGroupTab {
     public static JTextField filterField;
     public static JComboBox userTimeCombo = new JComboBox();
 
+    static {addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
+            freeUsers = new JTree(treeModel.getTreeModelFreePersonal());}
     //UsersTab() {}
     UsersTab(int x, int y, int w, int h){
         super(x,y,w,h);
@@ -96,6 +98,7 @@ public class UsersTab extends UserGroupTab {
         c.insets = new Insets(0, 0, 0, 0);
         c.anchor = GridBagConstraints.EAST;
         basicLayer.add(userTimeCombo, c);
+
 
         freeUsers.setSelectionModel(selModel);
         freeUsers.addTreeSelectionListener(new PersonalSelectionListener());

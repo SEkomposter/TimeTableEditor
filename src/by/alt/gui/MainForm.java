@@ -201,7 +201,6 @@ public class MainForm extends JFrame {
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
                     getUsersTab().fillCombo(userTimeCombo, userTimeList);
                     refreshPersonal();
-
                 }
             });
             openItem.setFont(font);

@@ -22,7 +22,6 @@ public class UserGroupTab extends JPanel{
     public static JTree addedUsers;
     public static JTree freeUsers;
 
-
     GridBagConstraints c = new GridBagConstraints();
     TreeSelectionModel selModel;
 
@@ -33,8 +32,7 @@ public class UserGroupTab extends JPanel{
         this.setBounds(x, y, w, h);
         // this.add(new JScrollPane(addedUsers));
         this.setPreferredSize(new Dimension(w, h));
-        addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
-        freeUsers = new JTree(treeModel.getTreeModelFreePersonal());
+
         selModel = new DefaultTreeSelectionModel();
         selModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         add(basicLayer);
@@ -81,6 +79,28 @@ public class UserGroupTab extends JPanel{
     basicLayer.add(treeLabel2, c);
 
 
+
+
+    c.fill = GridBagConstraints.NONE;
+    c.gridx = 2;
+    c.gridy = 4;
+    c.gridwidth = 1;
+    c.gridheight = 1;
+    c.weightx = 0.05;
+    c.weighty = 0.0;
+    c.insets = new Insets(50, 20, 0, 0);
+    basicLayer.add(addButton, c);
+
+    c.fill = GridBagConstraints.NONE;
+    c.gridx = 2;
+    c.gridy = 5;
+    c.gridwidth = 1;
+    c.gridheight = 1;
+    c.weightx = 0.05;
+    c.weighty = 0.0;
+    c.insets = new Insets(50, 20, 0, 0);
+    basicLayer.add(removeButton, c);
+
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 4;
@@ -102,26 +122,6 @@ public class UserGroupTab extends JPanel{
         c.weighty = 0.8;
         c.insets = new Insets(0, 0, 30, 10);
         basicLayer.add(new JScrollPane(freeUsers), c);
-
-    c.fill = GridBagConstraints.NONE;
-    c.gridx = 2;
-    c.gridy = 4;
-    c.gridwidth = 1;
-    c.gridheight = 1;
-    c.weightx = 0.05;
-    c.weighty = 0.0;
-    c.insets = new Insets(50, 20, 0, 0);
-    basicLayer.add(addButton, c);
-
-    c.fill = GridBagConstraints.NONE;
-    c.gridx = 2;
-    c.gridy = 5;
-    c.gridwidth = 1;
-    c.gridheight = 1;
-    c.weightx = 0.05;
-    c.weighty = 0.0;
-    c.insets = new Insets(50, 20, 0, 0);
-    basicLayer.add(removeButton, c);
 
 }
 

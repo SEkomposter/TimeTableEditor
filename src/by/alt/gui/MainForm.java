@@ -17,13 +17,14 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.*;
 
+import static by.alt.gui.DepartmentsTab.groupTimeCombo;
 import static by.alt.gui.MainForm.daoObject;
 import static by.alt.gui.UsersTab.*;
 
 public class MainForm extends JFrame {
     private JTabbedPane tabbedPane1;
     private TimeTableTab timeTables;
-    private DepartmentsTab depTab;
+
     private PropReader propReader;
     public static DaoClass daoObject = new DaoClass();
     private Font font;
@@ -37,7 +38,7 @@ public class MainForm extends JFrame {
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JTable tt;
     public static UsersTab usersTab;
-    public static DepartmentsTab departmentsTab;
+    private static DepartmentsTab depTab;
     public static PersonalTreeModel treeModel = new PersonalTreeModel();
 
     public static void main(String[] args) {
@@ -200,6 +201,7 @@ public class MainForm extends JFrame {
                     groupTimeList.clear();
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
                     getUsersTab().fillCombo(userTimeCombo, userTimeList);
+                    getDepTab().fillCombo(groupTimeCombo, groupTimeList);
                     refreshPersonal();
                 }
             });
@@ -266,8 +268,8 @@ public class MainForm extends JFrame {
         treeModel.getTreeModelFreePersonal().reload();
     }
 
-    public static DepartmentsTab getDepartmentsTab() {
-        return departmentsTab;
+    public static DepartmentsTab getDepTab() {
+        return depTab;
     }
     public static UsersTab getUsersTab(){
         return  usersTab;

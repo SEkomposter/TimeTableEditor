@@ -40,7 +40,6 @@ public class MainForm extends JFrame {
     public static DepartmentsTab departmentsTab;
     public static PersonalTreeModel treeModel = new PersonalTreeModel();
 
-
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -58,10 +57,11 @@ public class MainForm extends JFrame {
         tabbedPane1 = new myTabbedPane(this.getX(), this.getY(), this.getWidth(), getHeight());
         getContentPane().add(tabbedPane1);
         this.setJMenuBar(menuBar);
-        repaint();
         propReader = new PropReader();
-        usersTab = new UsersTab(this.getX(), this.getY(), this.getWidth(), getHeight());
-        departmentsTab = new DepartmentsTab(this.getX(), this.getY(), this.getWidth(), getHeight());
+        //usersTab = new UsersTab(this.getX(), this.getY(), this.getWidth(), getHeight());
+        //departmentsTab = new DepartmentsTab(this.getX(), this.getY(), this.getWidth(), getHeight());
+        repaint();
+
     }
 
     public static void tableUpdate() {
@@ -178,7 +178,7 @@ public class MainForm extends JFrame {
                     tableEntryList.clear();
                     userTimeList.clear();
                     groupTimeList.clear();
-                    getUsersTab().userTimeCombo.removeAllItems();
+                    userTimeCombo.removeAllItems();
                     treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
                     treeModel.getTreeModelAddedPersonal().reload();
                     treeModel.getTreeModelFreePersonal().reload();
@@ -199,12 +199,9 @@ public class MainForm extends JFrame {
                     userTimeList.addAll(propReader.getPropertiesList(PropType.USERTIME));
                     groupTimeList.clear();
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
-                    getUsersTab().userTimeCombo.removeAllItems();
-                    getUsersTab().fillCombo(getUsersTab().userTimeCombo, userTimeList);
-                    usersTab.repaint();
-                    //usersTab.fillAllTrees();
-                    //updateComponents();
+                    getUsersTab().fillCombo(userTimeCombo, userTimeList);
                     refreshPersonal();
+
                 }
             });
             openItem.setFont(font);
@@ -248,8 +245,9 @@ public class MainForm extends JFrame {
                 if (gt.getName().equalsIgnoreCase(nm) && gt.getShedule().equalsIgnoreCase(shed)) tempList.add(gt);
             }
             groupTimeList.removeAll(tempList);
-            getUsersTab().userTimeCombo.removeAllItems();
-            getUsersTab().fillCombo(getUsersTab().userTimeCombo,userTimeList);
+            userTimeCombo.removeAllItems();
+            getUsersTab().fillCombo(userTimeCombo,userTimeList);
+
 
             }catch (Exception exc){
                 exc.printStackTrace();
@@ -260,7 +258,7 @@ public class MainForm extends JFrame {
         treeModel.delAllPersonal(treeModel.getRootFreePersonal());
         treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
         daoObject.buildObjTree(daoObject.getRootNode());
-        treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) getUsersTab().userTimeCombo.getSelectedItem());
+        treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) userTimeCombo.getSelectedItem());
         treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
         treeModel.removeAddedFromFree(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal());
         usersTab.freeUsers.expandRow(0);

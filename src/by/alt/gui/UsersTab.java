@@ -22,6 +22,7 @@ import java.util.Iterator;
 
 import static by.alt.gui.MainForm.daoObject;
 import static by.alt.gui.MainForm.treeModel;
+import static by.alt.gui.MainForm.userTimeList;
 
 
 public class UsersTab extends UserGroupTab {
@@ -38,7 +39,7 @@ public class UsersTab extends UserGroupTab {
 
     //public static PersonalTreeModel treeModel2 = MainForm.treeModel;
     public static JTextField filterField;
-    public JComboBox userTimeCombo;
+    public static JComboBox userTimeCombo = new JComboBox();
 
     //UsersTab() {}
     UsersTab(int x, int y, int w, int h){
@@ -64,7 +65,7 @@ public class UsersTab extends UserGroupTab {
                 fillAllTrees();
             }
         });
-        userTimeCombo = new JComboBox();
+
         userTimeCombo.setBackground(Color.white);
         userTimeCombo.addItemListener(
                 new ItemListener() {

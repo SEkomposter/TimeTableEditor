@@ -16,9 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static by.alt.gui.MainForm.tableModel;
-import static by.alt.gui.MainForm.tableUpdate;
-import static by.alt.gui.MainForm.tt;
+import static by.alt.gui.MainForm.*;
 
 public class TimeTableEditor extends JDialog{
     private static JTextField nameField;
@@ -180,7 +178,7 @@ class DifferentB extends JButton{
                                 UserTime ut = new UserTime(te.getName(),te.getShedule());
                                 MainForm.userTimeList.add(ut);
                                 MainForm.groupTimeList.add(ut);
-                                MainForm.getUsersTab().userTimeCombo.addItem(ut);
+                                getUsersTab().userTimeCombo.addItem(ut);
                                 tableUpdate();
                                 MainForm.timeTableEditor.dispose();
                             }

@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import static by.alt.gui.MainForm.treeModel;
-
+import static by.alt.gui.MainForm.userTimeList;
 
 
 public class UserGroupTab extends JPanel{
@@ -26,6 +26,7 @@ public class UserGroupTab extends JPanel{
     GridBagConstraints c = new GridBagConstraints();
     TreeSelectionModel selModel;
 
+
 //UserGroupTab() {}
     UserGroupTab (int x, int y, int w, int h) {
         this.setLayout(null);
@@ -37,9 +38,7 @@ public class UserGroupTab extends JPanel{
         selModel = new DefaultTreeSelectionModel();
         selModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         add(basicLayer);
-
         setVisible(true);
-        add(basicLayer);
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {

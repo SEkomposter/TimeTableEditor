@@ -79,26 +79,26 @@ public class UsersTab extends UserGroupTab {
                 }
         );
 
-        GridBagConstraints c = super.c;
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 2;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.0;
+        c.insets = new Insets(-45, 0, 0, 0);
+        c.anchor = GridBagConstraints.CENTER;
+        basicLayer.add(userTimeCombo, c);
+
+        //GridBagConstraints c = super.c;
+        c.fill = GridBagConstraints.NONE;
         c.gridx = 4;
         c.gridy = 1;
         c.gridwidth = 1;
         c.weightx = 0.1;
         c.weighty = 0.1;
-        c.insets = new Insets(0, 350, 0, 20);
-        basicLayer.add(filterField, c);
-
-        c.fill = GridBagConstraints.NONE;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.weightx = 0.0;
-        c.weighty = 0.0;
-        c.insets = new Insets(0, 0, 0, 0);
         c.anchor = GridBagConstraints.EAST;
-        basicLayer.add(userTimeCombo, c);
-
+        c.insets = new Insets(0, 0, 0, 30);
+        basicLayer.add(filterField, c);
 
         freeUsers.setSelectionModel(selModel);
         freeUsers.addTreeSelectionListener(new PersonalSelectionListener());

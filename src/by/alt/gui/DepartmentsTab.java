@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import static by.alt.gui.MainForm.treeModel;
+
 public class DepartmentsTab extends UserGroupTab {
     /*JPanel basicLayer = new JPanel();
     JLabel timeTableLabel = new JLabel("Расписание:");
@@ -26,13 +28,35 @@ public class DepartmentsTab extends UserGroupTab {
     public static JTree addedGroups;
     public static JTree freeGroups;
     public static PersonalTreeModel groupTreeModel = new PersonalTreeModel();
+    */
     public static JComboBox groupTimeCombo = new JComboBox();
-*/
+    static {addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
+        freeUsers = new JTree(treeModel.getTreeModelFreePersonal());}
     //DepartmentsTab(){}
     DepartmentsTab(int x, int y,int w, int h){
         super(x,y,w,h);
         treeLabel1.setText("Подразделения, добавленные в расписание:");
         treeLabel2.setText("Подразделения, отсутствующие в расписании:");
+        groupTimeCombo.setBackground(Color.white);
+        groupTimeCombo.addItemListener(
+                new ItemListener() {
+                    public void itemStateChanged(ItemEvent ev) {
+                        if (ev.getStateChange() == ItemEvent.SELECTED) {
+                            MainForm.refreshPersonal();
+                        }
+                    }
+                }
+        );
+
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 3;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.0;
+        c.insets = new Insets(0, 00, 0, 0);
+        c.anchor = GridBagConstraints.WEST;
+        basicLayer.add(groupTimeCombo, c);
     }
 
   /*

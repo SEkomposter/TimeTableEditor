@@ -40,6 +40,7 @@ public class MainForm extends JFrame {
     public static UsersTab usersTab;
     private static DepartmentsTab depTab;
     public static PersonalTreeModel treeModel = new PersonalTreeModel();
+    public static PersonalTreeModel treeModel2 = new PersonalTreeModel();
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

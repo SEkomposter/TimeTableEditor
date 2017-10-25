@@ -69,7 +69,7 @@ public class UserGroupTab extends JPanel{
         jPanel2.setLayout(new GridBagLayout());
         jPanel3.setBounds(x+10,y+50,w-30,30);
         add(jPanel3);
-        basicLayer.setBounds(x+10,y+80,w-30,h-80);
+        basicLayer.setBounds(x+10,y+80,w-30,h-180);
         add(basicLayer);
         jPanel1.add(timeTableLabel);
         setVisible(true);
@@ -130,7 +130,7 @@ public class UserGroupTab extends JPanel{
         c.gridwidth = 2;
         c.gridheight = 3;
         c.weightx = 0.45;
-        c.weighty = 0.8;
+        c.weighty = 0.7;
         c.ipadx = 0;
         c.insets = new Insets(0, 0, 0, 0);
         c.anchor = GridBagConstraints.NORTHWEST;
@@ -142,7 +142,7 @@ public class UserGroupTab extends JPanel{
         c.gridwidth = 2;
         c.gridheight = 3;
         c.weightx = 0.45;
-        c.weighty = 0.8;
+        c.weighty = 0.7;
 
         c.insets = new Insets(0, 0, 0, 0);
         basicLayer.add(new JScrollPane(freeUsers), c);

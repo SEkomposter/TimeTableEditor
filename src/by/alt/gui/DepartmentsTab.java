@@ -6,23 +6,16 @@ import by.alt.Object.PersonalTreeModel;
 import by.alt.Object.UserTime;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.tree.DefaultTreeSelectionModel;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
-import static by.alt.gui.MainForm.treeModel;
+import static by.alt.gui.MainForm.treeModel2;
 
 public class DepartmentsTab extends UserGroupTab {
 
     public static JComboBox groupTimeCombo = new JComboBox();
-    static {addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
-        freeUsers = new JTree(treeModel.getTreeModelFreePersonal());}
+    static {addedUsers = new JTree(treeModel2.getTreeModelAddedPersonal());
+        freeUsers = new JTree(treeModel2.getTreeModelFreePersonal());}
     //DepartmentsTab(){}
     DepartmentsTab(int x, int y,int w, int h){
         super(x,y,w,h);

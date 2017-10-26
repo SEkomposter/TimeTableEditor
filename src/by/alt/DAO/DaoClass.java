@@ -25,7 +25,7 @@ public class DaoClass {
                     node.setHasChildNode(true);}
                else{
                    tempPers = new Personal(resultSet.getInt("ID"),resultSet.getString("NAME"),resultSet.getInt("PARENT_ID"));
-                   childList.add(tempPers);
+                   //childList.add(tempPers);
                    allPersonal.add(tempPers);
                }
            }
@@ -50,7 +50,7 @@ public class DaoClass {
         }
     }
     public void refreshObjTree(){
-        allPersonal.clear();
+      //  allPersonal.clear();
         endNodes.clear();
         buildObjTree(getRootNode());
     }
@@ -60,6 +60,6 @@ public class DaoClass {
     }
 
     public TreeSet<Personal> getAllPersonal() {
-        return allPersonal;
+       return allPersonal;
     }
 }

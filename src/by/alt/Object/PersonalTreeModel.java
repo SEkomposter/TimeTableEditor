@@ -2,9 +2,11 @@ package by.alt.Object;
 
 
 import by.alt.DAO.DaoClass;
+import by.alt.DAO.Node;
 import by.alt.DAO.Personal;
 import javax.swing.tree.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 
 public class PersonalTreeModel {
@@ -36,6 +38,12 @@ public class PersonalTreeModel {
                 if(free.getChildAt(j).toString().equals(added.getChildAt(i).toString())) free.remove(j);
         }
     }
+ public void fillTreeAddedDeps(){
+        Object[] temp = daoObject.getRootNode().getChildObjList().toArray();
+        for (Object o: temp)
+            getRootFreePersonal().add(new DefaultMutableTreeNode(o,((Node)o).isHasChildNode()));
+
+ }
     public void filterPersonal (String mask){
         DefaultMutableTreeNode source = getRootFreePersonal();
         ArrayList list = new ArrayList();

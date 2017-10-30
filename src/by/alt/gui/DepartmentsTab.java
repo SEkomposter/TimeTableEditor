@@ -14,8 +14,8 @@ import static by.alt.gui.MainForm.treeModel2;
 public class DepartmentsTab extends UserGroupTab {
 
     public static JComboBox groupTimeCombo = new JComboBox();
-    static {addedUsers = new JTree(treeModel2.getTreeModelAddedDeps());
-        freeUsers = new JTree(treeModel2.getTreeModelFreeDeps());}
+    static {addedUsers = new JTree(treeModel2.getTreeModelAddedPersonal());
+        freeUsers = new JTree(treeModel2.getTreeModelFreePersonal());}
     //DepartmentsTab(){}
     DepartmentsTab(int x, int y,int w, int h){
         super(x,y,w,h);
@@ -26,7 +26,7 @@ public class DepartmentsTab extends UserGroupTab {
                 new ItemListener() {
                     public void itemStateChanged(ItemEvent ev) {
                         if (ev.getStateChange() == ItemEvent.SELECTED) {
-                            MainForm.refreshPersonal();
+                            MainForm.refreshPersonal(MainForm.treeModel2,groupTimeCombo);
                         }
                     }
                 }
@@ -40,6 +40,8 @@ public class DepartmentsTab extends UserGroupTab {
         c.insets = new Insets(0, 00, 0, 0);
         c.anchor = GridBagConstraints.WEST;
         jPanel1.add(groupTimeCombo, c);
+        fillAllTrees(treeModel2);
+        //basicLayer.setVisible(true);
     }
 
 }

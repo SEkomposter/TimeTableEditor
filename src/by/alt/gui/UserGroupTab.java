@@ -1,9 +1,12 @@
 package by.alt.gui;
 
 
+import by.alt.Object.PersonalTreeModel;
 import com.sun.prism.paint.*;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeSelectionModel;
@@ -14,8 +17,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static by.alt.gui.MainForm.treeModel;
-import static by.alt.gui.MainForm.userTimeList;
+import static by.alt.gui.MainForm.*;
 
 
 public class UserGroupTab extends JPanel{
@@ -30,6 +32,7 @@ public class UserGroupTab extends JPanel{
     JButton removeButton = new JButton("Убрать       =>");
     public static JTree addedUsers;
     public static JTree freeUsers;
+    public JTextField filterField;
 
     GridBagConstraints c = new GridBagConstraints();
     TreeSelectionModel selModel;
@@ -143,9 +146,42 @@ public class UserGroupTab extends JPanel{
         c.gridheight = 3;
         c.weightx = 0.45;
         c.weighty = 0.7;
-
         c.insets = new Insets(0, 0, 0, 0);
         basicLayer.add(new JScrollPane(freeUsers), c);
+
+        filterField = new JTextField("Фильтр:");
+        filterField.setForeground(Color.GRAY);
+        filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
+        filterField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(treeModel2);
+                    else fillAllTrees(treeModel);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(treeModel2);
+                else fillAllTrees(treeModel);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(treeModel2);
+                else fillAllTrees(treeModel);
+            }
+        });
+
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.weightx = 1;
+        c.weighty = 0.0;
+        c.ipadx = 150;
+        c.insets = new Insets(0, 0, 0, 15);
+        c.anchor = GridBagConstraints.EAST;
+        jPanel2.add(filterField,c);
 }
     public JComboBox fillCombo(JComboBox jComboBox,ArrayList list ){
         Iterator iterator = list.iterator();
@@ -153,6 +189,15 @@ public class UserGroupTab extends JPanel{
             jComboBox.addItem(iterator.next());
         }
         return jComboBox;
+    }
+    public JTextField getFilterField(){
+        return filterField;
+    }
+    public void fillAllTrees(PersonalTreeModel tm){
+        if (tm.equals(treeModel)) tm.fillTreeFreePersonal(tm.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
+        else tm.fillTreeFreePersonal(tm.getRootFreePersonal(), daoObject.getEndNodes().toArray());
+        tm.filterPersonal(filterField.getText());
+        tm.getTreeModelFreePersonal().reload();
     }
 
 }

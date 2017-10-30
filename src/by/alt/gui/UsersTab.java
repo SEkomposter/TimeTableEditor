@@ -27,7 +27,6 @@ import static by.alt.gui.MainForm.userTimeList;
 
 public class UsersTab extends UserGroupTab {
 
-    public static JTextField filterField;
     public static JComboBox userTimeCombo = new JComboBox();
 
     static {addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
@@ -37,36 +36,7 @@ public class UsersTab extends UserGroupTab {
         super(x,y,w,h);
         treeLabel1.setText("Сотрудники, добавленные в расписание:");
         treeLabel2.setText("Сотрудники, отсутствующие в расписании:");
-        filterField = new JTextField("Фильтр:");
-        filterField.setForeground(Color.GRAY);
-        filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
-        filterField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                fillAllTrees();
-            }
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                fillAllTrees();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                fillAllTrees();
-            }
-        });
-
-        c.fill = GridBagConstraints.NONE;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.weightx = 1;
-        c.weighty = 0.0;
-        c.ipadx = 150;
-        c.insets = new Insets(0, 0, 0, 15);
-        c.anchor = GridBagConstraints.EAST;
-        jPanel2.add(filterField,c);
 
         jPanel1.add(userTimeCombo);
         userTimeCombo.setBackground(Color.white);
@@ -74,7 +44,7 @@ public class UsersTab extends UserGroupTab {
                 new ItemListener() {
                     public void itemStateChanged(ItemEvent ev) {
                         if (ev.getStateChange() == ItemEvent.SELECTED) {
-                            MainForm.refreshPersonal();
+                            MainForm.refreshPersonal(MainForm.treeModel,userTimeCombo);
                         }
                     }
                 }
@@ -110,17 +80,10 @@ public class UsersTab extends UserGroupTab {
                 treeModel.getTreeModelFreePersonal().reload();
             }
         });
-        fillAllTrees();
+        fillAllTrees(treeModel);
         basicLayer.setVisible(true);
     }
-    public JTextField getFilterField(){
-        return filterField;
-    }
-    public void fillAllTrees(){
-        treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
-        treeModel.filterPersonal(filterField.getText());
-        treeModel.getTreeModelFreePersonal().reload();
-    }
+
 
 
 }

@@ -1,30 +1,23 @@
 package by.alt.gui;
 
-
 import by.alt.DAO.DaoClass;
-import by.alt.DAO.Personal;
-import by.alt.Main;
 import by.alt.Object.MyTableModel;
 import by.alt.Object.TableEntry;
 import by.alt.Object.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.*;
-import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.*;
 
 import static by.alt.gui.DepartmentsTab.groupTimeCombo;
-import static by.alt.gui.MainForm.daoObject;
+
 import static by.alt.gui.UsersTab.*;
 
 public class MainForm extends JFrame {
     private JTabbedPane tabbedPane1;
     private TimeTableTab timeTables;
-
     private PropReader propReader;
     public static DaoClass daoObject = new DaoClass();
     private Font font;
@@ -181,6 +174,7 @@ public class MainForm extends JFrame {
                     userTimeList.clear();
                     groupTimeList.clear();
                     userTimeCombo.removeAllItems();
+                    groupTimeCombo.removeAllItems();
                     treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
                     treeModel.getTreeModelAddedPersonal().reload();
                     treeModel.getTreeModelFreePersonal().reload();
@@ -203,7 +197,7 @@ public class MainForm extends JFrame {
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
                     getUsersTab().fillCombo(userTimeCombo, userTimeList);
                     getDepTab().fillCombo(groupTimeCombo, groupTimeList);
-                    refreshPersonal();
+                    updateComponents();
                 }
             });
             openItem.setFont(font);
@@ -227,10 +221,10 @@ public class MainForm extends JFrame {
         }
     }
 
-
     public void updateComponents(){
-        this.refreshPersonal();
-    }
+        refreshPersonal(treeModel,userTimeCombo);
+        refreshPersonal(treeModel2,groupTimeCombo);
+   }
     public void deleteUserTime(String nm, String shed){
         ArrayList<TableEntry> tempList = new ArrayList<TableEntry>();
         try {
@@ -256,19 +250,19 @@ public class MainForm extends JFrame {
             }
         }
 
-    public static void refreshPersonal(){
-        treeModel.delAllPersonal(treeModel.getRootFreePersonal());
-        treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
+    public static void refreshPersonal(PersonalTreeModel tm, JComboBox combo){
+        tm.delAllPersonal(tm.getRootFreePersonal());
+        tm.delAllPersonal(tm.getRootAddedPersonal());
         daoObject.buildObjTree(daoObject.getRootNode());
-        treeModel.fillTreeAddedPersonal(treeModel.getRootAddedPersonal(),(UserTime) userTimeCombo.getSelectedItem());
-        treeModel.fillTreeFreePersonal(treeModel.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
-        treeModel.removeAddedFromFree(treeModel.getRootAddedPersonal(),treeModel.getRootFreePersonal());
-        usersTab.freeUsers.expandRow(0);
-        usersTab.addedUsers.expandRow(0);
-        treeModel.getTreeModelAddedPersonal().reload();
-        treeModel.getTreeModelFreePersonal().reload();
-        treeModel2.fillTreeAddedDeps();
-        treeModel2.getTreeModelAddedDeps().reload();
+        tm.fillTreeAddedPersonal(tm.getRootAddedPersonal(),(UserTime) combo.getSelectedItem());
+        if(combo.equals(userTimeCombo)) tm.fillTreeFreePersonal(tm.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
+        else tm.fillTreeFreePersonal(tm.getRootFreePersonal(),daoObject.getEndNodes().toArray());
+        tm.removeAddedFromFree(tm.getRootAddedPersonal(),tm.getRootFreePersonal());
+        //usersTab.freeUsers.expandRow(0);
+        //usersTab.addedUsers.expandRow(0);
+        tm.getTreeModelAddedPersonal().reload();
+        tm.getTreeModelFreePersonal().reload();
+
     }
 
     public static DepartmentsTab getDepTab() {

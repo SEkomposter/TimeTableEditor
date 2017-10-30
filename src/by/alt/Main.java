@@ -10,8 +10,8 @@ import java.sql.SQLException;
 public class Main {
 
     public static void main(String[] args) {
-        PropReader propReader = new PropReader();
-        DaoClass dao = new DaoClass();
+     //   PropReader propReader = new PropReader();
+     //   DaoClass dao = new DaoClass();
         try{
             DBReader.ConnectToDB();
         }catch (SQLException exc){

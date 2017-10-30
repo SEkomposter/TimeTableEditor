@@ -11,12 +11,12 @@ import java.util.Enumeration;
 
 public class PersonalTreeModel {
     private static DaoClass daoObject = new DaoClass();
-    private static DefaultMutableTreeNode rootAddedPersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
-    private static DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
+    private DefaultMutableTreeNode rootAddedPersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
+    private DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
     public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, false);
     public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, false);
-    public DefaultTreeModel treeModelAddedDeps = new DefaultTreeModel(rootAddedPersonal, true);
-    public DefaultTreeModel treeModelFreeDeps = new DefaultTreeModel(rootFreePersonal, true);
+   // public DefaultTreeModel treeModelAddedDeps = new DefaultTreeModel(rootAddedPersonal, true);
+   // public DefaultTreeModel treeModelFreeDeps = new DefaultTreeModel(rootFreePersonal, true);
 
     public void fillTreeFreePersonal(DefaultMutableTreeNode treeNode, Object[] tempArray){
        //Object[] tempArray = daoObject.getAllPersonal().toArray();
@@ -41,10 +41,9 @@ public class PersonalTreeModel {
         }
     }
  public void fillTreeAddedDeps(){
-        Object[] temp = daoObject.getRootNode().getChildObjList().toArray();
-        for (Object o: temp)
-            getRootFreePersonal().add(new DefaultMutableTreeNode(o,((Node)o).isHasChildNode()));
+
  }
+
     public void filterPersonal (String mask){
         DefaultMutableTreeNode source = getRootFreePersonal();
         ArrayList list = new ArrayList();
@@ -81,11 +80,5 @@ public class PersonalTreeModel {
     public  DefaultTreeModel getTreeModelFreePersonal() {
         return treeModelFreePersonal;
     }
-    public  DefaultTreeModel getTreeModelAddedDeps() {
-        return treeModelAddedDeps;
-    }
 
-    public  DefaultTreeModel getTreeModelFreeDeps() {
-        return treeModelFreeDeps;
-    }
 }

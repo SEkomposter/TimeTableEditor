@@ -55,7 +55,7 @@ public class DaoClass {
         buildObjTree(getRootNode());
     }
 
-    public ArrayList<Node> getEndNodes() {
+    public ArrayList<Node> getNodes(Node parent) {
         return endNodes;
     }
 

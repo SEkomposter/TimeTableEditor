@@ -14,8 +14,8 @@ import static by.alt.gui.MainForm.treeModel2;
 public class DepartmentsTab extends UserGroupTab {
 
     public static JComboBox groupTimeCombo = new JComboBox();
-    static {addedUsers = new JTree(treeModel2.getTreeModelAddedPersonal());
-        freeUsers = new JTree(treeModel2.getTreeModelFreePersonal());}
+    static {addedUsers = new JTree(treeModel2.getTreeModelAddedDeps());
+        freeUsers = new JTree(treeModel2.getTreeModelFreeDeps());}
     //DepartmentsTab(){}
     DepartmentsTab(int x, int y,int w, int h){
         super(x,y,w,h);

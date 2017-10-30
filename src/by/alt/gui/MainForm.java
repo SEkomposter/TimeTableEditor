@@ -267,6 +267,8 @@ public class MainForm extends JFrame {
         usersTab.addedUsers.expandRow(0);
         treeModel.getTreeModelAddedPersonal().reload();
         treeModel.getTreeModelFreePersonal().reload();
+        treeModel2.fillTreeAddedDeps();
+        treeModel2.getTreeModelAddedDeps().reload();
     }
 
     public static DepartmentsTab getDepTab() {

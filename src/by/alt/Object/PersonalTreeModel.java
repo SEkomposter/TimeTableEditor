@@ -15,6 +15,8 @@ public class PersonalTreeModel {
     private static DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
     public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, false);
     public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, false);
+    public DefaultTreeModel treeModelAddedDeps = new DefaultTreeModel(rootAddedPersonal, true);
+    public DefaultTreeModel treeModelFreeDeps = new DefaultTreeModel(rootFreePersonal, true);
 
     public void fillTreeFreePersonal(DefaultMutableTreeNode treeNode, Object[] tempArray){
        //Object[] tempArray = daoObject.getAllPersonal().toArray();
@@ -42,7 +44,6 @@ public class PersonalTreeModel {
         Object[] temp = daoObject.getRootNode().getChildObjList().toArray();
         for (Object o: temp)
             getRootFreePersonal().add(new DefaultMutableTreeNode(o,((Node)o).isHasChildNode()));
-
  }
     public void filterPersonal (String mask){
         DefaultMutableTreeNode source = getRootFreePersonal();
@@ -79,5 +80,12 @@ public class PersonalTreeModel {
 
     public  DefaultTreeModel getTreeModelFreePersonal() {
         return treeModelFreePersonal;
+    }
+    public  DefaultTreeModel getTreeModelAddedDeps() {
+        return treeModelAddedDeps;
+    }
+
+    public  DefaultTreeModel getTreeModelFreeDeps() {
+        return treeModelFreeDeps;
     }
 }

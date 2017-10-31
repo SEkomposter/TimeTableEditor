@@ -1,6 +1,5 @@
 package by.alt.Object;
 
-
 import by.alt.DAO.DaoClass;
 import by.alt.DAO.Node;
 import by.alt.DAO.Personal;
@@ -8,18 +7,14 @@ import javax.swing.tree.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-
 public class PersonalTreeModel {
     private static DaoClass daoObject = new DaoClass();
     private DefaultMutableTreeNode rootAddedPersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
     private DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
     public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, false);
     public DefaultTreeModel treeModelFreePersonal = new DefaultTreeModel(rootFreePersonal, false);
-   // public DefaultTreeModel treeModelAddedDeps = new DefaultTreeModel(rootAddedPersonal, true);
-   // public DefaultTreeModel treeModelFreeDeps = new DefaultTreeModel(rootFreePersonal, true);
 
     public void fillTreeFreePersonal(DefaultMutableTreeNode treeNode, Object[] tempArray){
-       //Object[] tempArray = daoObject.getAllPersonal().toArray();
         delAllPersonal(treeNode);
         for (int i=0; i< tempArray.length; i++){
             treeNode.add(new DefaultMutableTreeNode(tempArray[i],false));
@@ -40,11 +35,7 @@ public class PersonalTreeModel {
                 if(free.getChildAt(j).toString().equals(added.getChildAt(i).toString())) free.remove(j);
         }
     }
- public void fillTreeAddedDeps(){
-
- }
-
-    public void filterPersonal (String mask){
+   public void filterPersonal (String mask){
         DefaultMutableTreeNode source = getRootFreePersonal();
         ArrayList list = new ArrayList();
             for (int i=0;i<source.getChildCount();i++) {
@@ -55,7 +46,6 @@ public class PersonalTreeModel {
             source.removeAllChildren();
             fillTreeFreePersonal(source, list.toArray());
             removeAddedFromFree(getRootAddedPersonal(),source);
-       // if (!(source.getChildAt(i).toString().toLowerCase().startsWith(mask.toLowerCase()))) source.remove(i);
     }
     public void movePersonal (DefaultMutableTreeNode source, DefaultMutableTreeNode target, TreePath[] treePaths){
         for (TreePath tp:treePaths){
@@ -66,19 +56,14 @@ public class PersonalTreeModel {
             target.add(new DefaultMutableTreeNode(str,false));
         }
     }
-
     public DefaultMutableTreeNode getRootAddedPersonal(){
         return this.rootAddedPersonal;
     }
-    public DefaultMutableTreeNode getRootFreePersonal(){return this.rootFreePersonal;
-    }
-
+    public DefaultMutableTreeNode getRootFreePersonal(){return this.rootFreePersonal;}
     public  DefaultTreeModel getTreeModelAddedPersonal() {
         return treeModelAddedPersonal;
     }
-
     public  DefaultTreeModel getTreeModelFreePersonal() {
         return treeModelFreePersonal;
     }
-
 }

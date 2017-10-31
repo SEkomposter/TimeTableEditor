@@ -1,22 +1,15 @@
 package by.alt.gui;
 
-
 import by.alt.Object.PersonalTreeModel;
-import com.sun.prism.paint.*;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.Color;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import static by.alt.gui.MainForm.*;
 
 
@@ -150,8 +143,9 @@ public class UserGroupTab extends JPanel{
         basicLayer.add(new JScrollPane(freeUsers), c);
 
         filterField = new JTextField("Фильтр:");
+        filterField.setEnabled(false);
         filterField.setForeground(Color.GRAY);
-        filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
+        //filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
         filterField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {

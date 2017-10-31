@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.*;
 
 import static by.alt.gui.DepartmentsTab.groupTimeCombo;
-
 import static by.alt.gui.UsersTab.*;
 
 public class MainForm extends JFrame {
@@ -33,7 +32,7 @@ public class MainForm extends JFrame {
     public static UsersTab usersTab;
     private static DepartmentsTab depTab;
     public static PersonalTreeModel treeModel = new PersonalTreeModel();
-    public static PersonalTreeModel treeModel2 = new PersonalTreeModel();
+    public static DepTreeModel treeModel2 = new DepTreeModel();
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -53,17 +52,13 @@ public class MainForm extends JFrame {
         getContentPane().add(tabbedPane1);
         this.setJMenuBar(menuBar);
         propReader = new PropReader();
-        //usersTab = new UsersTab(this.getX(), this.getY(), this.getWidth(), getHeight());
-        //departmentsTab = new DepartmentsTab(this.getX(), this.getY(), this.getWidth(), getHeight());
         repaint();
 
     }
-
     public static void tableUpdate() {
         tableModel.fireTableStructureChanged();
         tt.updateUI();
     }
-
     public void readPropsFromConf() {
         try {
             propReader.readRepProp();
@@ -71,7 +66,6 @@ public class MainForm extends JFrame {
             exc.printStackTrace();
         }
     }
-
     class myTabbedPane extends JTabbedPane{
         myTabbedPane(int x, int y,int w, int h){
             setBounds(x, y, w, h);
@@ -84,7 +78,6 @@ public class MainForm extends JFrame {
             this.addTab("Сотрудники",usersTab);
         }
     }
-
     class TimeTableTab extends JPanel{
         TimeTableTab(int x, int y,int w, int h){
             setBounds(x, y, w, h);
@@ -169,6 +162,7 @@ public class MainForm extends JFrame {
             newItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    initFilterFields();
                     propReader.removeAllProperties();
                     tableEntryList.clear();
                     userTimeList.clear();
@@ -188,6 +182,7 @@ public class MainForm extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     readPropsFromConf();
+                    initFilterFields();
                     tableEntryList.clear();
                     tableEntryList.addAll(propReader.getPropertiesList(PropType.TIMETABLE));
                     tableUpdate();
@@ -220,7 +215,6 @@ public class MainForm extends JFrame {
             add(fileMenu);
         }
     }
-
     public void updateComponents(){
         refreshPersonal(treeModel,userTimeCombo);
         refreshPersonal(treeModel2,groupTimeCombo);
@@ -243,8 +237,6 @@ public class MainForm extends JFrame {
             groupTimeList.removeAll(tempList);
             userTimeCombo.removeAllItems();
             getUsersTab().fillCombo(userTimeCombo,userTimeList);
-
-
             }catch (Exception exc){
                 exc.printStackTrace();
             }
@@ -262,9 +254,13 @@ public class MainForm extends JFrame {
         //usersTab.addedUsers.expandRow(0);
         tm.getTreeModelAddedPersonal().reload();
         tm.getTreeModelFreePersonal().reload();
-
     }
-
+    public void initFilterFields(){
+        usersTab.getFilterField().setEnabled(true);
+        depTab.getFilterField().setEnabled(true);
+        usersTab.getFilterField().addFocusListener(new by.alt.Object.FilterFieldListener());
+        depTab.getFilterField().addFocusListener(new by.alt.Object.FilterFieldListener());
+    }
     public static DepartmentsTab getDepTab() {
         return depTab;
     }

@@ -27,6 +27,7 @@ public class DepartmentsTab extends UserGroupTab {
                     public void itemStateChanged(ItemEvent ev) {
                         if (ev.getStateChange() == ItemEvent.SELECTED) {
                             MainForm.refreshPersonal(MainForm.treeModel2,groupTimeCombo);
+                            fillAllTrees(treeModel2);
                         }
                     }
                 }

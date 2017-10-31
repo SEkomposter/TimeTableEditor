@@ -177,8 +177,10 @@ class DifferentB extends JButton{
                                 MainForm.tableEntryList.add(te);
                                 UserTime ut = new UserTime(te.getName(),te.getShedule());
                                 MainForm.userTimeList.add(ut);
-                                MainForm.groupTimeList.add(ut);
                                 getUsersTab().userTimeCombo.addItem(ut);
+                                ut = new GroupTime(te.getName(),te.getShedule());
+                                MainForm.groupTimeList.add(ut);
+                                getDepTab().groupTimeCombo.addItem(ut);
                                 tableUpdate();
                                 MainForm.timeTableEditor.dispose();
                             }
@@ -196,8 +198,22 @@ class DifferentB extends JButton{
                                         "Ошибка ввода", JOptionPane.INFORMATION_MESSAGE);
                             }
                             else {
-                                tableModel.removeRow(tt.getSelectedRow());
-                                MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+                                int sel = tt.getSelectedRow();
+                                tt.setValueAt(TimeTableEditor.getNameFromDialog(),sel,0);
+                                tt.setValueAt(TimeTableEditor.getSheduleFromDialog(),sel,1);
+                                tt.setValueAt(TimeTableEditor.getFromTimeFromDialog(),sel,2);
+                                tt.setValueAt(TimeTableEditor.getToTimeFromDialog(),sel,3);
+
+                                //tableModel.removeRow(sel);
+                               // UserTime ut = new UserTime(n,s);
+                                //MainForm.userTimeList.
+                               // MainForm.userTimeList.add(new UserTime(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog()));
+                               // ut = new GroupTime(n,s);
+                               // MainForm.groupTimeList.remove(ut);
+                               // MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
+
+                               //MainForm.groupTimeList.add(new GroupTime(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog()));
+                               // MainForm.fillComboes();
                                 tableUpdate();
                                 MainForm.timeTableEditor.dispose();
                             }

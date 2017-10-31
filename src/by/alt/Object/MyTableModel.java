@@ -75,6 +75,17 @@ public class MyTableModel extends AbstractTableModel {
     }
 
     public void setValueAt(Object value, int rowIndex, int columnIndex){
+        TableEntry entry = entries.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                entry.setName(value.toString());
+            case 1:
+                entry.setShedule(value.toString());
+            case 2:
+                entry.setTimeFrom(value.toString());
+            case 3:
+                entry.setTimeTo(value.toString());
+        }
 
     }
 

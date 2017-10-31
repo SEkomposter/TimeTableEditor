@@ -1,14 +1,11 @@
 package by.alt.Object;
 
-import by.alt.DAO.DaoClass;
-import by.alt.DAO.Node;
-import by.alt.DAO.Personal;
 import javax.swing.tree.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
+
+import static by.alt.gui.MainForm.daoObject;
 
 public class PersonalTreeModel {
-    private static DaoClass daoObject = new DaoClass();
     private DefaultMutableTreeNode rootAddedPersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
     private DefaultMutableTreeNode rootFreePersonal = new DefaultMutableTreeNode(daoObject.getRootNode());
     public DefaultTreeModel treeModelAddedPersonal = new DefaultTreeModel(rootAddedPersonal, false);

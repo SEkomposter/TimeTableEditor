@@ -172,6 +172,9 @@ public class MainForm extends JFrame {
                     treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
                     treeModel.getTreeModelAddedPersonal().reload();
                     treeModel.getTreeModelFreePersonal().reload();
+                    treeModel2.delAllPersonal(treeModel2.getRootAddedPersonal());
+                    treeModel2.getTreeModelAddedPersonal().reload();
+                    treeModel2.getTreeModelFreePersonal().reload();
                     tableUpdate();
                 }
             });
@@ -190,8 +193,9 @@ public class MainForm extends JFrame {
                     userTimeList.addAll(propReader.getPropertiesList(PropType.USERTIME));
                     groupTimeList.clear();
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
-                    getUsersTab().fillCombo(userTimeCombo, userTimeList);
-                    getDepTab().fillCombo(groupTimeCombo, groupTimeList);
+                    fillComboes();
+                    //getUsersTab().fillCombo(userTimeCombo, userTimeList);
+                    //getDepTab().fillCombo(groupTimeCombo, groupTimeList);
                     updateComponents();
                 }
             });
@@ -235,23 +239,20 @@ public class MainForm extends JFrame {
                 if (gt.getName().equalsIgnoreCase(nm) && gt.getShedule().equalsIgnoreCase(shed)) tempList.add(gt);
             }
             groupTimeList.removeAll(tempList);
-            userTimeCombo.removeAllItems();
-            getUsersTab().fillCombo(userTimeCombo,userTimeList);
+            fillComboes();
             }catch (Exception exc){
                 exc.printStackTrace();
             }
         }
-
     public static void refreshPersonal(PersonalTreeModel tm, JComboBox combo){
         tm.delAllPersonal(tm.getRootFreePersonal());
         tm.delAllPersonal(tm.getRootAddedPersonal());
+        daoObject.getEndNodes().clear();
         daoObject.buildObjTree(daoObject.getRootNode());
         tm.fillTreeAddedPersonal(tm.getRootAddedPersonal(),(UserTime) combo.getSelectedItem());
         if(combo.equals(userTimeCombo)) tm.fillTreeFreePersonal(tm.getRootFreePersonal(),daoObject.getAllPersonal().toArray());
         else tm.fillTreeFreePersonal(tm.getRootFreePersonal(),daoObject.getEndNodes().toArray());
         tm.removeAddedFromFree(tm.getRootAddedPersonal(),tm.getRootFreePersonal());
-        //usersTab.freeUsers.expandRow(0);
-        //usersTab.addedUsers.expandRow(0);
         tm.getTreeModelAddedPersonal().reload();
         tm.getTreeModelFreePersonal().reload();
     }
@@ -261,11 +262,15 @@ public class MainForm extends JFrame {
         usersTab.getFilterField().addFocusListener(new by.alt.Object.FilterFieldListener());
         depTab.getFilterField().addFocusListener(new by.alt.Object.FilterFieldListener());
     }
-    public static DepartmentsTab getDepTab() {
-        return depTab;
-    }
+    public static DepartmentsTab getDepTab() {return depTab;}
     public static UsersTab getUsersTab(){
         return  usersTab;
+    }
+    public static void fillComboes(){
+        userTimeCombo.removeAllItems();
+        groupTimeCombo.removeAllItems();
+        getUsersTab().fillCombo(userTimeCombo,userTimeList);
+        getDepTab().fillCombo(groupTimeCombo,groupTimeList);
     }
 }
 

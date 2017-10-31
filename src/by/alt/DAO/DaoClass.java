@@ -11,9 +11,7 @@ public class DaoClass {
     private static DBReader dbReader = new DBReader();
     public static ArrayList<Node> endNodes = new ArrayList<>();
     public static TreeSet<Personal> allPersonal = new TreeSet<>();
-    //public DaoClass(){
-     //   buildObjTree(getRootNode());
-   //}
+
     public RootNode getRootNode(){
         return new RootNode();
     }
@@ -52,17 +50,12 @@ public class DaoClass {
             endNodes.add(node);
         }
     }
-    public void refreshObjTree(){
-      //  allPersonal.clear();
-        endNodes.clear();
-        buildObjTree(getRootNode());
-    }
 
     public TreeSet<Personal> getAllPersonal() {
        return allPersonal;
     }
 
-    public static ArrayList<Node> getEndNodes() {
+    public ArrayList<Node> getEndNodes() {
         return endNodes;
     }
 }

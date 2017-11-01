@@ -23,8 +23,8 @@ public class UserGroupTab extends JPanel{
     JLabel treeLabel2 = new JLabel();
     JButton addButton = new JButton("<= Добавить");
     JButton removeButton = new JButton("Убрать       =>");
-    public static JTree addedUsers;
-    public static JTree freeUsers;
+    public  JTree addedUsers;
+    public  JTree freeUsers;
     public JTextField filterField;
 
     GridBagConstraints c = new GridBagConstraints();
@@ -35,8 +35,6 @@ public class UserGroupTab extends JPanel{
         this.setLayout(null);
         this.setPreferredSize(new Dimension(w, h));
 
-        selModel = new DefaultTreeSelectionModel();
-        selModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         add(jPanel1);
         jPanel1.setBounds(x+10,y,w-30,30);
 
@@ -149,20 +147,20 @@ public class UserGroupTab extends JPanel{
         filterField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(treeModel2);
-                    else fillAllTrees(treeModel);
+                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(MainForm.getDepTab().treeModel2);
+                    else fillAllTrees(MainForm.getUsersTab().treeModel);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(treeModel2);
-                else fillAllTrees(treeModel);
+                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(MainForm.getDepTab().treeModel2);
+                else fillAllTrees(MainForm.getUsersTab().treeModel);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(treeModel2);
-                else fillAllTrees(treeModel);
+                if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(MainForm.getDepTab().treeModel2);
+                else fillAllTrees(MainForm.getUsersTab().treeModel);
             }
         });
 
@@ -188,7 +186,7 @@ public class UserGroupTab extends JPanel{
         return filterField;
     }
     public void fillAllTrees(PersonalTreeModel tm){
-        if (tm.equals(treeModel)) tm.fillTreeFreePersonal(tm.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
+        if (tm.equals(MainForm.getUsersTab().treeModel)) tm.fillTreeFreePersonal(tm.getRootFreePersonal(), daoObject.getAllPersonal().toArray());
         else tm.fillTreeFreePersonal(tm.getRootFreePersonal(), daoObject.getEndNodes().toArray());
         tm.filterPersonal(filterField.getText());
         tm.getTreeModelFreePersonal().reload();

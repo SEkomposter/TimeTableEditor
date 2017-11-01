@@ -29,8 +29,8 @@ public class FilterFieldListener implements FocusListener {
         if(ff.getText().equals("")) {
             ff.setText("Фильтр:");
             ff.setForeground(Color.gray);
-            if (container instanceof UsersTab) MainForm.refreshPersonal(MainForm.treeModel, UsersTab.userTimeCombo);
-            else MainForm.refreshPersonal(MainForm.treeModel2, DepartmentsTab.groupTimeCombo);
+            if (container instanceof UsersTab) MainForm.refreshPersonal(MainForm.getUsersTab().treeModel, UsersTab.userTimeCombo);
+            else MainForm.refreshPersonal(MainForm.getDepTab().treeModel2, DepartmentsTab.groupTimeCombo);
         }
     }
 }

@@ -25,14 +25,14 @@ public class MainForm extends JFrame {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
     public static ArrayList<TableEntry> tableEntryList = new ArrayList<TableEntry>();
-    public static ArrayList<TableEntry> userTimeList = new ArrayList<TableEntry>();
-    public static ArrayList<TableEntry> groupTimeList = new ArrayList<TableEntry>();
+    public static TEntryList userTimeList = new TEntryList();
+    public static TEntryList groupTimeList = new TEntryList();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
     static JTable tt;
     public static UsersTab usersTab;
     private static DepartmentsTab depTab;
-    public static PersonalTreeModel treeModel = new PersonalTreeModel();
-    public static DepTreeModel treeModel2 = new DepTreeModel();
+    //public static PersonalTreeModel treeModel = new PersonalTreeModel();
+   // public DepTreeModel treeModel2 = new DepTreeModel();
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -169,12 +169,12 @@ public class MainForm extends JFrame {
                     groupTimeList.clear();
                     userTimeCombo.removeAllItems();
                     groupTimeCombo.removeAllItems();
-                    treeModel.delAllPersonal(treeModel.getRootAddedPersonal());
-                    treeModel.getTreeModelAddedPersonal().reload();
-                    treeModel.getTreeModelFreePersonal().reload();
-                    treeModel2.delAllPersonal(treeModel2.getRootAddedPersonal());
-                    treeModel2.getTreeModelAddedPersonal().reload();
-                    treeModel2.getTreeModelFreePersonal().reload();
+                    MainForm.getUsersTab().treeModel.delAllPersonal(MainForm.getUsersTab().treeModel.getRootAddedPersonal());
+                    MainForm.getUsersTab().treeModel.getTreeModelAddedPersonal().reload();
+                    MainForm.getUsersTab().treeModel.getTreeModelFreePersonal().reload();
+                    MainForm.getDepTab().treeModel2.delAllPersonal(MainForm.getDepTab().treeModel2.getRootAddedPersonal());
+                    MainForm.getDepTab().treeModel2.getTreeModelAddedPersonal().reload();
+                    MainForm.getDepTab().treeModel2.getTreeModelFreePersonal().reload();
                     tableUpdate();
                 }
             });
@@ -220,8 +220,8 @@ public class MainForm extends JFrame {
         }
     }
     public void updateComponents(){
-        refreshPersonal(treeModel,userTimeCombo);
-        refreshPersonal(treeModel2,groupTimeCombo);
+        refreshPersonal(MainForm.getUsersTab().treeModel,userTimeCombo);
+        refreshPersonal(MainForm.getDepTab().treeModel2,groupTimeCombo);
    }
     public void deleteUserTime(String nm, String shed){
         ArrayList<TableEntry> tempList = new ArrayList<TableEntry>();

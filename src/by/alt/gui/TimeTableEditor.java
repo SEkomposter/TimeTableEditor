@@ -199,6 +199,8 @@ class DifferentB extends JButton{
                             }
                             else {
                                 int sel = tt.getSelectedRow();
+                                MainForm.userTimeList.findObjByName((String) tt.getValueAt(sel,0),(String) tt.getValueAt(sel,1),TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog());
+                                MainForm.groupTimeList.findObjByName((String) tt.getValueAt(sel,0),(String) tt.getValueAt(sel,1),TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog());
                                 tt.setValueAt(TimeTableEditor.getNameFromDialog(),sel,0);
                                 tt.setValueAt(TimeTableEditor.getSheduleFromDialog(),sel,1);
                                 tt.setValueAt(TimeTableEditor.getFromTimeFromDialog(),sel,2);
@@ -206,7 +208,7 @@ class DifferentB extends JButton{
 
                                 //tableModel.removeRow(sel);
                                // UserTime ut = new UserTime(n,s);
-                                //MainForm.userTimeList.
+                                //
                                // MainForm.userTimeList.add(new UserTime(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog()));
                                // ut = new GroupTime(n,s);
                                // MainForm.groupTimeList.remove(ut);

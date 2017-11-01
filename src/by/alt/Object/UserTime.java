@@ -2,6 +2,7 @@ package by.alt.Object;
 
 
 import by.alt.DAO.Personal;
+import by.alt.DAO.SurvObject;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -14,22 +15,22 @@ public class UserTime extends TableEntry implements Comparable{
         this.setShedule(s);
     }
 
-    private Set<Personal> personalAdded = new PersonalTreeSet<Personal>();
+    private Set<SurvObject> personalAdded = new PersonalTreeSet<Personal>();
 
-    public void setPersonalAdded(Set<Personal> personalAdded) {
+    public void setPersonalAdded(Set<SurvObject> personalAdded) {
         this.personalAdded = personalAdded;
     }
 
-    public void addPersonal(Personal newPers) {
+    public void addPersonal(SurvObject newPers) {
         personalAdded.add(newPers);
     }
-    public Set<Personal> getPersonalAdded(){
+    public Set<SurvObject> getPersonalAdded(){
         return personalAdded;
     }
 
     public void removePersonal(String name) {
         Iterator iterator = personalAdded.iterator();
-        Personal delPers = new Personal();
+        SurvObject delPers = new Personal();
         while (iterator.hasNext()) {
             delPers = (Personal) iterator.next();
             if (delPers.toString().equalsIgnoreCase(name))

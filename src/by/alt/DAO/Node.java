@@ -11,6 +11,9 @@ public class Node implements SurvObject {
     private ArrayList<SurvObject> childObjList = new ArrayList<>();
     private boolean hasChildNode = false;
     Node(){}
+    public Node(String name){
+        this.name = name;
+    }
     Node(int id, String name, int parent_id){
         this.id = id;
         this.name = name;

@@ -21,28 +21,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static by.alt.gui.MainForm.daoObject;
-import static by.alt.gui.MainForm.treeModel;
+//import static by.alt.gui.MainForm.treeModel;
 import static by.alt.gui.MainForm.userTimeList;
 
 
 public class UsersTab extends UserGroupTab {
 
     public static JComboBox userTimeCombo = new JComboBox();
+    public  PersonalTreeModel treeModel;// = new PersonalTreeModel();
 
-    static {addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
-            freeUsers = new JTree(treeModel.getTreeModelFreePersonal());}
     //UsersTab() {}
     UsersTab(int x, int y, int w, int h){
         super(x,y,w,h);
+        treeModel = new PersonalTreeModel();
+        selModel = new DefaultTreeSelectionModel();
+        selModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
+        addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
+        freeUsers = new JTree(treeModel.getTreeModelFreePersonal());
+        freeUsers.repaint();
         treeLabel1.setText("Сотрудники, добавленные в расписание:");
         treeLabel2.setText("Сотрудники, отсутствующие в расписании:");
         jPanel1.add(userTimeCombo);
         userTimeCombo.setBackground(Color.white);
+        userTimeCombo.createToolTip();
         userTimeCombo.addItemListener(
                 new ItemListener() {
                     public void itemStateChanged(ItemEvent ev) {
                         if (ev.getStateChange() == ItemEvent.SELECTED) {
-                            MainForm.refreshPersonal(MainForm.treeModel,userTimeCombo);
+                            MainForm.refreshPersonal(treeModel,userTimeCombo);
+                            userTimeCombo.setToolTipText(userTimeCombo.getSelectedItem().toString());
                         }
                     }
                 }
@@ -50,7 +57,6 @@ public class UsersTab extends UserGroupTab {
 
         freeUsers.setSelectionModel(selModel);
         freeUsers.addTreeSelectionListener(new PersonalSelectionListener());
-
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +84,8 @@ public class UsersTab extends UserGroupTab {
                 treeModel.getTreeModelFreePersonal().reload();
             }
         });
-        fillAllTrees(treeModel);
+        //fillAllTrees(treeModel);
+        basicLayer.updateUI();
         basicLayer.setVisible(true);
     }
 

@@ -23,6 +23,7 @@ public class UserGroupTab extends JPanel{
     JLabel treeLabel2 = new JLabel();
     JButton addButton = new JButton("<= Добавить");
     JButton removeButton = new JButton("Убрать       =>");
+    JScrollPane jSPane;
     public  JTree addedUsers;
     public  JTree freeUsers;
     public JTextField filterField;
@@ -128,7 +129,8 @@ public class UserGroupTab extends JPanel{
         c.ipadx = 0;
         c.insets = new Insets(0, 0, 0, 0);
         c.anchor = GridBagConstraints.NORTHWEST;
-        basicLayer.add(new JScrollPane(addedUsers), c);
+        jSPane = new JScrollPane(addedUsers);
+        basicLayer.add(jSPane, c);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 3;

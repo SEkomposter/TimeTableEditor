@@ -39,6 +39,9 @@ public class UsersTab extends UserGroupTab {
         addedUsers = new JTree(treeModel.getTreeModelAddedPersonal());
         freeUsers = new JTree(treeModel.getTreeModelFreePersonal());
         freeUsers.repaint();
+        jSPane = new JScrollPane(addedUsers);
+        jSPane.updateUI();
+        jSPane.repaint();
         treeLabel1.setText("Сотрудники, добавленные в расписание:");
         treeLabel2.setText("Сотрудники, отсутствующие в расписании:");
         jPanel1.add(userTimeCombo);

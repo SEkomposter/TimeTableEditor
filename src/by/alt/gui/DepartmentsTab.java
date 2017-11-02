@@ -1,8 +1,6 @@
 package by.alt.gui;
 
-import by.alt.DAO.Node;
 import by.alt.DAO.Personal;
-import by.alt.DAO.SurvObject;
 import by.alt.Object.*;
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeSelectionModel;

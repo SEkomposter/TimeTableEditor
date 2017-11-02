@@ -21,6 +21,7 @@ public class MainForm extends JFrame {
     public static DaoClass daoObject = new DaoClass();
     private Font font;
     private MyMenuBar menuBar;
+    Logger logger = new Logger();
     public static TimeTableEditor timeTableEditor;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // определяем список записей в таблице вкладки расписаний:
@@ -38,7 +39,11 @@ public class MainForm extends JFrame {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame.setDefaultLookAndFeelDecorated(true);
-                new MainForm();
+                try{
+                new MainForm();}
+                catch (NullPointerException exc){
+                    new Logger().pushToScreenNlog(exc,exc.getClass(),"Null in main");
+                }
             }
         });
     }
@@ -194,8 +199,6 @@ public class MainForm extends JFrame {
                     groupTimeList.clear();
                     groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
                     fillComboes();
-                    //getUsersTab().fillCombo(userTimeCombo, userTimeList);
-                    //getDepTab().fillCombo(groupTimeCombo, groupTimeList);
                     updateComponents();
                 }
             });
@@ -210,6 +213,7 @@ public class MainForm extends JFrame {
                         propReader.readRepProp();
                     }catch (IOException exc){
                         exc.printStackTrace();
+                        logger.pushToScreenNlog(exc,exc.getClass(),"файл не найден");
                     }
                 }
             });

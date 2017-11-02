@@ -2,8 +2,6 @@ package by.alt.Object;
 
 import by.alt.DAO.Personal;
 import by.alt.gui.MainForm;
-import sun.misc.ASCIICaseInsensitiveComparator;
-
 import java.io.*;
 import java.util.*;
 

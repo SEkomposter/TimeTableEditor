@@ -1,16 +1,11 @@
 package by.alt.Object;
 
-import by.alt.DAO.Node;
 import by.alt.DAO.Personal;
 import by.alt.DAO.SurvObject;
 import by.alt.gui.MainForm;
 import by.alt.gui.TimeTableEditor;
-
 import javax.swing.*;
-import java.io.IOException;
 import java.util.*;
-
-import static by.alt.gui.MainForm.tableEntryList;
 import static by.alt.gui.MainForm.tableModel;
 
 public class TableEntry implements Comparable{

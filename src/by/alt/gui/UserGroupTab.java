@@ -4,14 +4,12 @@ import by.alt.Object.PersonalTreeModel;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import static by.alt.gui.MainForm.*;
-
 
 public class UserGroupTab extends JPanel{
     JPanel jPanel1 = new JPanel();

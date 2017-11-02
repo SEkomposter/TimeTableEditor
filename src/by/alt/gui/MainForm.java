@@ -31,8 +31,8 @@ public class MainForm extends JFrame {
     static JTable tt;
     public static UsersTab usersTab;
     private static DepartmentsTab depTab;
-    //public static PersonalTreeModel treeModel = new PersonalTreeModel();
-   // public DepTreeModel treeModel2 = new DepTreeModel();
+    //public PersonalTreeModel treeModel = new PersonalTreeModel();
+    //public DepTreeModel treeModel2 = new DepTreeModel();
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

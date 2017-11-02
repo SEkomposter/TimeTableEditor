@@ -1,6 +1,7 @@
 package by.alt.Object;
 
 
+import by.alt.DAO.Node;
 import by.alt.DAO.Personal;
 import by.alt.DAO.SurvObject;
 
@@ -15,7 +16,7 @@ public class UserTime extends TableEntry implements Comparable{
         this.setShedule(s);
     }
 
-    private Set<SurvObject> personalAdded = new PersonalTreeSet<Personal>();
+    /*private Set<SurvObject> personalAdded = new PersonalTreeSet<Personal>();
 
     public void setPersonalAdded(Set<SurvObject> personalAdded) {
         this.personalAdded = personalAdded;
@@ -32,7 +33,7 @@ public class UserTime extends TableEntry implements Comparable{
         Iterator iterator = personalAdded.iterator();
         SurvObject delPers = new Personal();
         while (iterator.hasNext()) {
-            delPers = (Personal) iterator.next();
+            delPers = (Node) iterator.next();
             if (delPers.toString().equalsIgnoreCase(name))
              break;
         }
@@ -46,6 +47,7 @@ public class UserTime extends TableEntry implements Comparable{
     public void clearUserTime() {
         personalAdded.clear();
     }
+    */
     @Override
     public String toString() {
         return "userTime."+ super.getShedule() +"."+ super.getName();

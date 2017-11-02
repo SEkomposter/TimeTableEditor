@@ -2,8 +2,8 @@ package by.alt.gui;
 
 import by.alt.DAO.Node;
 import by.alt.DAO.Personal;
+import by.alt.DAO.SurvObject;
 import by.alt.Object.*;
-
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
@@ -14,18 +14,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-//import static by.alt.gui.MainForm.treeModel;
-//import static by.alt.gui.MainForm.treeModel2;
-
 public class DepartmentsTab extends UserGroupTab {
     public static JComboBox groupTimeCombo = new JComboBox();
-    public DepTreeModel treeModel2;// = new DepTreeModel();
+    public DepTreeModel treeModel2;
     //DepartmentsTab(){}
     DepartmentsTab(int x, int y,int w, int h){
         super(x,y,w,h);
         treeModel2 = new DepTreeModel();
-        addedUsers = new JTree(treeModel2.getTreeModelAddedPersonal());
-        freeUsers = new JTree(treeModel2.getTreeModelFreePersonal());
+        addedUsers.setModel(treeModel2.getTreeModelAddedPersonal());
+        freeUsers.setModel(treeModel2.getTreeModelFreePersonal());
         selModel = new DefaultTreeSelectionModel();
         selModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         treeLabel1.setText("Подразделения, добавленные в расписание:");
@@ -38,7 +35,7 @@ public class DepartmentsTab extends UserGroupTab {
                         if (ev.getStateChange() == ItemEvent.SELECTED) {
                             MainForm.refreshPersonal(treeModel2,groupTimeCombo);
                             groupTimeCombo.setToolTipText(groupTimeCombo.getSelectedItem().toString());
-                            fillAllTrees(treeModel2);
+                            //fillAllTrees(treeModel2);
                         }
                     }
                 }
@@ -53,17 +50,15 @@ public class DepartmentsTab extends UserGroupTab {
         c.anchor = GridBagConstraints.WEST;
         jPanel1.add(groupTimeCombo, c);
 
-
-
         freeUsers.setSelectionModel(selModel);
         freeUsers.addTreeSelectionListener(new PersonalSelectionListener());
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    TreePath[] tp = freeUsers.getSelectionPaths();
+                   TreePath[] tp = freeUsers.getSelectionPaths();
                     for (TreePath t : tp)
-                        ((GroupTime) groupTimeCombo.getSelectedItem()).addPersonal(new Node(t.getLastPathComponent().toString()));
+                        ((GroupTime) groupTimeCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
                     treeModel2.movePersonal(treeModel2.getRootFreePersonal(), treeModel2.getRootAddedPersonal(), freeUsers.getSelectionPaths());
                     treeModel2.getTreeModelAddedPersonal().reload();
                     treeModel2.getTreeModelFreePersonal().reload();
@@ -78,14 +73,11 @@ public class DepartmentsTab extends UserGroupTab {
             public void actionPerformed(ActionEvent e) {
                 TreePath[] tp = addedUsers.getSelectionPaths();
                 for (TreePath t : tp)
-                    ((GroupTime) groupTimeCombo.getSelectedItem()).removePersonal(t.getLastPathComponent().toString());
-                treeModel2.movePersonal(treeModel2.getRootAddedPersonal(), treeModel2.getRootFreePersonal(), addedUsers.getSelectionPaths());
+                    ((GroupTime) groupTimeCombo.getSelectedItem()).removePersonal(t.getLastPathComponent().toString());treeModel2.movePersonal(treeModel2.getRootAddedPersonal(), treeModel2.getRootFreePersonal(), addedUsers.getSelectionPaths());
                 treeModel2.getTreeModelAddedPersonal().reload();
                 treeModel2.getTreeModelFreePersonal().reload();
             }
         });
-        //fillAllTrees(treeModel2);
-        //basicLayer.setVisible(true);
         addedUsers.updateUI();
     }
 

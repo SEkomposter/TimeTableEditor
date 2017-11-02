@@ -1,5 +1,6 @@
 package by.alt.Object;
 
+import by.alt.DAO.Node;
 import by.alt.DAO.Personal;
 import by.alt.DAO.SurvObject;
 import by.alt.gui.MainForm;
@@ -14,7 +15,7 @@ import static by.alt.gui.MainForm.tableModel;
 
 public class TableEntry implements Comparable{
     private String name, shedule, timeFrom, timeTo;
-
+    private Set<SurvObject> personalAdded = new PersonalTreeSet<Personal>();
     public TableEntry(){}
     public TableEntry(String n,String s,String tf, String tt){
         this.setName(n);
@@ -22,13 +23,44 @@ public class TableEntry implements Comparable{
         this.setTimeFrom(tf);
         this.setTimeTo(tt);
     }
+
+    public void setPersonalAdded(Set<SurvObject> personalAdded) {
+        this.personalAdded = personalAdded;
+    }
+
+    public void addPersonal(SurvObject newPers) {
+        personalAdded.add(newPers);
+    }
+    public Set<SurvObject> getPersonalAdded(){
+        return personalAdded;
+    }
+
+    public void removePersonal(String name) {
+        Iterator iterator = personalAdded.iterator();
+        SurvObject delPers = new Personal();
+        while (iterator.hasNext()) {
+            delPers = (SurvObject) iterator.next();
+            if (delPers.toString().equalsIgnoreCase(name))
+                break;
+        }
+        personalAdded.remove(delPers);
+    }
+
+    public void addAllPersonal(TreeSet<Personal> personalTreeSet) {
+        personalAdded.addAll(personalTreeSet);
+    }
+
+    public void clearUserTime() {
+        personalAdded.clear();
+    }
+
     @Override
     public int compareTo(Object o) {
         return  (((TableEntry)o).toString().compareToIgnoreCase(this.toString())<0?1: ((TableEntry)o).toString().compareToIgnoreCase(this.toString())==0?0:-1);
     }
 
     public void addPersonal(Personal newPers) {
-        //personalAdded.add(newPers);
+        personalAdded.add(newPers);
     }
 
     //Читаем данные из формы добавления или редактирования расписания

@@ -23,7 +23,7 @@ public class UserGroupTab extends JPanel{
     JLabel treeLabel2 = new JLabel();
     JButton addButton = new JButton("<= Добавить");
     JButton removeButton = new JButton("Убрать       =>");
-    JScrollPane jSPane;
+    JScrollPane jSPane, jSPane2;
     public  JTree addedUsers;
     public  JTree freeUsers;
     public JTextField filterField;
@@ -35,7 +35,10 @@ public class UserGroupTab extends JPanel{
     UserGroupTab (int x, int y, int w, int h) {
         this.setLayout(null);
         this.setPreferredSize(new Dimension(w, h));
-
+        freeUsers = new JTree();
+        addedUsers = new JTree();
+        jSPane = new JScrollPane(addedUsers);
+        jSPane2 = new JScrollPane(freeUsers);
         add(jPanel1);
         jPanel1.setBounds(x+10,y,w-30,30);
 
@@ -129,7 +132,6 @@ public class UserGroupTab extends JPanel{
         c.ipadx = 0;
         c.insets = new Insets(0, 0, 0, 0);
         c.anchor = GridBagConstraints.NORTHWEST;
-        jSPane = new JScrollPane(addedUsers);
         basicLayer.add(jSPane, c);
 
         c.fill = GridBagConstraints.BOTH;
@@ -140,7 +142,7 @@ public class UserGroupTab extends JPanel{
         c.weightx = 0.45;
         c.weighty = 0.7;
         c.insets = new Insets(0, 0, 0, 0);
-        basicLayer.add(new JScrollPane(freeUsers), c);
+        basicLayer.add(jSPane2, c);
 
         filterField = new JTextField("Фильтр:");
         filterField.setEnabled(false);

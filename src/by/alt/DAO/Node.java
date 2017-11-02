@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class Node implements SurvObject {
+public class Node implements SurvObject,Comparable {
     private String name;
     private String type = ObjectType.DEP.toString();
     private int id, parent_id;
@@ -94,5 +94,8 @@ public class Node implements SurvObject {
     }
     public void setHasChildNode(boolean hasChildNode) {
         this.hasChildNode = hasChildNode;
+    }
+    public int compareTo(Object o) {
+        return  (((Node) o).name.compareToIgnoreCase(this.getName())<0?1: ((Node)o).name.compareToIgnoreCase(this.name)==0?0:-1);
     }
 }

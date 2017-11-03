@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TimeTableEditor:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="179baa62-75c8-4e73-8053-ba57ac431e86" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/by/alt/DAO/Department.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/DBReader.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/DBReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/DaoClass.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/DaoClass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/ObjectType.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/ObjectType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/Personal.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/Personal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/RootNode.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/RootNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/DAO/SurvObject.java" afterPath="$PROJECT_DIR$/src/by/alt/DAO/SurvObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Main.java" afterPath="$PROJECT_DIR$/src/by/alt/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Object/FilterFieldListener.java" afterPath="$PROJECT_DIR$/src/by/alt/Object/FilterFieldListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Object/MyTableModel.java" afterPath="$PROJECT_DIR$/src/by/alt/Object/MyTableModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/Object/PropReader.java" afterPath="$PROJECT_DIR$/src/by/alt/Object/PropReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/DepartmentsTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/MainForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/TimeTableEditor.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/TimeTableEditor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/UserGroupTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/by/alt/gui/UsersTab.java" afterPath="$PROJECT_DIR$/src/by/alt/gui/UsersTab.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,7 +47,7 @@
       <file leaf-file-name="PropReader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1768">
+            <state relative-caret-position="1615">
               <caret line="106" column="62" lean-forward="false" selection-start-line="106" selection-start-column="62" selection-end-line="106" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -283,8 +272,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Resources/log4j-core-2.8.2.jar!/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="D:/ExternalReports" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -712,7 +701,7 @@
       <workItem from="1509467953869" duration="9951000" />
       <workItem from="1509558527906" duration="8853000" />
       <workItem from="1509645403372" duration="10891000" />
-      <workItem from="1509729984299" duration="7631000" />
+      <workItem from="1509729984299" duration="8745000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1505858589712</created>
@@ -1022,11 +1011,18 @@
       <option name="project" value="LOCAL" />
       <updated>1509656869332</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="03.11.2017">
+      <created>1509737664961</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1509737664961</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189312000" />
+    <option name="totallyTimeSpent" value="190426000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1059,7 +1055,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19818456" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -1487,7 +1483,7 @@
         <state relative-caret-position="340">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1512,7 +1508,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/alt/Object/PropReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
+        <state relative-caret-position="1615">
           <caret line="106" column="62" lean-forward="false" selection-start-line="106" selection-start-column="62" selection-end-line="106" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1526,10 +1522,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>TimeTableEditor:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

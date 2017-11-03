@@ -22,6 +22,7 @@ public class UserGroupTab extends JPanel{
     JButton addButton = new JButton("<= Добавить");
     JButton removeButton = new JButton("Убрать       =>");
     JScrollPane jSPane, jSPane2;
+    java.awt.Toolkit tk;
     public  JTree addedUsers;
     public  JTree freeUsers;
     public JTextField filterField;
@@ -37,6 +38,7 @@ public class UserGroupTab extends JPanel{
         addedUsers = new JTree();
         jSPane = new JScrollPane(addedUsers);
         jSPane2 = new JScrollPane(freeUsers);
+        tk = Toolkit.getDefaultToolkit();
         add(jPanel1);
         jPanel1.setBounds(x+10,y,w-30,30);
 

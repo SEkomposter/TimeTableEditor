@@ -1,10 +1,7 @@
 package by.alt.gui;
 
-import by.alt.Object.GroupTime;
-import by.alt.Object.UserTime;
+import by.alt.Object.*;
 import by.alt.gui.MainForm;
-import by.alt.Object.Shedules;
-import by.alt.Object.TableEntry;
 import lu.tudor.santec.jtimechooser.JTimeChooser;
 
 import javax.swing.*;
@@ -143,7 +140,7 @@ public class TimeTableEditor extends JDialog{
         try {
             date = new SimpleDateFormat("hh.mm").parse(time);
         }catch (ParseException exc){
-            exc.printStackTrace();
+            new Logger().pushToScreenNlog(exc,exc.getClass());
         }
         return date;
     }
@@ -205,17 +202,6 @@ class DifferentB extends JButton{
                                 tt.setValueAt(TimeTableEditor.getSheduleFromDialog(),sel,1);
                                 tt.setValueAt(TimeTableEditor.getFromTimeFromDialog(),sel,2);
                                 tt.setValueAt(TimeTableEditor.getToTimeFromDialog(),sel,3);
-
-                                //tableModel.removeRow(sel);
-                               // UserTime ut = new UserTime(n,s);
-                                //
-                               // MainForm.userTimeList.add(new UserTime(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog()));
-                               // ut = new GroupTime(n,s);
-                               // MainForm.groupTimeList.remove(ut);
-                               // MainForm.tableEntryList.add(addedTableEntry.getTableEntryFromDialog());
-
-                               //MainForm.groupTimeList.add(new GroupTime(TimeTableEditor.getNameFromDialog(),TimeTableEditor.getSheduleFromDialog()));
-                               // MainForm.fillComboes();
                                 tableUpdate();
                                 MainForm.timeTableEditor.dispose();
                             }

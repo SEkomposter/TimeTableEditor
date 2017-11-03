@@ -1,5 +1,6 @@
 package by.alt.DAO;
 
+import by.alt.Object.Logger;
 import com.mysql.jdbc.ResultSet;
 
 import java.sql.SQLException;
@@ -11,7 +12,6 @@ public class DaoClass {
     private static DBReader dbReader = new DBReader();
     public static ArrayList<Node> endNodes = new ArrayList<>();
     public static TreeSet<Personal> allPersonal = new TreeSet<>();
-
     public RootNode getRootNode(){
         return new RootNode();
     }
@@ -32,7 +32,7 @@ public class DaoClass {
            }
            node.setChildObjList(childList);
         }catch (SQLException exc){
-            exc.printStackTrace();
+            new Logger().pushToScreenNlog(exc,exc.getClass());
         }
         return childList;
     }

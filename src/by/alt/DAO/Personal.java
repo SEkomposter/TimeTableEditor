@@ -16,7 +16,6 @@ public class Personal implements SurvObject, Comparable{
         this.name = name;
         this.parent_id = parent_id;
     }
-
     public int getId() {
         return id;
     }
@@ -37,14 +36,12 @@ public class Personal implements SurvObject, Comparable{
         return this.getName().hashCode();
     }
 
-   public boolean equals(Object obj){
+    public boolean equals(Object obj){
        return this.getName().equals(((Personal)obj).getName());
    }
     public String toString(){
-        //return String.valueOf(getId()) + "  " + getName() + "(EMP)  " + String.valueOf(getParent_id());
         return getName();
     }
-
     @Override
     public int compareTo(Object o) {
         return  (((Personal) o).name.compareToIgnoreCase(this.getName())<0?1: ((Personal)o).name.compareToIgnoreCase(this.name)==0?0:-1);

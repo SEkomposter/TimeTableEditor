@@ -1,6 +1,7 @@
 package by.alt.gui;
 
 import by.alt.DAO.Personal;
+import by.alt.Object.Logger;
 import by.alt.Object.PersonalSelectionListener;
 import by.alt.Object.PersonalTreeModel;
 import by.alt.Object.UserTime;
@@ -28,10 +29,10 @@ public class UsersTab extends UserGroupTab {
         selModel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         addedUsers.setModel(treeModel.getTreeModelAddedPersonal());
         freeUsers.setModel(treeModel.getTreeModelFreePersonal());
-        //jSPane.updateUI();
         treeLabel1.setText("Сотрудники, добавленные в расписание:");
         treeLabel2.setText("Сотрудники, отсутствующие в расписании:");
         jPanel1.add(userTimeCombo);
+
         userTimeCombo.setBackground(Color.white);
         userTimeCombo.createToolTip();
         userTimeCombo.addItemListener(
@@ -40,7 +41,6 @@ public class UsersTab extends UserGroupTab {
                         if (ev.getStateChange() == ItemEvent.SELECTED) {
                             MainForm.refreshPersonal(treeModel,userTimeCombo);
                             userTimeCombo.setToolTipText(userTimeCombo.getSelectedItem().toString());
-                            //fillAllTrees(treeModel);
                         }
                     }
                 }
@@ -55,24 +55,29 @@ public class UsersTab extends UserGroupTab {
                     TreePath[] tp = freeUsers.getSelectionPaths();
                     for (TreePath t : tp)
                         ((UserTime) userTimeCombo.getSelectedItem()).addPersonal(new Personal(t.getLastPathComponent().toString()));
+
                     treeModel.movePersonal(treeModel.getRootFreePersonal(), treeModel.getRootAddedPersonal(), freeUsers.getSelectionPaths());
                     treeModel.getTreeModelAddedPersonal().reload();
                     treeModel.getTreeModelFreePersonal().reload();
                 } catch (NullPointerException exc) {
-                    exc.printStackTrace();
-                    System.out.println("ничего не выбрано");
+                    tk.beep();
                 }
             }
         });
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               TreePath[] tp = addedUsers.getSelectionPaths();
-                for (TreePath t : tp)
-                    ((UserTime) userTimeCombo.getSelectedItem()).removePersonal(t.getLastPathComponent().toString());
+                try {
+                    TreePath[] tp = addedUsers.getSelectionPaths();
+                    for (TreePath t : tp)
+                        ((UserTime) userTimeCombo.getSelectedItem()).removePersonal(t.getLastPathComponent().toString());
+
                 treeModel.movePersonal(treeModel.getRootAddedPersonal(), treeModel.getRootFreePersonal(), addedUsers.getSelectionPaths());
                 treeModel.getTreeModelAddedPersonal().reload();
                 treeModel.getTreeModelFreePersonal().reload();
+                }catch (NullPointerException exc){
+                    tk.beep();
+                }
             }
         });
         basicLayer.updateUI();

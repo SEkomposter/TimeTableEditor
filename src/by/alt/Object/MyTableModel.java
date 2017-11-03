@@ -3,7 +3,6 @@ package by.alt.Object;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

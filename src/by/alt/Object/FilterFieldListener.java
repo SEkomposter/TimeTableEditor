@@ -4,7 +4,6 @@ import by.alt.gui.DepartmentsTab;
 import by.alt.gui.MainForm;
 import by.alt.gui.UserGroupTab;
 import by.alt.gui.UsersTab;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;

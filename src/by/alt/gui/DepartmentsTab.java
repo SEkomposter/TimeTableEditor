@@ -33,7 +33,6 @@ public class DepartmentsTab extends UserGroupTab {
                         if (ev.getStateChange() == ItemEvent.SELECTED) {
                             MainForm.refreshPersonal(treeModel2,groupTimeCombo);
                             groupTimeCombo.setToolTipText(groupTimeCombo.getSelectedItem().toString());
-                            //fillAllTrees(treeModel2);
                         }
                     }
                 }
@@ -61,19 +60,22 @@ public class DepartmentsTab extends UserGroupTab {
                     treeModel2.getTreeModelAddedPersonal().reload();
                     treeModel2.getTreeModelFreePersonal().reload();
                 } catch (NullPointerException exc) {
-                    exc.printStackTrace();
-                    System.out.println("ничего не выбрано");
+                    tk.beep();
                 }
             }
         });
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
                 TreePath[] tp = addedUsers.getSelectionPaths();
                 for (TreePath t : tp)
                     ((GroupTime) groupTimeCombo.getSelectedItem()).removePersonal(t.getLastPathComponent().toString());treeModel2.movePersonal(treeModel2.getRootAddedPersonal(), treeModel2.getRootFreePersonal(), addedUsers.getSelectionPaths());
                 treeModel2.getTreeModelAddedPersonal().reload();
                 treeModel2.getTreeModelFreePersonal().reload();
+                } catch (NullPointerException exc) {
+                    tk.beep();
+                }
             }
         });
         addedUsers.updateUI();

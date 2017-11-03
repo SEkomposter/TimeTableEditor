@@ -12,7 +12,6 @@ public class RootNode extends Node{
     private static final int ID = 0;
     private boolean hasChildNode = false;
     private ArrayList<SurvObject> childObjList = new ArrayList<>();
-   // private static RootNode rootNode = new RootNode("Объект");
     RootNode(){}
     RootNode(String name){
         setName(name);

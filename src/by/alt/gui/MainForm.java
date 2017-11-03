@@ -32,21 +32,8 @@ public class MainForm extends JFrame {
     static JTable tt;
     public static UsersTab usersTab;
     private static DepartmentsTab depTab;
-    //public PersonalTreeModel treeModel = new PersonalTreeModel();
-    //public DepTreeModel treeModel2 = new DepTreeModel();
+    public boolean fileOpened = false;
 
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                JFrame.setDefaultLookAndFeelDecorated(true);
-                try{
-                new MainForm();}
-                catch (NullPointerException exc){
-                    new Logger().pushToScreenNlog(exc,exc.getClass(),"Null in main");
-                }
-            }
-        });
-    }
     public MainForm() {
         setBounds(0, 0, 1300, 720);
         setMinimumSize(new Dimension(1300, 720));
@@ -56,7 +43,7 @@ public class MainForm extends JFrame {
         tabbedPane1 = new myTabbedPane(this.getX(), this.getY(), this.getWidth(), getHeight());
         getContentPane().add(tabbedPane1);
         this.setJMenuBar(menuBar);
-        propReader = new PropReader();
+        readPropsFromConf();
         repaint();
 
     }
@@ -66,9 +53,10 @@ public class MainForm extends JFrame {
     }
     public void readPropsFromConf() {
         try {
+            propReader = new PropReader();
             propReader.readRepProp();
         } catch (IOException exc) {
-            exc.printStackTrace();
+            new Logger().pushToScreenNlog(exc,exc.getClass());
         }
     }
     class myTabbedPane extends JTabbedPane{
@@ -167,7 +155,19 @@ public class MainForm extends JFrame {
             newItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    int n=0;
+                    if (fileOpened){
+                    n = JOptionPane.showConfirmDialog(MainForm.this,
+                            "Текущий файл конфигурации будет закрыт, все не сохраненные данные будут потеряны\nВы действительно хотите продолжить?",
+                            "Новый файл",
+                            JOptionPane.YES_NO_OPTION);
+                    }
+                    else {
+                        n = JOptionPane.YES_NO_OPTION;
+                    }
+                    if (n == JOptionPane.YES_NO_OPTION) {
                     initFilterFields();
+                    propReader = new PropReader();
                     propReader.removeAllProperties();
                     tableEntryList.clear();
                     userTimeList.clear();
@@ -182,6 +182,7 @@ public class MainForm extends JFrame {
                     MainForm.getDepTab().treeModel2.getTreeModelFreePersonal().reload();
                     tableUpdate();
                 }
+                }
             });
             newItem.setFont(font);
             fileMenu.add(newItem);
@@ -189,36 +190,74 @@ public class MainForm extends JFrame {
             openItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    readPropsFromConf();
-                    initFilterFields();
-                    tableEntryList.clear();
-                    tableEntryList.addAll(propReader.getPropertiesList(PropType.TIMETABLE));
-                    tableUpdate();
-                    userTimeList.clear();
-                    userTimeList.addAll(propReader.getPropertiesList(PropType.USERTIME));
-                    groupTimeList.clear();
-                    groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
-                    fillComboes();
-                    updateComponents();
+                    int n = 0;
+                    if (fileOpened) {
+                        n = JOptionPane.showConfirmDialog(MainForm.this,
+                                "Текущий файл конфигурации будет закрыт, все не сохраненные данные будут потеряны\nВы действительно хотите продолжить?",
+                                "Открыть файл",
+                                JOptionPane.YES_NO_OPTION);
+                    } else {
+                        n = JOptionPane.YES_NO_OPTION;
+                    }
+                    if (n == JOptionPane.YES_NO_OPTION) {
+                        propReader = new PropReader();
+                        try {
+                            propReader.readRepProp();
+                        } catch (IOException exc) {
+                            new Logger().pushToScreenNlog(exc, exc.getClass());
+                        }
+                        initFilterFields();
+                        tableEntryList.clear();
+                        tableEntryList.addAll(propReader.getPropertiesList(PropType.TIMETABLE));
+                        tableUpdate();
+                        userTimeList.clear();
+                        userTimeList.addAll(propReader.getPropertiesList(PropType.USERTIME));
+                        groupTimeList.clear();
+                        groupTimeList.addAll(propReader.getPropertiesList(PropType.GROUPTIME));
+                        fillComboes();
+                        updateComponents();
+                        fileOpened = true;
+                    }
                 }
             });
             openItem.setFont(font);
             fileMenu.add(openItem);
-            JMenuItem saveAsItem = new JMenuItem("Сохранить как...");
+            JMenuItem saveAsItem = new JMenuItem("Сохранить");
             saveAsItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    try {
-                        propReader.writeRepProp();
-                        propReader.readRepProp();
-                    }catch (IOException exc){
-                        exc.printStackTrace();
-                        logger.pushToScreenNlog(exc,exc.getClass(),"файл не найден");
+                    int n = 0;
+                    if (fileOpened) {
+                        n = JOptionPane.showConfirmDialog(MainForm.this,
+                                "Вы действительно хотите сохранить текущие настройки?",
+                                "Открыть файл",
+                                JOptionPane.YES_NO_OPTION);
+                    } else {
+                        n = JOptionPane.YES_NO_OPTION;
+                    }
+                    if (n == JOptionPane.YES_NO_OPTION) {
+                        try {
+                            propReader.writeRepProp();
+                            propReader.readRepProp();
+                        } catch (IOException exc) {
+                            logger.pushToScreenNlog(exc, exc.getClass(), "файл не найден");
+                        }
                     }
                 }
             });
             saveAsItem.setFont(font);
             fileMenu.add(saveAsItem);
+            JMenuItem closeItem = new JMenuItem("Закрыть");
+            closeItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        int dialogButton = JOptionPane.showConfirmDialog(MainForm.this, "Все не сохраненные данные будут потеряны.\n Вы действительно хотите закрыть приложение?", "Закрыть приложение",                              JOptionPane.YES_NO_OPTION);
+                        if (dialogButton == JOptionPane.YES_OPTION) {
+                            System.exit(NORMAL);
+                        }
+                    }
+                });
+            fileMenu.add(closeItem);
             newItem.setVisible(true);
             add(fileMenu);
         }
@@ -245,7 +284,7 @@ public class MainForm extends JFrame {
             groupTimeList.removeAll(tempList);
             fillComboes();
             }catch (Exception exc){
-                exc.printStackTrace();
+            new Logger().pushToScreenNlog(exc,exc.getClass());
             }
         }
     public static void refreshPersonal(PersonalTreeModel tm, JComboBox combo){

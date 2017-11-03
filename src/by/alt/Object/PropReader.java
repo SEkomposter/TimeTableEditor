@@ -8,17 +8,17 @@ import java.util.*;
 public class PropReader {
     String fileName = "report03.properties";
     String commProps = "common.properties";
-    File filePath = new File("D:\\TimeTableEditor\\");
+    static String path = "";
+    //static String path = "D:\\ExternalReports\\";
+    File filePath = new File(path + fileName);
+    File filePathCommon = new File(path + commProps);
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
     static Properties property = new Properties();
-
     private static TreeSet<TableEntry> tableEntrySet = new TreeSet<>();
     private static TreeSet<TableEntry> userTimeSet = new TreeSet<>();
     private static TreeSet<TableEntry> groupTimeSet = new TreeSet<>();
     public PropReader(){
-
     }
-
     public void writeRepProp() throws IOException{
         LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
         String[] entries = new String[2];
@@ -39,7 +39,7 @@ public class PropReader {
         property.clear();
         FileOutputStream fos;
         try {
-            fos = new FileOutputStream("src/resources/"+fileName);
+            fos = new FileOutputStream(filePath);
 
             Iterator it = map.keySet().iterator();
             String pr;
@@ -50,8 +50,8 @@ public class PropReader {
             property.store(fos,"");
             fos.close();
 
-        } catch (IOException e) {
-            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        } catch (IOException exc) {
+            new Logger().pushToScreenNlog(exc,exc.getClass());
         }
     }
 
@@ -59,11 +59,11 @@ public class PropReader {
         Properties property = new Properties();
         FileInputStream fis;
         try {
-            fis = new FileInputStream("src/resources/"+ commProps);
+            fis = new FileInputStream(filePathCommon);
             property.load(fis);
-        } catch (IOException e) {
-            System.err.println("ОШИБКА: Файл свойств отсуствует!");
-        }
+        } catch (IOException exc) {
+            new Logger().pushToScreenNlog(exc,exc.getClass());
+    }
         return property.get(propName).toString();
     }
     public void removeProperty(String prop){
@@ -88,7 +88,7 @@ public class PropReader {
     public Map<String,String> readRepProp() throws IOException{
         FileInputStream fis;
         try {
-            fis = new FileInputStream("src/resources/"+fileName);
+            fis = new FileInputStream(filePath);
             property.load(fis);
             Iterator it = property.keySet().iterator();
             String pr;
@@ -103,8 +103,8 @@ public class PropReader {
                 else groupTimeSet.add(parseUsersGroups(pr, property.getProperty(pr), new GroupTime()));
             }
             fis.close();
-        } catch (IOException e) {
-            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        } catch (IOException exc) {
+            new Logger().pushToScreenNlog(exc,exc.getClass());
         }
         return properties;
     }

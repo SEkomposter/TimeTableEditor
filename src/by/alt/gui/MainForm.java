@@ -203,6 +203,7 @@ public class MainForm extends JFrame {
                         propReader = new PropReader();
                         try {
                             propReader.readRepProp();
+                            propReader.backupRepProps();
                         } catch (IOException exc) {
                             new Logger().pushToScreenNlog(exc, exc.getClass());
                         }

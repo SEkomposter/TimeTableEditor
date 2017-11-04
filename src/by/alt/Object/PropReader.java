@@ -3,21 +3,26 @@ package by.alt.Object;
 import by.alt.DAO.Personal;
 import by.alt.gui.MainForm;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class PropReader {
     String fileName = "report03.properties";
     String commProps = "common.properties";
-    static String path = "";
+    String backup = "";
+    static String path = "D:\\TimeTableEditor\\src\\Resources\\";
+    static String pathBackup = "\\config_backup\\";
     //static String path = "D:\\ExternalReports\\";
     File filePath = new File(path + fileName);
     File filePathCommon = new File(path + commProps);
+    File filePathBackup;// = new File(path + pathBackup + backup);
     static HashMap<String,String> properties = new LinkedHashMap<String,String>();
     static Properties property = new Properties();
     private static TreeSet<TableEntry> tableEntrySet = new TreeSet<>();
     private static TreeSet<TableEntry> userTimeSet = new TreeSet<>();
     private static TreeSet<TableEntry> groupTimeSet = new TreeSet<>();
     public PropReader(){
+
     }
     public void writeRepProp() throws IOException{
         LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
@@ -50,6 +55,20 @@ public class PropReader {
             property.store(fos,"");
             fos.close();
 
+        } catch (IOException exc) {
+            new Logger().pushToScreenNlog(exc,exc.getClass());
+        }
+    }
+    public void backupRepProps (){
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd'-'hh-mm-ss'_'");
+        backup = formatForDateNow.format(dateNow);
+        filePathBackup = new File(path + pathBackup + backup + fileName);
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(filePathBackup);
+            property.store(fos,"");
+            fos.close();
         } catch (IOException exc) {
             new Logger().pushToScreenNlog(exc,exc.getClass());
         }

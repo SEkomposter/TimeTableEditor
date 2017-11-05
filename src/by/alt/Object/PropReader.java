@@ -10,9 +10,11 @@ public class PropReader {
     String fileName = "report03.properties";
     String commProps = "common.properties";
     String backup = "";
-    static String path = "D:\\TimeTableEditor\\src\\Resources\\";
-    static String pathBackup = "\\config_backup\\";
+    static String fileSeparator = System.getProperty("file.separator");
+    static String path = "D:" + fileSeparator + "ExternalReports" + fileSeparator;
+    static String pathBackup = "configBackup" + fileSeparator;
     //static String path = "D:\\ExternalReports\\";
+
     File filePath = new File(path + fileName);
     File filePathCommon = new File(path + commProps);
     File filePathBackup;// = new File(path + pathBackup + backup);
@@ -61,11 +63,14 @@ public class PropReader {
     }
     public void backupRepProps (){
         Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd'-'hh-mm-ss'_'");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyyMMdd'-'hhmm'_'");
         backup = formatForDateNow.format(dateNow);
-        filePathBackup = new File(path + pathBackup + backup + fileName);
-        FileOutputStream fos;
+        File backupDir = new File(path + pathBackup + "\\");
+            backupDir.mkdirs();
         try {
+            filePathBackup = new File(path + pathBackup + backup + fileName);
+            FileOutputStream fos;
+            filePathBackup.createNewFile();
             fos = new FileOutputStream(filePathBackup);
             property.store(fos,"");
             fos.close();
@@ -73,7 +78,6 @@ public class PropReader {
             new Logger().pushToScreenNlog(exc,exc.getClass());
         }
     }
-
     public String readCommonProps(String propName){
         Properties property = new Properties();
         FileInputStream fis;

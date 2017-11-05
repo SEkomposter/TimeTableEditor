@@ -155,6 +155,7 @@ public class MainForm extends JFrame {
             newItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    fileOpened = true;
                     int n=0;
                     if (fileOpened){
                     n = JOptionPane.showConfirmDialog(MainForm.this,

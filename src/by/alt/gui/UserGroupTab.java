@@ -19,6 +19,7 @@ public class UserGroupTab extends JPanel{
     JLabel timeTableLabel = new JLabel("Расписание:");
     JLabel treeLabel1 = new JLabel();
     JLabel treeLabel2 = new JLabel();
+    JButton info = new JButton(" ? ");
     JButton addButton = new JButton("<= Добавить");
     JButton removeButton = new JButton("Убрать       =>");
     JScrollPane jSPane, jSPane2;
@@ -99,6 +100,17 @@ public class UserGroupTab extends JPanel{
         c.insets = new Insets(0, 0, 0, 0);
         c.anchor = GridBagConstraints.EAST;
         jPanel3.add(treeLabel2, c);
+
+        c.fill = GridBagConstraints.NONE;
+        c.gridx = 2;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.weightx = 0.00;
+        c.weighty = 0.0;
+        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(00, 30, 0, 30);
+        basicLayer.add(info, c);
 
     c.fill = GridBagConstraints.NONE;
     c.gridx = 2;

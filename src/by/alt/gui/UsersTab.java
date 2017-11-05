@@ -48,6 +48,22 @@ public class UsersTab extends UserGroupTab {
 
         freeUsers.setSelectionModel(selModel);
         freeUsers.addTreeSelectionListener(new PersonalSelectionListener());
+        info.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    TreePath[] tp = freeUsers.getSelectionPaths();
+                    for (TreePath t : tp)
+                        ((UserTime) userTimeCombo.getSelectedItem()).getPersonalAdded();
+                    //int n = JOptionPane.showInternalMessageDialog();
+                    treeModel.movePersonal(treeModel.getRootFreePersonal(), treeModel.getRootAddedPersonal(), freeUsers.getSelectionPaths());
+                    treeModel.getTreeModelAddedPersonal().reload();
+                    treeModel.getTreeModelFreePersonal().reload();
+                } catch (NullPointerException exc) {
+                    tk.beep();
+                }
+            }
+        });
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

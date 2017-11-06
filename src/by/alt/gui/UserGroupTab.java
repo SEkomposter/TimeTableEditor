@@ -7,6 +7,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import static by.alt.gui.MainForm.*;
@@ -177,6 +179,26 @@ public class UserGroupTab extends JPanel{
             public void changedUpdate(DocumentEvent e) {
                 if (filterField.getParent().getParent().equals(MainForm.getDepTab()))fillAllTrees(MainForm.getDepTab().treeModel2);
                 else fillAllTrees(MainForm.getUsersTab().treeModel);
+            }
+        });
+        freeUsers.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                addedUsers.clearSelection();
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+        addedUsers.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                freeUsers.clearSelection();
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+
             }
         });
 

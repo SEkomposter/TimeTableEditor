@@ -1,8 +1,5 @@
 package by.alt.DAO;
 
-import by.alt.Object.TableEntry;
-import by.alt.Object.UserTime;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -12,8 +9,7 @@ public class Node implements SurvObject,Comparable {
     private String type = ObjectType.DEP.toString();
     private int id, parent_id;
     private ArrayList<SurvObject> childObjList = new ArrayList<>();
-    ArrayList<TableEntry> survObjMembership = new ArrayList<>();
-    private boolean hasChildNode = false;
+    boolean hasChildNode = false;
     Node(){}
     public Node(String name){
         this.name = name;
@@ -24,22 +20,6 @@ public class Node implements SurvObject,Comparable {
         this.parent_id = parent_id;
     }
 
-    public void addSurvObjMembership (TableEntry te){
-        survObjMembership.add(te);
-    }
-
-    public ArrayList<TableEntry> getSurvObjMembership() {
-        return survObjMembership;
-    }
-    public String memberList(){
-        StringBuilder sb = new StringBuilder(this.toString() + ":\n\n");
-        Iterator it = survObjMembership.iterator();
-        while (it.hasNext()) {
-            sb.append((TableEntry)it.next());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
     @Override
     public String toString(){
         return getName();
@@ -63,22 +43,6 @@ public class Node implements SurvObject,Comparable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getParent_id() {
-        return parent_id;
-    }
-
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
     }
 
     public ArrayList<SurvObject> getChildObjList() {
@@ -110,9 +74,9 @@ public class Node implements SurvObject,Comparable {
         }
         return option1&option2;
     }
-    public void setHasChildNode(boolean hasChildNode) {
-        this.hasChildNode = hasChildNode;
-    }
+public void setHasChildNode(boolean bool){
+        this.hasChildNode = bool;
+}
     public int compareTo(Object o) {
         return  (((Node) o).name.compareToIgnoreCase(this.getName())<0?1: ((Node)o).name.compareToIgnoreCase(this.name)==0?0:-1);
     }

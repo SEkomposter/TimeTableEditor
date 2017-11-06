@@ -48,7 +48,17 @@ public class DepartmentsTab extends UserGroupTab {
         jPanel1.add(groupTimeCombo, c);
 
         freeUsers.setSelectionModel(selModel);
-        freeUsers.addTreeSelectionListener(new PersonalSelectionListener());
+        freeUsers.addTreeSelectionListener(new PersonalSelectionListener());info.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JOptionPane.showMessageDialog(MainForm.getDepTab(), MainForm.groupTimeList.findAddedPersonal(freeUsers.getSelectionPaths()));
+                } catch (NullPointerException exc) {
+                    tk.beep();
+                }
+            }
+        });
+
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

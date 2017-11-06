@@ -15,7 +15,7 @@ import static by.alt.gui.DepartmentsTab.groupTimeCombo;
 import static by.alt.gui.UsersTab.*;
 
 public class MainForm extends JFrame {
-    private JTabbedPane tabbedPane1;
+    public static JTabbedPane tabbedPane1;
     private TimeTableTab timeTables;
     private PropReader propReader;
     public static DaoClass daoObject = new DaoClass();
@@ -37,6 +37,7 @@ public class MainForm extends JFrame {
     public MainForm() {
         setBounds(0, 0, 1300, 720);
         setMinimumSize(new Dimension(1300, 720));
+        setMaximumSize(new Dimension(1300, 720));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         menuBar = new MyMenuBar();

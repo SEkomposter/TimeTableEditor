@@ -70,17 +70,19 @@ public class UserGroupTab extends JPanel{
         jPanel2.setLayout(new GridBagLayout());
         jPanel3.setBounds(x+10,y+50,w-30,30);
         add(jPanel3);
-        basicLayer.setBounds(x+10,y+80,w-30,h-180);
+        basicLayer.setBounds(x+10,y+80,w-30,h-80);
         add(basicLayer);
         jPanel1.add(timeTableLabel);
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                setBounds(getX(), getY(), getWidth(), getHeight());
+                basicLayer.setBounds(basicLayer.getX(), basicLayer.getY(), getWidth(), getHeight()-80);
+                jPanel1.setBounds(jPanel1.getX(),jPanel1.getY(),getWidth(),jPanel1.getHeight());
+                jPanel2.setBounds(jPanel2.getX(),jPanel2.getY(),getWidth(),jPanel2.getHeight());
+                jPanel3.setBounds(jPanel3.getX(),jPanel3.getY(),getWidth(),jPanel3.getHeight());
             }
         });
         basicLayer.setLayout(new GridBagLayout());
-        //basicLayer.setBounds(x, y, w, h);
         jPanel3.setLayout(new GridBagLayout());
 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -109,7 +111,7 @@ public class UserGroupTab extends JPanel{
         c.gridwidth = 1;
         c.gridheight = 1;
         c.weightx = 0.00;
-        c.weighty = 0.0;
+        c.weighty = 0.33;
         c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(00, 30, 0, 30);
         basicLayer.add(info, c);
@@ -120,9 +122,9 @@ public class UserGroupTab extends JPanel{
     c.gridwidth = 1;
     c.gridheight = 1;
     c.weightx = 0.00;
-    c.weighty = 0.0;
-        c.anchor = GridBagConstraints.CENTER;
-    c.insets = new Insets(150, 30, 0, 30);
+    c.weighty = 0.33;
+        c.anchor = GridBagConstraints.SOUTH;
+    c.insets = new Insets(150, 30, 20, 30);
     basicLayer.add(addButton, c);
 
     c.fill = GridBagConstraints.NONE;
@@ -131,9 +133,9 @@ public class UserGroupTab extends JPanel{
     c.gridwidth = 1;
     c.gridheight = 1;
     c.weightx = 0.00;
-    c.weighty = 0.0;
-        c.anchor = GridBagConstraints.CENTER;
-    c.insets = new Insets(0, 30, 250, 30);
+    c.weighty = 0.33;
+        c.anchor = GridBagConstraints.NORTH;
+    c.insets = new Insets(20, 30, 250, 30);
     basicLayer.add(removeButton, c);
 
         c.fill = GridBagConstraints.BOTH;
@@ -155,13 +157,12 @@ public class UserGroupTab extends JPanel{
         c.gridheight = 3;
         c.weightx = 0.45;
         c.weighty = 0.7;
-        c.insets = new Insets(0, 0, 0, 0);
+        c.insets = new Insets(0, 0, 0, 20);
         basicLayer.add(jSPane2, c);
 
         filterField = new JTextField("Фильтр:");
         filterField.setEnabled(false);
         filterField.setForeground(Color.GRAY);
-        //filterField.addFocusListener(new by.alt.Object.FilterFieldListener());
         filterField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -212,6 +213,11 @@ public class UserGroupTab extends JPanel{
         c.insets = new Insets(0, 0, 0, 15);
         c.anchor = GridBagConstraints.EAST;
         jPanel2.add(filterField,c);
+        //addComponentListener(new java.awt.event.ComponentAdapter() {
+        //    public void componentResized(java.awt.event.ComponentEvent evt) {
+        //        basicLayer.setSize(MainForm.tabbedPane1.getSize());
+        //    }
+       // });
 }
     public JComboBox fillCombo(JComboBox jComboBox,ArrayList list ){
         Iterator iterator = list.iterator();

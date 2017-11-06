@@ -29,7 +29,7 @@ public class MainForm extends JFrame {
     public static TEntryList userTimeList = new TEntryList();
     public static TEntryList groupTimeList = new TEntryList();
     public static MyTableModel tableModel = new MyTableModel(tableEntryList);
-    static JTable tt;
+    public static JTable tt;
     public static UsersTab usersTab;
     private static DepartmentsTab depTab;
     public boolean fileOpened = false;
@@ -128,6 +128,7 @@ public class MainForm extends JFrame {
             });
             tTabSubPan1.add(delButton);
             tt = new JTable(tableModel);
+            tt.addMouseListener(new DoubleClickMouseListener());
             tt.setRowSelectionAllowed(true);
             tt.setRowHeight(25);
             tTabSubPan2.add(tt,BorderLayout.NORTH);

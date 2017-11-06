@@ -11,9 +11,9 @@ public class PropReader {
     String commProps = "common.properties";
     String backup = "";
     static String fileSeparator = System.getProperty("file.separator");
-    static String path = "D:" + fileSeparator + "ExternalReports" + fileSeparator;
+   // static String path = "D:" + fileSeparator + "ExternalReports" + fileSeparator;
     static String pathBackup = "configBackup" + fileSeparator;
-   // static String path = "";
+    static String path = "";
 
     File filePath = new File(path + fileName);
     File filePathCommon = new File(path + commProps);
